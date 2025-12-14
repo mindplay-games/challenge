@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>אתגר</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <header class="top">
+    <a class="link" href="./index.html">← חזרה לבחירה</a>
+    <h1 id="title">אתגר</h1>
+    <p id="subtitle" class="sub"></p>
+  </header>
+
+  <main class="container">
+    <section class="card">
+      <h2>📘 הסבר</h2>
+      <div id="explain" class="text"></div>
+
+      <div class="row">
+        <button id="hintBtn" class="btn">💡 רמז</button>
+        <button id="solutionBtn" class="btn btnGhost">🧠 הצג פתרון</button>
+      </div>
+
+      <div id="hint" class="hint hidden"></div>
+      <pre id="solution" class="solution hidden"></pre>
+    </section>
+
+    <section class="card">
+      <h2>✍️ כתבו קוד כאן</h2>
+      <textarea id="editor" class="editor" spellcheck="false"></textarea>
+
+      <div class="row">
+        <button id="runBtn" class="btn">▶️ Run</button>
+        <button id="resetBtn" class="btn btnGhost">♻️ אפס</button>
+        <div id="status" class="status"></div>
+      </div>
+
+      <h3 class="mini">📤 פלט</h3>
+      <pre id="output" class="output"></pre>
+    </section>
+
+    <section class="card">
+      <h2>📌 משימה</h2>
+      <div id="task" class="text"></div>
+      <p class="mini">טיפ: בתרגילים כאן משתמשים ב-JavaScript. הדפסה עושים עם <code>console.log()</code>.</p>
+    </section>
+  </main>
+
+  <script src="data/challenges.js"></script>
+  <script src="js/runner.js"></script>
+  <script src="js/challenge.js"></script>
+</body>
+</html>
