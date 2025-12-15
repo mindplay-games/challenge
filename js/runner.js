@@ -1,30 +1,60 @@
-function runUserCode(code){
-  const logs = [];
-  const originalLog = console.log;
+let pyodideReady = null;
 
-  console.log = (...args) => {
-    logs.push(args.join(" "));
-  };
+async function initPyodide() {
+  if (pyodideReady) return pyodideReady;
+
+  pyodideReady = (async () => {
+    const pyodide = await loadPyodide({
+      indexURL: "https://cdn.jsdelivr.net/pyodide/v0.25.1/full/",
+    });
+    return pyodide;
+  })();
+
+  return pyodideReady;
+}
+
+function indent(text, spaces) {
+  const pad = " ".repeat(spaces);
+  return text.split("\n").map(line => pad + line).join("\n");
+}
+
+// נשאר אותו שם כמו קודם כדי ש-challenge.js לא יצטרך להשתנות
+async function runUserCode(code) {
+  const pyodide = await initPyodide();
+
+  // לוכדים print לפלט
+  const wrapped = `
+import sys, io
+_buffer = io.StringIO()
+sys.stdout = _buffer
+sys.stderr = _buffer
+
+try:
+${indent(code, 4)}
+except Exception as e:
+    print("שגיאה:", e)
+
+sys.stdout = sys.__stdout__
+sys.stderr = sys.__stderr__
+_buffer.getvalue()
+`;
 
   try {
-    // מריצים קוד בתוך Function כדי לבודד scope
-    new Function(code)();
-    return { ok: true, output: logs.join("\n") };
+    const out = pyodide.runPython(wrapped);
+    return { ok: true, output: (out ?? "").toString() };
   } catch (e) {
     return { ok: false, output: "שגיאה: " + e.message };
-  } finally {
-    console.log = originalLog;
   }
 }
 
-function normalize(s){
+function normalize(s) {
   return (s ?? "").toString().trim().replace(/\r\n/g, "\n");
 }
 
-function checkExpected(userOutput, expectedOutput){
-  if (expectedOutput == null) return { canCheck:false, passed:false };
+function checkExpected(userOutput, expectedOutput) {
+  if (expectedOutput == null) return { canCheck: false, passed: false };
   return {
     canCheck: true,
-    passed: normalize(userOutput) === normalize(expectedOutput)
+    passed: normalize(userOutput) === normalize(expectedOutput),
   };
 }
