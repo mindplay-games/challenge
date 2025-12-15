@@ -5,14 +5,13 @@ const ch = CHALLENGES.find(x => x.id === id);
 function getNextChallengeId(currentId){
   const idx = CHALLENGES.findIndex(x => x.id === currentId);
   if (idx === -1) return null;
-  const next = CHALLENGES[idx + 1];
-  return next ? next.id : null;
+  return CHALLENGES[idx + 1]?.id ?? null;
 }
 
 function goNextChallenge(){
   const nextId = getNextChallengeId(id);
   if (!nextId) {
-    alert("🎉 סיימתם את כל האתגרים! חזרו לדף הראשי כדי לבחור שוב.");
+    alert("🎉 סיימתם את כל האתגרים!");
     location.href = "./index.html";
     return;
   }
@@ -24,6 +23,7 @@ if (!ch) {
 } else {
   document.title = ch.title;
 
+  // אלמנטים
   const title = document.getElementById("title");
   const subtitle = document.getElementById("subtitle");
   const explain = document.getElementById("explain");
@@ -47,18 +47,16 @@ if (!ch) {
   hint.textContent = ch.hint;
   solution.textContent = ch.solution;
 
-  // badges
   topicBadge.textContent = `# ${ch.topic}`;
   const idx = CHALLENGES.findIndex(x => x.id === ch.id);
   progressBadge.textContent = `אתגר ${idx + 1} מתוך ${CHALLENGES.length}`;
 
-  // שמירה מקומית
+  // שמירה מקומית (רק אם יש editor)
   const key = "code_" + ch.id;
-  editor.value = localStorage.getItem(key) ?? ch.starter;
-
-  editor.addEventListener("input", () => {
-    localStorage.setItem(key, editor.value);
-  });
+  if (editor) {
+    editor.value = localStorage.getItem(key) ?? ch.starter;
+    editor.addEventListener("input", () => localStorage.setItem(key, editor.value));
+  }
 
   // רמז/פתרון
   document.getElementById("hintBtn").onclick = () => hint.classList.toggle("hidden");
@@ -66,82 +64,85 @@ if (!ch) {
 
   // איפוס
   document.getElementById("resetBtn").onclick = () => {
-    editor.value = ch.starter;
-    localStorage.setItem(key, editor.value);
-    output.textContent = "";
-    status.textContent = "";
-    status.className = "status";
+    if (editor) {
+      editor.value = ch.starter;
+      localStorage.setItem(key, editor.value);
+    }
+    if (output) output.textContent = "";
+    if (status) {
+      status.textContent = "";
+      status.className = "status";
+    }
   };
 
-  // כפתור הבא (לאתגר הבא)
+  // הבא (אתגר הבא)
   document.getElementById("nextBtn").onclick = goNextChallenge;
   const nextBtnFallback = document.getElementById("nextBtnFallback");
   if (nextBtnFallback) nextBtnFallback.onclick = goNextChallenge;
 
-  // אם זה אתגר fallbackOnly (כמו SQL) – לא תלויים ב-Pyodide
+  // ✅ אם זה fallbackOnly (שנה ג' SQL) — מציגים ישר את ה-steps
   if (ch.mode === "fallbackOnly") {
-    codeCard.classList.add("hidden");
-    showFallback(ch); // יציג steps
-  } else {
-    // Run Python
-    document.getElementById("runBtn").onclick = async () => {
-      status.textContent = "טוען/מריץ…";
-      status.className = "status";
-
-      try {
-        const res = await runUserCode(editor.value);
-        output.textContent = res.output;
-
-        const check = checkExpected(res.output, ch.expectedOutput);
-
-        if (!res.ok) {
-          status.textContent = "❌ יש שגיאה בקוד";
-          status.className = "status bad";
-          return;
-        }
-
-        if (!check.canCheck) {
-          status.textContent = "✅ רץ! (אין בדיקה אוטומטית לתרגיל הזה)";
-          status.className = "status good";
-          return;
-        }
-
-        if (check.passed) {
-          status.textContent = "✅ הצלחת! מעולה!";
-          status.className = "status good";
-        } else {
-          status.textContent = "❌ עוד לא… בדוק פלט";
-          status.className = "status bad";
-        }
-      } catch (e) {
-        codeCard.classList.add("hidden");
-        showFallback(ch);
-      }
-    };
-
-    // נסיון לטעון Pyodide מראש + fallback אם לא נטען
-    (async () => {
-      status.textContent = "טוען מנוע Python…";
-      status.className = "status";
-
-      try {
-        await Promise.race([
-          initPyodide(),
-          new Promise((_, rej) => setTimeout(() => rej(new Error("timeout")), 12000))
-        ]);
-        status.textContent = "✅ Python מוכן! אפשר להריץ";
-        status.className = "status good";
-      } catch {
-        codeCard.classList.add("hidden");
-        showFallback(ch);
-      }
-    })();
+    codeCard?.classList.add("hidden");
+    showFallback(ch);
+    return;
   }
+
+  // אחרת — מסלול הרצה רגיל
+  document.getElementById("runBtn").onclick = async () => {
+    status.textContent = "טוען/מריץ…";
+    status.className = "status";
+
+    try {
+      const res = await runUserCode(editor.value);
+      output.textContent = res.output;
+
+      const check = checkExpected(res.output, ch.expectedOutput);
+
+      if (!res.ok) {
+        status.textContent = "❌ יש שגיאה בקוד";
+        status.className = "status bad";
+        return;
+      }
+
+      if (!check.canCheck) {
+        status.textContent = "✅ רץ! (אין בדיקה אוטומטית לתרגיל הזה)";
+        status.className = "status good";
+        return;
+      }
+
+      if (check.passed) {
+        status.textContent = "✅ הצלחת! מעולה!";
+        status.className = "status good";
+      } else {
+        status.textContent = "❌ עוד לא… בדוק פלט";
+        status.className = "status bad";
+      }
+    } catch {
+      codeCard.classList.add("hidden");
+      showFallback(ch);
+    }
+  };
+
+  // טעינת Pyodide מראש
+  (async () => {
+    status.textContent = "טוען מנוע Python…";
+    status.className = "status";
+    try {
+      await Promise.race([
+        initPyodide(),
+        new Promise((_, rej) => setTimeout(() => rej(new Error("timeout")), 12000))
+      ]);
+      status.textContent = "✅ Python מוכן! אפשר להריץ";
+      status.className = "status good";
+    } catch {
+      codeCard.classList.add("hidden");
+      showFallback(ch);
+    }
+  })();
 }
 
 /* =========================
-   תוכנית ב' (Fallback)
-   תומך גם ב-steps (רב שלבי)
+   Fallback + Steps
    ========================= */
 
 let __stepIndex = 0;
@@ -157,25 +158,23 @@ function showFallback(ch){
     return;
   }
 
-  // רב-שלבי
   if (ch.fallback.type === "steps") {
     __stepIndex = 0;
-    renderStep(ch, area);
+    renderStep(ch);
     return;
   }
 
-  // רגיל (single)
   if (ch.fallback.type === "quiz") renderQuiz(ch.fallback, area);
   if (ch.fallback.type === "order") renderOrder(ch.fallback, area);
 }
 
-function renderStep(ch, area){
+function renderStep(ch){
+  const area = document.getElementById("fallbackArea");
   const steps = ch.fallback.steps;
   const step = steps[__stepIndex];
 
   area.innerHTML = "";
 
-  // כותרת שלב + התקדמות
   const header = document.createElement("div");
   header.className = "row";
   header.style.justifyContent = "space-between";
@@ -185,39 +184,29 @@ function renderStep(ch, area){
   `;
   area.appendChild(header);
 
-  // גוף שלב
   if (step.type === "quiz") renderQuiz(step, area);
   if (step.type === "order") renderOrder(step, area);
 
-  // כפתור הבא בתוך steps
-  const btnWrap = document.createElement("div");
-  btnWrap.className = "row";
-  btnWrap.style.justifyContent = "flex-end";
-  btnWrap.style.marginTop = "14px";
+  const nav = document.createElement("div");
+  nav.className = "row";
+  nav.style.justifyContent = "flex-end";
 
   const btn = document.createElement("button");
   btn.className = "btn btnGreen";
-
   const isLast = __stepIndex === steps.length - 1;
   btn.textContent = isLast ? "סיימתי ➜ אתגר הבא" : "הבא ➜";
+
   btn.onclick = () => {
     if (isLast) {
-      // עוברים לאתגר הבא
-      const nextId = getNextChallengeId(id);
-      if (!nextId) {
-        alert("🎉 סיימתם את כל האתגרים!");
-        location.href = "./index.html";
-      } else {
-        location.href = `./challenge.html?id=${encodeURIComponent(nextId)}`;
-      }
+      goNextChallenge();
       return;
     }
     __stepIndex++;
-    renderStep(ch, area);
+    renderStep(ch);
   };
 
-  btnWrap.appendChild(btn);
-  area.appendChild(btnWrap);
+  nav.appendChild(btn);
+  area.appendChild(nav);
 }
 
 function renderQuiz(fb, root){
@@ -236,7 +225,6 @@ function renderQuiz(fb, root){
 
     btn.onclick = () => {
       const ok = idx === fb.correctIndex;
-
       root.querySelectorAll(".status, .mini.answer").forEach(el => el.remove());
 
       const msg = document.createElement("div");
@@ -245,7 +233,7 @@ function renderQuiz(fb, root){
 
       const exp = document.createElement("p");
       exp.className = "mini answer";
-      exp.textContent = ok ? fb.explainCorrect : "רמז: קרא שוב את ההסבר למעלה 😉";
+      exp.textContent = ok ? fb.explainCorrect : "רמז: חזור להסבר למעלה 😉";
 
       root.appendChild(msg);
       root.appendChild(exp);
@@ -281,7 +269,6 @@ function renderOrder(fb, root){
 
     li.addEventListener("dragstart", (e) => e.dataTransfer.setData("text/plain", line));
     li.addEventListener("dragover", (e) => e.preventDefault());
-
     li.addEventListener("drop", (e) => {
       e.preventDefault();
       const draggedValue = e.dataTransfer.getData("text/plain");
@@ -309,7 +296,7 @@ function renderOrder(fb, root){
 
     const exp = document.createElement("p");
     exp.className = "mini answer";
-    exp.textContent = ok ? fb.explainCorrect : "רמז: תחשוב מה חייב לבוא קודם 😉";
+    exp.textContent = ok ? fb.explainCorrect : "רמז: import → connect → cursor 😉";
 
     root.appendChild(result);
     root.appendChild(exp);
