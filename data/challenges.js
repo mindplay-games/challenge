@@ -272,7 +272,7 @@ print(f"{a}{op}{b} = {result}")`,
             "execute מריץ SQL, fetchall מביא את התוצאות של SELECT, ו־commit שומר שינויים (הוספה/מחיקה) לקובץ."
         }
       ]
-    }
+    
 }
 
 ];
