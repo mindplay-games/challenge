@@ -14,8 +14,14 @@
   </header>
 
   <main class="container">
+    <!-- 1) הסבר -->
     <section class="card">
-      <h2>📘 הסבר</h2>
+      <div class="row" style="justify-content:space-between;">
+        <span class="badge" id="topicBadge">#</span>
+        <span class="badge" id="progressBadge">אתגר</span>
+      </div>
+
+      <h2 style="margin-top:10px;">📘 הסבר</h2>
       <div id="explain" class="text"></div>
 
       <div class="row">
@@ -27,7 +33,14 @@
       <pre id="solution" class="solution hidden"></pre>
     </section>
 
-    <!-- כרטיס כתיבת קוד והרצה (ייפול לתוכנית ב' אם Pyodide לא נטען) -->
+    <!-- 2) משימה -->
+    <section class="card">
+      <h2>📌 משימה</h2>
+      <div id="task" class="text"></div>
+      <p class="mini">טיפ: בפייתון מדפיסים עם <code>print()</code>.</p>
+    </section>
+
+    <!-- 3) כתיבת קוד -->
     <section id="codeCard" class="card">
       <h2>✍️ כתבו קוד כאן (Python)</h2>
       <textarea id="editor" class="editor" spellcheck="false"></textarea>
@@ -41,27 +54,23 @@
       <h3 class="mini">📤 פלט</h3>
       <pre id="output" class="output"></pre>
 
-      <p class="mini">
-        אם ההרצה לא עובדת (אינטרנט/טעינה), נעבור אוטומטית לתרגול חלופי.
-      </p>
+      <div class="row" style="justify-content:flex-end;">
+        <button id="nextBtn" class="btn btnGreen">הבא ➜</button>
+      </div>
     </section>
 
-    <!-- ✅ תוכנית ב' (תמיד עובד) -->
+    <!-- תוכנית ב' -->
     <section id="fallbackCard" class="card hidden">
       <h2>🧩 תרגול בלי הרצה (תוכנית ב׳)</h2>
       <div id="fallbackArea"></div>
-    </section>
 
-    <section class="card">
-      <h2>📌 משימה</h2>
-      <div id="task" class="text"></div>
-      <p class="mini">טיפ: בפייתון מדפיסים עם <code>print()</code>.</p>
+      <div class="row" style="justify-content:flex-end; margin-top:14px;">
+        <button id="nextBtnFallback" class="btn btnGreen">הבא ➜</button>
+      </div>
     </section>
   </main>
 
-  <!-- ✅ Pyodide -->
   <script src="https://cdn.jsdelivr.net/pyodide/v0.25.1/full/pyodide.js"></script>
-
   <script src="data/challenges.js"></script>
   <script src="js/runner.js"></script>
   <script src="js/challenge.js"></script>
