@@ -2,6 +2,24 @@ const params = new URLSearchParams(location.search);
 const id = params.get("id");
 const ch = CHALLENGES.find(x => x.id === id);
 
+function getNextChallengeId(currentId){
+  const idx = CHALLENGES.findIndex(x => x.id === currentId);
+  if (idx === -1) return null;
+  const next = CHALLENGES[idx + 1];
+  return next ? next.id : null;
+}
+
+function goNext(){
+  const nextId = getNextChallengeId(id);
+  if (!nextId) {
+    // אם אין הבא
+    alert("🎉 סיימתם את כל האתגרים! חזרו לדף הראשי כדי לבחור שוב.");
+    location.href = "./index.html";
+    return;
+  }
+  location.href = `./challenge.html?id=${encodeURIComponent(nextId)}`;
+}
+
 if (!ch) {
   document.body.innerHTML = "<h2 style='padding:20px'>לא נמצא אתגר 😅</h2>";
 } else {
@@ -18,12 +36,21 @@ if (!ch) {
   const status = document.getElementById("status");
   const codeCard = document.getElementById("codeCard");
 
+  const topicBadge = document.getElementById("topicBadge");
+  const progressBadge = document.getElementById("progressBadge");
+
+  // כותרות
   title.textContent = ch.title;
   subtitle.textContent = ch.subtitle;
   explain.textContent = ch.explain;
   task.textContent = ch.task;
   hint.textContent = ch.hint;
   solution.textContent = ch.solution;
+
+  // badges
+  topicBadge.textContent = `# ${ch.topic}`;
+  const idx = CHALLENGES.findIndex(x => x.id === ch.id);
+  progressBadge.textContent = `אתגר ${idx + 1} מתוך ${CHALLENGES.length}`;
 
   // שמירה מקומית
   const key = "code_" + ch.id;
@@ -33,14 +60,11 @@ if (!ch) {
     localStorage.setItem(key, editor.value);
   });
 
-  document.getElementById("hintBtn").onclick = () => {
-    hint.classList.toggle("hidden");
-  };
+  // רמז/פתרון
+  document.getElementById("hintBtn").onclick = () => hint.classList.toggle("hidden");
+  document.getElementById("solutionBtn").onclick = () => solution.classList.toggle("hidden");
 
-  document.getElementById("solutionBtn").onclick = () => {
-    solution.classList.toggle("hidden");
-  };
-
+  // איפוס
   document.getElementById("resetBtn").onclick = () => {
     editor.value = ch.starter;
     localStorage.setItem(key, editor.value);
@@ -49,7 +73,12 @@ if (!ch) {
     status.className = "status";
   };
 
-  // ===== Run Python =====
+  // כפתור הבא
+  document.getElementById("nextBtn").onclick = goNext;
+  const nextBtnFallback = document.getElementById("nextBtnFallback");
+  if (nextBtnFallback) nextBtnFallback.onclick = goNext;
+
+  // Run Python
   document.getElementById("runBtn").onclick = async () => {
     status.textContent = "טוען/מריץ…";
     status.className = "status";
@@ -80,13 +109,12 @@ if (!ch) {
         status.className = "status bad";
       }
     } catch (e) {
-      // אם משהו קורה בהרצה/טעינה – מעבר לתוכנית ב'
       codeCard.classList.add("hidden");
       showFallback(ch);
     }
   };
 
-  // ===== נסיון לטעון Pyodide מראש + fallback אם לא נטען =====
+  // נסיון לטעון Pyodide מראש + fallback אם לא נטען
   (async () => {
     status.textContent = "טוען מנוע Python…";
     status.className = "status";
@@ -99,7 +127,6 @@ if (!ch) {
       status.textContent = "✅ Python מוכן! אפשר להריץ";
       status.className = "status good";
     } catch {
-      // Pyodide לא נטען -> תוכנית ב'
       codeCard.classList.add("hidden");
       showFallback(ch);
     }
@@ -150,7 +177,7 @@ function renderQuiz(fb, root){
 
       const exp = document.createElement("p");
       exp.className = "mini answer";
-      exp.textContent = ok ? fb.explainCorrect : "רמז: חפש את הפקודה הנכונה בפייתון (print / if / for...).";
+      exp.textContent = ok ? fb.explainCorrect : "רמז: חפש את הפקודה הנכונה בפייתון.";
 
       root.appendChild(msg);
       root.appendChild(exp);
@@ -173,7 +200,7 @@ function renderOrder(fb, root){
   ul.style.listStyle = "none";
   ul.style.padding = "0";
   ul.style.display = "grid";
-  ul.style.gap = "8px";
+  ul.style.gap = "10px";
 
   const pieces = [...fb.pieces].sort(() => Math.random() - 0.5);
 
@@ -184,10 +211,7 @@ function renderOrder(fb, root){
     li.textContent = line;
     li.dataset.value = line;
 
-    li.addEventListener("dragstart", (e) => {
-      e.dataTransfer.setData("text/plain", line);
-    });
-
+    li.addEventListener("dragstart", (e) => e.dataTransfer.setData("text/plain", line));
     li.addEventListener("dragover", (e) => e.preventDefault());
 
     li.addEventListener("drop", (e) => {
@@ -217,7 +241,7 @@ function renderOrder(fb, root){
 
     const exp = document.createElement("p");
     exp.className = "mini answer";
-    exp.textContent = ok ? fb.explainCorrect : "רמז: קודם שורת for/if עם :, ואז שורה מוזחת עם הפעולה.";
+    exp.textContent = ok ? fb.explainCorrect : "רמז: קודם השורה שמתחילה, ואז השורה המוזחת.";
 
     root.appendChild(result);
     root.appendChild(exp);
