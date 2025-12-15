@@ -5,15 +5,15 @@ const CHALLENGES = [
     id: "cmd_print_name",
     group: "basics",
     topic: "פקודה",
-    title: "הדפס את השם שלך",
+    title: "הדפס שלום",
     subtitle: "תרגול print",
     explain: "פקודה היא הוראה למחשב. בפייתון מדפיסים למסך עם print().",
-    task: "כתוב שורה אחת שמדפיסה את השם שלך.",
-    hint: "טקסט תמיד בתוך גרשיים: print(\"יוסי\")",
+    task: "כתוב שורה אחת שמדפיסה את שלום.",
+    hint: "טקסט תמיד בתוך גרשיים: print(\"שלום\")",
     starter: `# כתבו כאן:
-print("השם שלי")`,
-    solution: `print("יוסי")`,
-    expectedOutput: "יוסי"
+print("שלום")`,
+    solution: `print("שלום")`,
+    expectedOutput: "שלום"
   },
 
   {
