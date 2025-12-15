@@ -1,132 +1,161 @@
 const CHALLENGES = [
-  // ✅ יסודות
+  // ===== יסודות =====
+
   {
     id: "cmd_print_name",
     group: "basics",
     topic: "פקודה",
     title: "הדפס את השם שלך",
-    subtitle: "תרגול console.log",
-    explain: "פקודה היא הוראה למחשב. כאן נתרגל פקודת הדפסה למסך בעזרת JavaScript.",
+    subtitle: "תרגול print",
+    explain: "פקודה היא הוראה למחשב. בפייתון מדפיסים למסך עם print().",
     task: "כתוב שורה אחת שמדפיסה את השם שלך.",
-    hint: "ב-JS מדפיסים עם console.log(\"טקסט\").",
-    starter: `// כתבו כאן:
-console.log("השם שלי");`,
-    solution: `console.log("יוסי");`,
+    hint: "טקסט תמיד בתוך גרשיים: print(\"יוסי\")",
+    starter: `# כתבו כאן:
+print("השם שלי")`,
+    solution: `print("יוסי")`,
     expectedOutput: "יוסי"
   },
+
   {
-    id: "var_zoo",
+    id: "var_zoo_total",
     group: "basics",
     topic: "משתנים",
     title: "גן חיות עם משתנים",
-    subtitle: "3 משתנים עם מספרים",
-    explain: "משתנה הוא קופסה עם שם. בתוך הקופסה שמים ערך (למשל מספר).",
-    task: "צור 3 משתנים של חיות (למשל lions, monkeys, elephants) ושמור בהם מספרים. בסוף הדפס את סכום כל החיות.",
-    hint: "סכום עושים עם +, ואז console.log(total).",
-    starter: `let lions = 5;
-let monkeys = 12;
-let elephants = 2;
+    subtitle: "3 משתנים + סכום",
+    explain: "משתנה הוא קופסה בזיכרון עם שם. אפשר לשמור בו מספרים וטקסט.",
+    task: "צור 3 משתנים של חיות (lions, monkeys, elephants) עם מספרים. בסוף הדפס את סכום כל החיות.",
+    hint: "יוצרים סכום: total = lions + monkeys + elephants ואז print(total)",
+    starter: `lions = 5
+monkeys = 12
+elephants = 2
 
-// חשבו סכום והדפיסו:
+# חשבו סכום והדפיסו:
 `,
-    solution: `let lions = 5;
-let monkeys = 12;
-let elephants = 2;
+    solution: `lions = 5
+monkeys = 12
+elephants = 2
 
-let total = lions + monkeys + elephants;
-console.log(total);`,
+total = lions + monkeys + elephants
+print(total)`,
     expectedOutput: "19"
   },
-  {
-    id: "if_divide_by_zero",
-    group: "basics",
-    topic: "תנאים",
-    title: "אסור לחלק באפס",
-    subtitle: "if / else",
-    explain: "תנאי מאפשר למחשב לבחור: אם משהו נכון – תעשה X, אחרת – תעשה Y.",
-    task: "יש משתנה num2. אם num2 שווה 0 הדפס: 'אי אפשר לחלק באפס' אחרת הדפס 'אפשר לחלק'.",
-    hint: "if (num2 === 0) { ... } else { ... }",
-    starter: `let num2 = 0;
 
-// כתבו תנאי כאן:
-`,
-    solution: `let num2 = 0;
-
-if (num2 === 0) {
-  console.log("אי אפשר לחלק באפס");
-} else {
-  console.log("אפשר לחלק");
-}`,
-    expectedOutput: "אי אפשר לחלק באפס"
-  },
   {
     id: "for_5_rounds",
     group: "basics",
     topic: "לולאת for",
     title: "5 סיבובים",
     subtitle: "הדפס שם + מספר סיבוב",
-    explain: "for רצה מספר פעמים ידוע מראש.",
-    task: "צור לולאת for שעושה 5 סיבובים. בכל סיבוב הדפס: 'יוסי סיבוב X' (במקום X מספר הסיבוב).",
-    hint: "for (let i = 1; i <= 5; i++) { ... }",
-    starter: `// כתבו לולאה:
+    explain: "לולאת for עושה מספר חזרות ידוע מראש. range(1,6) נותן 1 עד 5.",
+    task: "צור לולאת for שעושה 5 סיבובים. בכל סיבוב הדפס: 'יוסי סיבוב X'.",
+    hint: "for i in range(1, 6):",
+    starter: `# כתבו לולאה כאן:
 `,
-    solution: `for (let i = 1; i <= 5; i++) {
-  console.log("יוסי סיבוב " + i);
-}`,
-    expectedOutput: "יוסי סיבוב 1\nyוסי סיבוב 2"
+    solution: `for i in range(1, 6):
+    print("יוסי סיבוב", i)`,
+    expectedOutput: `יוסי סיבוב 1
+יוסי סיבוב 2
+יוסי סיבוב 3
+יוסי סיבוב 4
+יוסי סיבוב 5`
   },
+
+  {
+    id: "while_guess",
+    group: "basics",
+    topic: "לולאת while",
+    title: "ניחוש מספר (בלי input)",
+    subtitle: "while עד שמצליחים",
+    explain: "while רצה כל עוד תנאי נכון. כאן נדמה משחק ניחוש בלי input כדי שנוכל לבדוק פלט.",
+    task: "יש secret=7 ויש guesses=[2,7]. הדפס כל ניחוש. כשהניחוש נכון – הדפס 'ניצחת!' ועצור.",
+    hint: "עוברים על guesses עם אינדקס. כל עוד guess != secret ממשיכים.",
+    starter: `secret = 7
+guesses = [2, 7]
+
+# כתבו כאן:
+`,
+    solution: `secret = 7
+guesses = [2, 7]
+
+i = 0
+guess = guesses[i]
+
+while guess != secret:
+    print("ניחוש:", guess)
+    i = i + 1
+    guess = guesses[i]
+
+print("ניחוש:", guess)
+print("ניצחת!")`,
+    expectedOutput: `ניחוש: 2
+ניחוש: 7
+ניצחת!`
+  },
+
+  {
+    id: "if_divide_by_zero",
+    group: "basics",
+    topic: "תנאים",
+    title: "אסור לחלק באפס",
+    subtitle: "if / else",
+    explain: "תנאי מאפשר למחשב לבחור מה לעשות. אם משהו נכון – פעולה אחת, אחרת – פעולה אחרת.",
+    task: "יש num2 = 0. אם num2 שווה 0 הדפס 'אי אפשר לחלק באפס' אחרת הדפס 'אפשר לחלק'.",
+    hint: "if num2 == 0:",
+    starter: `num2 = 0
+
+# כתבו תנאי כאן:
+`,
+    solution: `num2 = 0
+
+if num2 == 0:
+    print("אי אפשר לחלק באפס")
+else:
+    print("אפשר לחלק")`,
+    expectedOutput: "אי אפשר לחלק באפס"
+  },
+
   {
     id: "func_greet",
     group: "basics",
     topic: "פונקציות",
     title: "פונקציה שמברכת",
-    subtitle: "function greet(name)",
-    explain: "פונקציה היא מתכון. נותנים לה שם, ואפשר להשתמש בה שוב ושוב.",
-    task: "צור פונקציה greet שמקבלת name ומדפיסה: 'שלום NAME'. ואז תקרא לה עם השם שלך.",
-    hint: "function greet(name){ console.log('שלום ' + name); }",
-    starter: `// כתבו כאן פונקציה ואז קריאה אליה:
+    subtitle: "def greet(name)",
+    explain: "פונקציה היא מתכון: כותבים פעם אחת ומפעילים שוב ושוב.",
+    task: "צור פונקציה greet שמקבלת name ומדפיסה 'שלום NAME'. ואז קרא לה עם השם שלך.",
+    hint: "def greet(name): ואז print בתוך הפונקציה",
+    starter: `# כתבו כאן פונקציה ואז קריאה אליה:
 `,
-    solution: `function greet(name){
-  console.log("שלום " + name);
-}
-greet("יוסי");`,
+    solution: `def greet(name):
+    print("שלום", name)
+
+greet("יוסי")`,
     expectedOutput: "שלום יוסי"
   },
 
-  // ✅ “פרויקטים” (כפתורים של תרגול מתקדם)
+  // ===== “פרויקטים” (תרגול ארוך יותר) =====
   {
-    id: "project_calculator_intro",
+    id: "project_calculator_demo",
     group: "projects",
     topic: "מחשבון",
-    title: "מחשבון: תרגיל + תוצאה",
-    subtitle: "בונים מחשבון פשוט",
-    explain: "פה מתחילים פרויקט. ב-Web נשתמש ב-prompt כדי לקבל קלט, ו-console.log כדי להדפיס.",
-    task: "קבל שני מספרים (prompt), קבל פעולה (+,-,*,/), וכתוב את התרגיל והתוצאה.",
-    hint: "Number(prompt('...')) הופך טקסט למספר.",
-    starter: `// דוגמה:
-let a = Number(prompt("מספר ראשון:"));
-let op = prompt("פעולה: + - * /");
-let b = Number(prompt("מספר שני:"));
+    title: "מחשבון קטן (דמו בלי input)",
+    subtitle: "חישוב + הדפסת תרגיל",
+    explain: "בגלל שבדפדפן input פחות נוח לבדיקה אוטומטית, נעשה דמו עם ערכים מוכנים מראש.",
+    task: "יש a=5, op='+', b=10. אם op הוא '+' הדפס: '5+10 = 15'.",
+    hint: "result = a + b ואז print עם f-string",
+    starter: `a = 5
+op = "+"
+b = 10
 
-// כתבו כאן חישוב והדפסה:
+# כתבו כאן:
 `,
-    solution: `let a = Number(prompt("מספר ראשון:"));
-let op = prompt("פעולה: + - * /");
-let b = Number(prompt("מספר שני:"));
+    solution: `a = 5
+op = "+"
+b = 10
 
-let result;
+if op == "+":
+    result = a + b
 
-if (op === "+") result = a + b;
-else if (op === "-") result = a - b;
-else if (op === "*") result = a * b;
-else if (op === "/") {
-  if (b === 0) {
-    console.log("אי אפשר לחלק באפס");
-    result = null;
-  } else result = a / b;
-}
-
-if (result !== null) console.log(a + op + b + " = " + result);`,
-    expectedOutput: null // בפרויקט כזה לא בודקים פלט קבוע
+print(f"{a}{op}{b} = {result}")`,
+    expectedOutput: "5+10 = 15"
   }
 ];
