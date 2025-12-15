@@ -48,31 +48,34 @@ if (!ch) {
     status.className = "status";
   };
 
-  document.getElementById("runBtn").onclick = () => {
-    const res = runUserCode(editor.value);
-    output.textContent = res.output;
+ document.getElementById("runBtn").onclick = async () => {
+  status.textContent = "טוען/מריץ…";
+  status.className = "status";
 
-    // בדיקה אוטומטית (אם יש expectedOutput קבוע)
-    const check = checkExpected(res.output, ch.expectedOutput);
+  const res = await runUserCode(editor.value);
+  output.textContent = res.output;
 
-    if (!res.ok) {
-      status.textContent = "❌ יש שגיאה בקוד";
-      status.className = "status bad";
-      return;
-    }
+  const check = checkExpected(res.output, ch.expectedOutput);
 
-    if (!check.canCheck) {
-      status.textContent = "✅ רץ! (אין בדיקה אוטומטית לתרגיל הזה)";
-      status.className = "status good";
-      return;
-    }
+  if (!res.ok) {
+    status.textContent = "❌ יש שגיאה בקוד";
+    status.className = "status bad";
+    return;
+  }
 
-    if (check.passed) {
-      status.textContent = "✅ הצלחת! מעולה!";
-      status.className = "status good";
-    } else {
-      status.textContent = "❌ עוד לא… בדוק פלט";
-      status.className = "status bad";
-    }
-  };
+  if (!check.canCheck) {
+    status.textContent = "✅ רץ! (אין בדיקה אוטומטית לתרגיל הזה)";
+    status.className = "status good";
+    return;
+  }
+
+  if (check.passed) {
+    status.textContent = "✅ הצלחת! מעולה!";
+    status.className = "status good";
+  } else {
+    status.textContent = "❌ עוד לא… בדוק פלט";
+    status.className = "status bad";
+  }
+};
+
 }
