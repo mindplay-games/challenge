@@ -196,5 +196,83 @@ print(f"{a}{op}{b} = {result}")`,
       correctIndex: 1,
       explainCorrect: "חילוק באפס גורם לשגיאה, ולכן בודקים לפני שמחלקים."
     }
+  },
+  {
+  id: "grade3_sql_books",
+  group: "projects",
+  topic: "שנה ג׳ - SQL",
+  title: "מערכת ספרים - בסיס נתונים (SQLite)",
+  subtitle: "3 משימות: חיבור, טבלה, פעולות SQL",
+  explain:
+    "בשנה ג׳ למדנו לשמור ספרים בקובץ books.db בעזרת SQLite. נתרגל את השלבים הכי חשובים: חיבור, cursor, טבלת books ופקודות SQL.",
+  task:
+    "באתגר הזה יש 3 משימות. לחצו 'הבא ➜' כדי להתקדם שלב-שלב.",
+  hint:
+    "זכרו: connect יוצר חיבור לקובץ db, cursor מאפשר להריץ SQL, execute מריץ פקודה, fetchall מביא תוצאות, commit שומר שינויים.",
+
+  // חשוב: זה אתגר רב-שלבי. את ההרצה נשאיר לא חובה (כי sqlite3 בדפדפן לא תמיד זמין),
+  // ולכן נציג כאן תרגול אינטראקטיבי ב-JS שתמיד עובד.
+  mode: "fallbackOnly",
+
+  starter: `# אתגר שנה ג' - נעבוד כאן בעיקר עם תרגול אינטראקטיבי (ללא הרצה חובה)
+print("SQL Challenge")`,
+  solution: `print("Done")`,
+  expectedOutput: null,
+
+  fallback: {
+    type: "steps",
+    steps: [
+      {
+        type: "order",
+        title: "משימה 1: לפתוח פרויקט ולהתחבר ל־books.db",
+        prompt: "גררו לסדר הנכון את השורות כדי להתחבר לבסיס נתונים ולהכין cursor:",
+        pieces: [
+          "cursor = conn.cursor()",
+          "import sqlite3",
+          "conn = sqlite3.connect(\"books.db\")"
+        ],
+        correct: [
+          "import sqlite3",
+          "conn = sqlite3.connect(\"books.db\")",
+          "cursor = conn.cursor()"
+        ],
+        explainCorrect:
+          "קודם מייבאים sqlite3, אחר כך מתחברים לקובץ books.db, ואז יוצרים cursor כדי להריץ פקודות SQL."
+      },
+
+      {
+        type: "quiz",
+        title: "משימה 2: להבין טבלה ו־CREATE TABLE",
+        question:
+          "איזו פקודה יוצרת טבלה בשם books רק אם היא לא קיימת כבר?",
+        options: [
+          "INSERT INTO books ...",
+          "CREATE TABLE books ...",
+          "CREATE TABLE IF NOT EXISTS books (...)",
+          "SELECT * FROM books"
+        ],
+        correctIndex: 2,
+        explainCorrect:
+          "CREATE TABLE יוצר טבלה, ו־IF NOT EXISTS אומר ליצור רק אם הטבלה עדיין לא קיימת."
+      },
+
+      {
+        type: "quiz",
+        title: "משימה 3: execute / fetchall / commit",
+        question:
+          "מה נכון לגבי execute(), fetchall(), commit()?",
+        options: [
+          "fetchall() שומר שינויים בקובץ",
+          "commit() מביא את כל התוצאות של SELECT",
+          "execute() מריץ פקודת SQL, fetchall() מביא תוצאות, commit() שומר שינויים",
+          "execute() סוגר חיבור לבסיס הנתונים"
+        ],
+        correctIndex: 2,
+        explainCorrect:
+          "execute מריץ SQL, fetchall מביא את התוצאות של SELECT, ו־commit שומר שינויים (הוספה/מחיקה) לקובץ."
+      }
+    ]
   }
+}
+
 ];
