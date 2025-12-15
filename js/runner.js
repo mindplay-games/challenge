@@ -18,11 +18,10 @@ function indent(text, spaces) {
   return text.split("\n").map(line => pad + line).join("\n");
 }
 
-// נשאר אותו שם כמו קודם כדי ש-challenge.js לא יצטרך להשתנות
+// השם נשאר runUserCode כדי לא לשבור לוגיקה קיימת
 async function runUserCode(code) {
   const pyodide = await initPyodide();
 
-  // לוכדים print לפלט
   const wrapped = `
 import sys, io
 _buffer = io.StringIO()
