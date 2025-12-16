@@ -197,37 +197,261 @@ print(f"{a}{op}{b} = {result}")`,
       explainCorrect: "חילוק באפס גורם לשגיאה, ולכן בודקים לפני שמחלקים."
     }
   },
-  
+  /* ======================
+   SQL – חלק א׳: שאלונים
+   ====================== */
+
 {
-  id: "grade3_sql_execute_fetch_commit",
+  id: "sql_quiz_1",
   group: "projects",
-  topic: "שנה ג׳ - SQL",
-  title: "SQL 3: execute / fetchall / commit",
-  subtitle: "להבין מה כל פונקציה עושה",
-  explain:
-    "cursor.execute מריץ פקודת SQL. fetchall() מביא תוצאות של SELECT. commit() שומר שינויים (INSERT/UPDATE/DELETE) לקובץ.",
-  task:
-    "בחרו את המשפט הנכון לגבי execute(), fetchall(), commit().",
-  hint:
-    "commit שומר שינויים, fetchall קשור ל-SELECT.",
-  starter: `# אין הרצה חובה כאן
-print("SQL 3")`,
-  solution: `execute מריץ SQL, fetchall מביא תוצאות, commit שומר שינויים.`,
+  topic: "SQL",
+  title: "SQL 1: מה זה SQL?",
+  subtitle: "שאלון",
+  explain: "נתחיל מהבסיס: מה זה בכלל SQL?",
+  task: "בחרו את התשובה הנכונה.",
+  hint: "SQL קשור למידע.",
+  starter: "",
   expectedOutput: null,
   fallback: {
     type: "quiz",
-    question: "מה נכון לגבי execute(), fetchall(), commit()?",
+    question: "מה זה SQL?",
     options: [
-      "fetchall() שומר שינויים בקובץ",
-      "commit() מביא את כל התוצאות של SELECT",
-      "execute() מריץ פקודת SQL, fetchall() מביא תוצאות, commit() שומר שינויים",
-      "execute() סוגר חיבור לבסיס הנתונים"
+      "שפת ציור למשחקים",
+      "שפה לעבודה עם בסיסי נתונים",
+      "שפת עיצוב אתרים",
+      "מערכת הפעלה"
+    ],
+    correctIndex: 1,
+    explainCorrect: "SQL היא שפה שבעזרתה עובדים עם מידע בבסיס נתונים."
+  }
+},
+
+{
+  id: "sql_quiz_2",
+  group: "projects",
+  topic: "SQL",
+  title: "SQL 2: מה זה בסיס נתונים?",
+  subtitle: "שאלון",
+  explain: "בסיס נתונים הוא מקום שבו שומרים מידע בצורה מסודרת.",
+  task: "בחרו את התשובה הנכונה.",
+  hint: "מקום לשמור מידע.",
+  starter: "",
+  expectedOutput: null,
+  fallback: {
+    type: "quiz",
+    question: "מה התיאור הכי נכון לבסיס נתונים?",
+    options: [
+      "משחק מחשב",
+      "מקום לשמור מידע בצורה מסודרת",
+      "ציור",
+      "סרטון"
+    ],
+    correctIndex: 1,
+    explainCorrect: "בסיס נתונים שומר מידע בצורה מסודרת."
+  }
+},
+
+{
+  id: "sql_quiz_3",
+  group: "projects",
+  topic: "SQL",
+  title: "SQL 3: מה זו טבלה?",
+  subtitle: "שאלון",
+  explain: "טבלה בבסיס נתונים דומה לטבלת אקסל.",
+  task: "בחרו את התשובה הנכונה.",
+  hint: "שורות ועמודות.",
+  starter: "",
+  expectedOutput: null,
+  fallback: {
+    type: "quiz",
+    question: "טבלה בבסיס נתונים דומה ל־",
+    options: [
+      "ציור",
+      "טבלת אקסל",
+      "משחק",
+      "וידאו"
+    ],
+    correctIndex: 1,
+    explainCorrect: "טבלה בבסיס נתונים דומה לטבלת אקסל."
+  }
+},
+
+{
+  id: "sql_quiz_4",
+  group: "projects",
+  topic: "SQL",
+  title: "SQL 4: מה זה cursor?",
+  subtitle: "שאלון",
+  explain: "cursor הוא הכלי שדרכו מריצים פקודות SQL.",
+  task: "בחרו את התשובה הנכונה.",
+  hint: "cursor = הרצת פקודות",
+  starter: "",
+  expectedOutput: null,
+  fallback: {
+    type: "quiz",
+    question: "למה משתמשים ב־cursor?",
+    options: [
+      "כדי לצייר",
+      "כדי להריץ פקודות SQL",
+      "כדי להפעיל משחק",
+      "כדי להדפיס"
+    ],
+    correctIndex: 1,
+    explainCorrect: "cursor מאפשר להריץ פקודות SQL על בסיס הנתונים."
+  }
+},
+
+{
+  id: "sql_quiz_5",
+  group: "projects",
+  topic: "SQL",
+  title: "SQL 5: SELECT",
+  subtitle: "שאלון",
+  explain: "SELECT משמש לשליפת מידע מטבלה.",
+  task: "בחרו את התשובה הנכונה.",
+  hint: "SELECT = לבחור מידע",
+  starter: "",
+  expectedOutput: null,
+  fallback: {
+    type: "quiz",
+    question: "מה עושה SELECT?",
+    options: [
+      "מוחק מידע",
+      "מוסיף מידע",
+      "שולף מידע",
+      "סוגר את המחשב"
     ],
     correctIndex: 2,
-    explainCorrect:
-      "execute מריץ SQL, fetchall מביא תוצאות, ו־commit שומר שינויים."
+    explainCorrect: "SELECT משמש לשליפת מידע."
+  }
+},
+
+/* ======================
+   SQL – חלק ב׳: גרירה
+   ====================== */
+
+{
+  id: "sql_order_1",
+  group: "projects",
+  topic: "SQL",
+  title: "SQL גרירה 1: SELECT בסיסי",
+  subtitle: "סדרו את השאילתה",
+  explain: "נבנה שאילתת SELECT פשוטה.",
+  task: "גררו את החלקים לסדר הנכון.",
+  expectedOutput: null,
+  fallback: {
+    type: "order",
+    prompt: "סדרו את השאילתה: SELECT * FROM books;",
+    pieces: [
+      "FROM books;",
+      "SELECT *"
+    ],
+    correct: [
+      "SELECT *",
+      "FROM books;"
+    ],
+    explainCorrect: "קודם SELECT ואז FROM."
+  }
+},
+
+{
+  id: "sql_order_2",
+  group: "projects",
+  topic: "SQL",
+  title: "SQL גרירה 2: בחירת עמודות",
+  subtitle: "SELECT עם עמודות",
+  explain: "אפשר לבחור עמודות ספציפיות.",
+  task: "גררו את החלקים לסדר הנכון.",
+  expectedOutput: null,
+  fallback: {
+    type: "order",
+    prompt: "סדרו: SELECT title, author FROM books;",
+    pieces: [
+      "FROM books;",
+      "SELECT title, author"
+    ],
+    correct: [
+      "SELECT title, author",
+      "FROM books;"
+    ],
+    explainCorrect: "קודם SELECT ואז FROM."
+  }
+},
+
+{
+  id: "sql_order_3",
+  group: "projects",
+  topic: "SQL",
+  title: "SQL גרירה 3: WHERE",
+  subtitle: "סינון מידע",
+  explain: "WHERE מסנן מידע בטבלה.",
+  task: "גררו את החלקים לסדר הנכון.",
+  expectedOutput: null,
+  fallback: {
+    type: "order",
+    prompt: "סדרו: SELECT * FROM books WHERE id = 1;",
+    pieces: [
+      "WHERE id = 1;",
+      "FROM books",
+      "SELECT *"
+    ],
+    correct: [
+      "SELECT *",
+      "FROM books",
+      "WHERE id = 1;"
+    ],
+    explainCorrect: "WHERE מגיע אחרי FROM."
+  }
+},
+
+{
+  id: "sql_order_4",
+  group: "projects",
+  topic: "SQL",
+  title: "SQL גרירה 4: INSERT",
+  subtitle: "הוספת מידע",
+  explain: "INSERT מוסיף שורה חדשה לטבלה.",
+  task: "גררו את החלקים לסדר הנכון.",
+  expectedOutput: null,
+  fallback: {
+    type: "order",
+    prompt: "סדרו: INSERT INTO books VALUES (...);",
+    pieces: [
+      "VALUES (...);",
+      "INSERT INTO books"
+    ],
+    correct: [
+      "INSERT INTO books",
+      "VALUES (...);"
+    ],
+    explainCorrect: "קודם INSERT INTO ואז VALUES."
+  }
+},
+
+{
+  id: "sql_order_5",
+  group: "projects",
+  topic: "SQL",
+  title: "SQL גרירה 5: CREATE TABLE",
+  subtitle: "יצירת טבלה",
+  explain: "CREATE TABLE יוצר טבלה חדשה.",
+  task: "גררו את החלקים לסדר הנכון.",
+  expectedOutput: null,
+  fallback: {
+    type: "order",
+    prompt: "סדרו: CREATE TABLE books (...);",
+    pieces: [
+      "books (...);",
+      "CREATE TABLE"
+    ],
+    correct: [
+      "CREATE TABLE",
+      "books (...);"
+    ],
+    explainCorrect: "קודם CREATE TABLE ואז שם הטבלה."
   }
 }
+
 
   
 ];
