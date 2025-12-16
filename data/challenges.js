@@ -197,4 +197,285 @@ print(f"{a}{op}{b} = {result}")`,
       explainCorrect: "חילוק באפס גורם לשגיאה, ולכן בודקים לפני שמחלקים."
     }
   },
+    /* ======================
+     SQL – 5 שאלונים + 5 גרירה (practice.html)
+     ====================== */
+
+  {
+    id: "sql_quiz_1",
+    group: "projects",
+    topic: "SQL",
+    title: "SQL 1: מה זה SQL?",
+    subtitle: "שאלון",
+    explain: "נתחיל מהבסיס: מה זה בכלל SQL?",
+    task: "בחרו את התשובה הנכונה.",
+    hint: "SQL קשור למידע.",
+    mode: "practiceOnly",
+    starter: "",
+    solution: "",
+    expectedOutput: null,
+    fallback: {
+      type: "quiz",
+      question: "מה זה SQL?",
+      options: [
+        "שפת ציור למשחקים",
+        "שפה לעבודה עם בסיסי נתונים",
+        "שפת עיצוב אתרים",
+        "מערכת הפעלה"
+      ],
+      correctIndex: 1,
+      explainCorrect: "SQL היא שפה שבעזרתה עובדים עם מידע בבסיס נתונים."
+    }
+  },
+
+  {
+    id: "sql_quiz_2",
+    group: "projects",
+    topic: "SQL",
+    title: "SQL 2: מה זה בסיס נתונים?",
+    subtitle: "שאלון",
+    explain: "בסיס נתונים הוא מקום שבו שומרים מידע בצורה מסודרת.",
+    task: "בחרו את התשובה הנכונה.",
+    hint: "מקום לשמור מידע.",
+    mode: "practiceOnly",
+    starter: "",
+    solution: "",
+    expectedOutput: null,
+    fallback: {
+      type: "quiz",
+      question: "מה התיאור הכי נכון לבסיס נתונים?",
+      options: [
+        "משחק מחשב",
+        "מקום לשמור מידע בצורה מסודרת",
+        "ציור",
+        "סרטון"
+      ],
+      correctIndex: 1,
+      explainCorrect: "בסיס נתונים שומר מידע בצורה מסודרת."
+    }
+  },
+
+  {
+    id: "sql_quiz_3",
+    group: "projects",
+    topic: "SQL",
+    title: "SQL 3: מה זו טבלה?",
+    subtitle: "שאלון",
+    explain: "טבלה בבסיס נתונים דומה לטבלת אקסל: שורות ועמודות.",
+    task: "בחרו את התשובה הנכונה.",
+    hint: "שורות + עמודות.",
+    mode: "practiceOnly",
+    starter: "",
+    solution: "",
+    expectedOutput: null,
+    fallback: {
+      type: "quiz",
+      question: "טבלה בבסיס נתונים דומה ל־",
+      options: [
+        "ציור",
+        "טבלת אקסל",
+        "משחק",
+        "וידאו"
+      ],
+      correctIndex: 1,
+      explainCorrect: "טבלה בבסיס נתונים נראית כמו טבלת אקסל."
+    }
+  },
+
+  {
+    id: "sql_quiz_4",
+    group: "projects",
+    topic: "SQL",
+    title: "SQL 4: מה זה cursor?",
+    subtitle: "שאלון",
+    explain: "cursor הוא הכלי שדרכו מריצים פקודות SQL (execute).",
+    task: "בחרו את התשובה הנכונה.",
+    hint: "cursor = הרצת פקודות",
+    mode: "practiceOnly",
+    starter: "",
+    solution: "",
+    expectedOutput: null,
+    fallback: {
+      type: "quiz",
+      question: "למה משתמשים ב־cursor?",
+      options: [
+        "כדי לצייר",
+        "כדי להריץ פקודות SQL",
+        "כדי להפעיל משחק",
+        "כדי להדפיס"
+      ],
+      correctIndex: 1,
+      explainCorrect: "cursor מאפשר להריץ פקודות SQL על בסיס הנתונים."
+    }
+  },
+
+  {
+    id: "sql_quiz_5",
+    group: "projects",
+    topic: "SQL",
+    title: "SQL 5: SELECT",
+    subtitle: "שאלון",
+    explain: "SELECT משמש לשליפת מידע מטבלה.",
+    task: "בחרו את התשובה הנכונה.",
+    hint: "SELECT = לשלוף מידע",
+    mode: "practiceOnly",
+    starter: "",
+    solution: "",
+    expectedOutput: null,
+    fallback: {
+      type: "quiz",
+      question: "מה עושה SELECT?",
+      options: [
+        "מוחק מידע",
+        "מוסיף מידע",
+        "שולף מידע",
+        "סוגר את המחשב"
+      ],
+      correctIndex: 2,
+      explainCorrect: "SELECT משמש לשליפת מידע מהטבלה."
+    }
+  },
+
+  {
+    id: "sql_order_1",
+    group: "projects",
+    topic: "SQL",
+    title: "SQL גרירה 1: SELECT בסיסי",
+    subtitle: "סדרו את השאילתה",
+    explain: "נבנה שאילתת SELECT פשוטה.",
+    task: "גררו את החלקים לסדר הנכון.",
+    hint: "קודם SELECT ואז FROM.",
+    mode: "practiceOnly",
+    starter: "",
+    solution: "",
+    expectedOutput: null,
+    fallback: {
+      type: "order",
+      prompt: "סדרו את השאילתה: SELECT * FROM books;",
+      pieces: [
+        "FROM books;",
+        "SELECT *"
+      ],
+      correct: [
+        "SELECT *",
+        "FROM books;"
+      ],
+      explainCorrect: "קודם SELECT ואז FROM."
+    }
+  },
+
+  {
+    id: "sql_order_2",
+    group: "projects",
+    topic: "SQL",
+    title: "SQL גרירה 2: בחירת עמודות",
+    subtitle: "SELECT עם עמודות",
+    explain: "אפשר לבחור עמודות ספציפיות ולא רק *.",
+    task: "גררו את החלקים לסדר הנכון.",
+    hint: "SELECT title, author ואז FROM.",
+    mode: "practiceOnly",
+    starter: "",
+    solution: "",
+    expectedOutput: null,
+    fallback: {
+      type: "order",
+      prompt: "סדרו: SELECT title, author FROM books;",
+      pieces: [
+        "FROM books;",
+        "SELECT title, author"
+      ],
+      correct: [
+        "SELECT title, author",
+        "FROM books;"
+      ],
+      explainCorrect: "קודם SELECT ואז FROM."
+    }
+  },
+
+  {
+    id: "sql_order_3",
+    group: "projects",
+    topic: "SQL",
+    title: "SQL גרירה 3: WHERE",
+    subtitle: "סינון מידע",
+    explain: "WHERE מסנן מידע לפי תנאי.",
+    task: "גררו את החלקים לסדר הנכון.",
+    hint: "WHERE מגיע אחרי FROM.",
+    mode: "practiceOnly",
+    starter: "",
+    solution: "",
+    expectedOutput: null,
+    fallback: {
+      type: "order",
+      prompt: "סדרו: SELECT * FROM books WHERE id = 1;",
+      pieces: [
+        "WHERE id = 1;",
+        "FROM books",
+        "SELECT *"
+      ],
+      correct: [
+        "SELECT *",
+        "FROM books",
+        "WHERE id = 1;"
+      ],
+      explainCorrect: "WHERE מגיע אחרי FROM."
+    }
+  },
+
+  {
+    id: "sql_order_4",
+    group: "projects",
+    topic: "SQL",
+    title: "SQL גרירה 4: INSERT",
+    subtitle: "הוספת מידע",
+    explain: "INSERT מוסיף שורה חדשה לטבלה.",
+    task: "גררו את החלקים לסדר הנכון.",
+    hint: "INSERT INTO ואז VALUES.",
+    mode: "practiceOnly",
+    starter: "",
+    solution: "",
+    expectedOutput: null,
+    fallback: {
+      type: "order",
+      prompt: "סדרו: INSERT INTO books VALUES (...);",
+      pieces: [
+        "VALUES (...);",
+        "INSERT INTO books"
+      ],
+      correct: [
+        "INSERT INTO books",
+        "VALUES (...);"
+      ],
+      explainCorrect: "קודם INSERT INTO ואז VALUES."
+    }
+  },
+
+  {
+    id: "sql_order_5",
+    group: "projects",
+    topic: "SQL",
+    title: "SQL גרירה 5: CREATE TABLE",
+    subtitle: "יצירת טבלה",
+    explain: "CREATE TABLE יוצר טבלה חדשה.",
+    task: "גררו את החלקים לסדר הנכון.",
+    hint: "CREATE TABLE ואז שם הטבלה.",
+    mode: "practiceOnly",
+    starter: "",
+    solution: "",
+    expectedOutput: null,
+    fallback: {
+      type: "order",
+      prompt: "סדרו: CREATE TABLE books (...);",
+      pieces: [
+        "books (...);",
+        "CREATE TABLE"
+      ],
+      correct: [
+        "CREATE TABLE",
+        "books (...);"
+      ],
+      explainCorrect: "קודם CREATE TABLE ואז שם הטבלה."
+    }
+  },
+
 ];
