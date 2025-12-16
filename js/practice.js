@@ -47,13 +47,16 @@ if (!ch) {
 
   if (!ch.fallback) {
     area.innerHTML = "<p class='mini'>אין תרגול לאתגר הזה.</p>";
-  } else if (ch.fallback.type === "quiz") {
-    renderQuiz(ch.fallback, area);
-  } else if (ch.fallback.type === "order") {
-    renderOrder(ch.fallback, area);
-  } else {
-    area.innerHTML = "<p class='mini'>סוג תרגול לא מוכר.</p>";
-  }
+    } else if (ch.fallback.type === "quiz") {
+      renderQuiz(ch.fallback, area);
+    } else if (ch.fallback.type === "order") {
+      renderOrder(ch.fallback, area);
+    } else if (ch.fallback.type === "fill") {
+      renderFill(ch.fallback, area);
+    } else {
+      area.innerHTML = "<p class='mini'>סוג תרגול לא מוכר.</p>";
+    }
+
 
   document.getElementById("nextBtn").onclick = goNext;
 }
@@ -183,4 +186,137 @@ function escapeHtml(s){
     .replaceAll('"',"&quot;")
     .replaceAll("'","&#039;");
 }
+function renderFill(fb, root){
+  // fb.promptParts: מערך חלקים קבועים בין החורים
+  // fb.blanks: [{correct: "..."}...]
+  // fb.bank: ["...", "..."]
+
+  const wrap = document.createElement("div");
+  wrap.style.display = "grid";
+  wrap.style.gap = "12px";
+
+  // שורת "משפט עם חורים"
+  const sentence = document.createElement("div");
+  sentence.className = "hint"; // משתמשים בעיצוב הקיים שלך
+  sentence.style.direction = "ltr";
+  sentence.style.textAlign = "left";
+
+  const blanks = fb.blanks.map(() => ({ value: "" }));
+
+  function renderSentence(){
+    sentence.innerHTML = "";
+
+    const line = document.createElement("div");
+    line.style.display = "flex";
+    line.style.flexWrap = "wrap";
+    line.style.gap = "10px";
+    line.style.alignItems = "center";
+
+    fb.promptParts.forEach((part, i) => {
+      const t = document.createElement("span");
+      t.style.fontFamily = "ui-monospace, Menlo, Consolas, monospace";
+      t.textContent = part;
+      line.appendChild(t);
+
+      if (i < fb.blanks.length) {
+        const b = document.createElement("button");
+        b.type = "button";
+        b.className = "btn btnGhost";
+        b.style.fontFamily = "ui-monospace, Menlo, Consolas, monospace";
+        b.style.direction = "ltr";
+        b.style.textAlign = "left";
+        b.textContent = blanks[i].value || "____";
+
+        // קליק על חור = לנקות אותו
+        b.onclick = () => {
+          blanks[i].value = "";
+          renderSentence();
+        };
+
+        line.appendChild(b);
+      }
+    });
+
+    sentence.appendChild(line);
+  }
+
+  // בנק מילים (לחיצה מכניסה למקום הראשון הפנוי)
+  const bankTitle = document.createElement("p");
+  bankTitle.className = "text";
+  bankTitle.innerHTML = "<b>בחרו מילים כדי להשלים:</b>";
+
+  const bankBox = document.createElement("div");
+  bankBox.className = "grid";
+
+  fb.bank.forEach(word => {
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "tile";
+    btn.style.fontFamily = "ui-monospace, Menlo, Consolas, monospace";
+    btn.style.direction = "ltr";
+    btn.style.textAlign = "left";
+    btn.textContent = word;
+
+    btn.onclick = () => {
+      const idx = blanks.findIndex(b => !b.value);
+      if (idx === -1) return; // כבר מלא
+      blanks[idx].value = word;
+      renderSentence();
+    };
+
+    bankBox.appendChild(btn);
+  });
+
+  // כפתורי בדיקה / איפוס
+  const actions = document.createElement("div");
+  actions.className = "row";
+  actions.style.justifyContent = "flex-end";
+
+  const checkBtn = document.createElement("button");
+  checkBtn.className = "btn";
+  checkBtn.textContent = "בדוק ✅";
+
+  const resetBtn = document.createElement("button");
+  resetBtn.className = "btn btnGhost";
+  resetBtn.textContent = "אפס";
+
+  checkBtn.onclick = () => {
+    root.querySelectorAll(".status, .mini.answer").forEach(el => el.remove());
+
+    const ok = fb.blanks.every((b, i) =>
+      (blanks[i].value || "").trim() === (b.correct || "").trim()
+    );
+
+    const result = document.createElement("div");
+    result.className = ok ? "status good" : "status bad";
+    result.textContent = ok ? "✅ מעולה! השלמת נכון" : "❌ כמעט… נסה שוב";
+
+    const exp = document.createElement("p");
+    exp.className = "mini answer";
+    exp.textContent = ok ? fb.explainCorrect : "רמז: חשבו על הסדר SELECT → FROM → WHERE 😉";
+
+    root.appendChild(result);
+    root.appendChild(exp);
+  };
+
+  resetBtn.onclick = () => {
+    blanks.forEach(b => b.value = "");
+    renderSentence();
+    root.querySelectorAll(".status, .mini.answer").forEach(el => el.remove());
+  };
+
+  actions.appendChild(checkBtn);
+  actions.appendChild(resetBtn);
+
+  // בנייה למסך
+  wrap.appendChild(sentence);
+  wrap.appendChild(bankTitle);
+  wrap.appendChild(bankBox);
+  wrap.appendChild(actions);
+  root.appendChild(wrap);
+
+  renderSentence();
+}
+
+
 
