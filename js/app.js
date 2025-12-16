@@ -1,7 +1,10 @@
 function makeTile(ch){
   const a = document.createElement("a");
   a.className = "tile";
-  a.href = `./challenge.html?id=${encodeURIComponent(ch.id)}`;
+
+  const page = (ch.mode === "practiceOnly") ? "practice.html" : "challenge.html";
+  a.href = `./${page}?id=${encodeURIComponent(ch.id)}`;
+
   a.innerHTML = `
     <div class="tag"># ${ch.topic}</div>
     <div class="name">${ch.title}</div>
