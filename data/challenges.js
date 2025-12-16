@@ -350,7 +350,7 @@ print(f"{a}{op}{b} = {result}")`,
     solution: "",
     expectedOutput: null,
     fallback: {
-      type: "order",
+      type: "fill",
       prompt: "סדרו את השאילתה: SELECT * FROM books;",
       pieces: [
         "FROM books;",
@@ -378,7 +378,7 @@ print(f"{a}{op}{b} = {result}")`,
     solution: "",
     expectedOutput: null,
     fallback: {
-      type: "order",
+      type: "fill",
       prompt: "סדרו: SELECT title, author FROM books;",
       pieces: [
         "FROM books;",
@@ -406,7 +406,7 @@ print(f"{a}{op}{b} = {result}")`,
     solution: "",
     expectedOutput: null,
     fallback: {
-      type: "order",
+      type: "fill",
       prompt: "סדרו: SELECT * FROM books WHERE id = 1;",
       pieces: [
         "WHERE id = 1;",
@@ -436,7 +436,7 @@ print(f"{a}{op}{b} = {result}")`,
     solution: "",
     expectedOutput: null,
     fallback: {
-      type: "order",
+      type: "fill",
       prompt: "סדרו: INSERT INTO books VALUES (...);",
       pieces: [
         "VALUES (...);",
@@ -464,7 +464,7 @@ print(f"{a}{op}{b} = {result}")`,
     solution: "",
     expectedOutput: null,
     fallback: {
-      type: "order",
+      type: "fill",
       prompt: "סדרו: CREATE TABLE books (...);",
       pieces: [
         "books (...);",
