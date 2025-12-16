@@ -209,7 +209,7 @@ print(f"{a}{op}{b} = {result}")`,
     subtitle: "שאלון",
     explain: "נתחיל מהבסיס: מה זה בכלל SQL?",
     task: "בחרו את התשובה הנכונה.",
-    hint: "SQL קשור למידע.",
+ 
     mode: "practiceOnly",
     starter: "",
     solution: "",
