@@ -277,5 +277,5 @@ print("SQL 2")`,
     "cursor.execute מריץ פקודת SQL. fetchall מביא תוצאות של SELECT. commit שו
 
 }
-
+  }
 ];
