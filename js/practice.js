@@ -103,33 +103,51 @@ function renderOrder(fb, root){
   p.innerHTML = `<b>${fb.prompt}</b>`;
   root.appendChild(p);
 
-  const ul = document.createElement("ul");
-  ul.style.listStyle = "none";
-  ul.style.padding = "0";
-  ul.style.display = "grid";
-  ul.style.gap = "10px";
+  const wrap = document.createElement("div");
+  wrap.className = "orderWrap";
 
   const pieces = [...fb.pieces].sort(() => Math.random() - 0.5);
 
-  pieces.forEach(line => {
-    const li = document.createElement("li");
-    li.className = "tile";
-    li.draggable = true;
-    li.textContent = line;
-    li.dataset.value = line;
+  pieces.forEach((line, i) => {
+    const row = document.createElement("div");
+    row.className = "orderItem";
+    row.draggable = true;
+    row.dataset.value = line;
 
-    li.addEventListener("dragstart", (e) => e.dataTransfer.setData("text/plain", line));
-    li.addEventListener("dragover", (e) => e.preventDefault());
-    li.addEventListener("drop", (e) => {
-      e.preventDefault();
-      const draggedValue = e.dataTransfer.getData("text/plain");
-      const draggedEl = [...ul.children].find(x => x.dataset.value === draggedValue);
-      if (!draggedEl || draggedEl === li) return;
-      ul.insertBefore(draggedEl, li);
+    row.innerHTML = `
+      <div class="orderGrip">≡</div>
+      <div class="orderCode">${escapeHtml(line)}</div>
+    `;
+
+    row.addEventListener("dragstart", (e) => {
+      e.dataTransfer.setData("text/plain", line);
     });
 
-    ul.appendChild(li);
+    row.addEventListener("dragover", (e) => {
+      e.preventDefault();
+      row.classList.add("dragOver");
+    });
+
+    row.addEventListener("dragleave", () => row.classList.remove("dragOver"));
+
+    row.addEventListener("drop", (e) => {
+      e.preventDefault();
+      row.classList.remove("dragOver");
+
+      const draggedValue = e.dataTransfer.getData("text/plain");
+      const draggedEl = [...wrap.children].find(x => x.dataset.value === draggedValue);
+      if (!draggedEl || draggedEl === row) return;
+
+      wrap.insertBefore(draggedEl, row);
+    });
+
+    wrap.appendChild(row);
   });
+
+  root.appendChild(wrap);
+
+  const actions = document.createElement("div");
+  actions.className = "orderActions";
 
   const checkBtn = document.createElement("button");
   checkBtn.className = "btn";
@@ -138,7 +156,7 @@ function renderOrder(fb, root){
   checkBtn.onclick = () => {
     root.querySelectorAll(".status, .mini.answer").forEach(el => el.remove());
 
-    const current = [...ul.children].map(li => li.dataset.value);
+    const current = [...wrap.children].map(el => el.dataset.value);
     const ok = current.join("\n") === fb.correct.join("\n");
 
     const result = document.createElement("div");
@@ -153,6 +171,16 @@ function renderOrder(fb, root){
     root.appendChild(exp);
   };
 
-  root.appendChild(ul);
-  root.appendChild(checkBtn);
+  actions.appendChild(checkBtn);
+  root.appendChild(actions);
 }
+
+function escapeHtml(s){
+  return (s ?? "")
+    .replaceAll("&","&amp;")
+    .replaceAll("<","&lt;")
+    .replaceAll(">","&gt;")
+    .replaceAll('"',"&quot;")
+    .replaceAll("'","&#039;");
+}
+
