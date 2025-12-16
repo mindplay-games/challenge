@@ -198,81 +198,84 @@ print(f"{a}{op}{b} = {result}")`,
     }
   },
   {
-    id: "grade3_sql_books",
-    group: "projects",
-    topic: "שנה ג׳ - SQL",
-    title: "מערכת ספרים - בסיס נתונים (SQLite)",
-    subtitle: "3 משימות: חיבור, טבלה, פעולות SQL",
-    explain:
-      "בשנה ג׳ למדנו לשמור ספרים בקובץ books.db בעזרת SQLite. נתרגל את השלבים הכי חשובים: חיבור, cursor, טבלת books ופקודות SQL.",
-    task:
-      "באתגר הזה יש 3 משימות. לחצו 'הבא ➜' כדי להתקדם שלב-שלב.",
-    hint:
-      "זכרו: connect יוצר חיבור לקובץ db, cursor מאפשר להריץ SQL, execute מריץ פקודה, fetchall מביא תוצאות, commit שומר שינויים.",
-  
-    // חשוב: זה אתגר רב-שלבי. את ההרצה נשאיר לא חובה (כי sqlite3 בדפדפן לא תמיד זמין),
-    // ולכן נציג כאן תרגול אינטראקטיבי ב-JS שתמיד עובד.
-    mode: "fallbackOnly",
-  
-    starter: `# אתגר שנה ג' - נעבוד כאן בעיקר עם תרגול אינטראקטיבי (ללא הרצה חובה)
-  print("SQL Challenge")`,
-    solution: `print("Done")`,
-    expectedOutput: null,
-  
-    fallback: {
-      type: "steps",
-      steps: [
-        {
-          type: "order",
-          title: "משימה 1: לפתוח פרויקט ולהתחבר ל־books.db",
-          prompt: "גררו לסדר הנכון את השורות כדי להתחבר לבסיס נתונים ולהכין cursor:",
-          pieces: [
-            "cursor = conn.cursor()",
-            "import sqlite3",
-            "conn = sqlite3.connect(\"books.db\")"
-          ],
-          correct: [
-            "import sqlite3",
-            "conn = sqlite3.connect(\"books.db\")",
-            "cursor = conn.cursor()"
-          ],
-          explainCorrect:
-            "קודם מייבאים sqlite3, אחר כך מתחברים לקובץ books.db, ואז יוצרים cursor כדי להריץ פקודות SQL."
-        },
-  
-        {
-          type: "quiz",
-          title: "משימה 2: להבין טבלה ו־CREATE TABLE",
-          question:
-            "איזו פקודה יוצרת טבלה בשם books רק אם היא לא קיימת כבר?",
-          options: [
-            "INSERT INTO books ...",
-            "CREATE TABLE books ...",
-            "CREATE TABLE IF NOT EXISTS books (...)",
-            "SELECT * FROM books"
-          ],
-          correctIndex: 2,
-          explainCorrect:
-            "CREATE TABLE יוצר טבלה, ו־IF NOT EXISTS אומר ליצור רק אם הטבלה עדיין לא קיימת."
-        },
-  
-        {
-          type: "quiz",
-          title: "משימה 3: execute / fetchall / commit",
-          question:
-            "מה נכון לגבי execute(), fetchall(), commit()?",
-          options: [
-            "fetchall() שומר שינויים בקובץ",
-            "commit() מביא את כל התוצאות של SELECT",
-            "execute() מריץ פקודת SQL, fetchall() מביא תוצאות, commit() שומר שינויים",
-            "execute() סוגר חיבור לבסיס הנתונים"
-          ],
-          correctIndex: 2,
-          explainCorrect:
-            "execute מריץ SQL, fetchall מביא את התוצאות של SELECT, ו־commit שומר שינויים (הוספה/מחיקה) לקובץ."
-        }
-      ]
-    } 
+   {
+  id: "grade3_sql_connect_cursor",
+  group: "projects",
+  topic: "שנה ג׳ - SQL",
+  title: "SQL 1: חיבור וקורסור",
+  subtitle: "connect + cursor",
+  explain:
+    "כדי לעבוד עם SQLite בפייתון: מייבאים sqlite3, מתחברים לקובץ books.db, ויוצרים cursor כדי להריץ פקודות SQL.",
+  task:
+    "סדרו את השורות לפי הסדר הנכון: import → connect → cursor.",
+  hint:
+    "קודם מייבאים sqlite3, אחר כך connect('books.db'), ואז cursor().",
+  starter: `# גררו/בחרו את הסדר הנכון בתרגול:
+# (כאן אין הרצה חובה)
+
+print("SQL 1")`,
+  solution: `import sqlite3
+conn = sqlite3.connect("books.db")
+cursor = conn.cursor()`,
+  expectedOutput: null,
+  fallback: {
+    type: "order",
+    prompt: "סדרו את השורות כדי להתחבר ל־books.db ולהכין cursor:",
+    pieces: [
+      "cursor = conn.cursor()",
+      "import sqlite3",
+      "conn = sqlite3.connect(\"books.db\")"
+    ],
+    correct: [
+      "import sqlite3",
+      "conn = sqlite3.connect(\"books.db\")",
+      "cursor = conn.cursor()"
+    ],
+    explainCorrect:
+      "קודם import, אחר כך connect לקובץ, ואז cursor כדי להריץ SQL."
+  }
+},
+
+{
+  id: "grade3_sql_create_table",
+  group: "projects",
+  topic: "שנה ג׳ - SQL",
+  title: "SQL 2: יצירת טבלה",
+  subtitle: "CREATE TABLE IF NOT EXISTS",
+  explain:
+    "טבלה היא כמו אקסל בתוך בסיס הנתונים. ניצור טבלה books אם היא לא קיימת.",
+  task:
+    "בחרו את הפקודה הנכונה שיוצרת טבלה books רק אם היא לא קיימת.",
+  hint:
+    "חפשו את IF NOT EXISTS בתוך CREATE TABLE.",
+  starter: `# אין הרצה חובה כאן
+print("SQL 2")`,
+  solution: `CREATE TABLE IF NOT EXISTS books (...);`,
+  expectedOutput: null,
+  fallback: {
+    type: "quiz",
+    question: "איזו פקודה יוצרת טבלה בשם books רק אם היא לא קיימת כבר?",
+    options: [
+      "INSERT INTO books ...",
+      "CREATE TABLE books ...",
+      "CREATE TABLE IF NOT EXISTS books (...)",
+      "SELECT * FROM books"
+    ],
+    correctIndex: 2,
+    explainCorrect:
+      "CREATE TABLE יוצר טבלה, ו־IF NOT EXISTS אומר ליצור רק אם הטבלה עדיין לא קיימת."
+  }
+},
+
+{
+  id: "grade3_sql_execute_fetch_commit",
+  group: "projects",
+  topic: "שנה ג׳ - SQL",
+  title: "SQL 3: execute / fetchall / commit",
+  subtitle: "להבין מה כל פונקציה עושה",
+  explain:
+    "cursor.execute מריץ פקודת SQL. fetchall מביא תוצאות של SELECT. commit שו
+
 }
 
 ];
