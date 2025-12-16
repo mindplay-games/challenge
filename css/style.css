@@ -164,3 +164,62 @@ code{
   padding:2px 6px;
   border-radius:8px;
 }
+
+
+/* ===== Drag & Drop (SQL Order) ===== */
+.orderWrap{
+  display:grid;
+  gap:10px;
+  margin-top:10px;
+}
+
+.orderItem{
+  display:flex;
+  align-items:center;
+  gap:10px;
+
+  padding:12px 14px;
+  border-radius:14px;
+  border:1px solid rgba(15,23,42,.12);
+  background: #ffffff;
+
+  cursor: grab;
+  user-select:none;
+}
+
+.orderItem:active{ cursor: grabbing; }
+
+.orderGrip{
+  width:34px;
+  height:34px;
+  border-radius:12px;
+  border:1px solid rgba(15,23,42,.10);
+  background: rgba(59,130,246,.10);
+  display:grid;
+  place-items:center;
+  font-weight:900;
+  color: #1d4ed8;
+}
+
+.orderCode{
+  flex:1;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size:14px;
+  color:#0f172a;
+  direction:ltr;          /* ✅ SQL נראה טוב יותר LTR */
+  text-align:left;
+}
+
+.orderItem.dragOver{
+  outline:2px dashed rgba(59,130,246,.55);
+  outline-offset:2px;
+  background: rgba(59,130,246,.06);
+}
+
+.orderActions{
+  display:flex;
+  justify-content:flex-end;
+  margin-top:12px;
+  gap:10px;
+}
+
