@@ -197,7 +197,7 @@ print(f"{a}{op}{b} = {result}")`,
       explainCorrect: "חילוק באפס גורם לשגיאה, ולכן בודקים לפני שמחלקים."
     }
   },
-  {
+  
    {
   id: "grade3_sql_connect_cursor",
   group: "projects",
@@ -277,5 +277,6 @@ print("SQL 2")`,
     "cursor.execute מריץ פקודת SQL. fetchall מביא תוצאות של SELECT. commit שו
 
 }
-  }
+
+  
 ];
