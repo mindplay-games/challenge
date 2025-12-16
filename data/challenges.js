@@ -198,75 +198,6 @@ print(f"{a}{op}{b} = {result}")`,
     }
   },
   
-   {
-  id: "grade3_sql_connect_cursor",
-  group: "projects",
-  topic: "שנה ג׳ - SQL",
-  title: "SQL 1: חיבור וקורסור",
-  subtitle: "connect + cursor",
-  explain:
-    "כדי לעבוד עם SQLite בפייתון: מייבאים sqlite3, מתחברים לקובץ books.db, ויוצרים cursor כדי להריץ פקודות SQL.",
-  task:
-    "סדרו את השורות לפי הסדר הנכון: import → connect → cursor.",
-  hint:
-    "קודם מייבאים sqlite3, אחר כך connect('books.db'), ואז cursor().",
-  starter: `# גררו/בחרו את הסדר הנכון בתרגול:
-# (כאן אין הרצה חובה)
-
-print("SQL 1")`,
-  solution: `import sqlite3
-conn = sqlite3.connect("books.db")
-cursor = conn.cursor()`,
-  expectedOutput: null,
-  fallback: {
-    type: "order",
-    prompt: "סדרו את השורות כדי להתחבר ל־books.db ולהכין cursor:",
-    pieces: [
-      "cursor = conn.cursor()",
-      "import sqlite3",
-      "conn = sqlite3.connect(\"books.db\")"
-    ],
-    correct: [
-      "import sqlite3",
-      "conn = sqlite3.connect(\"books.db\")",
-      "cursor = conn.cursor()"
-    ],
-    explainCorrect:
-      "קודם import, אחר כך connect לקובץ, ואז cursor כדי להריץ SQL."
-  }
-},
-
-{
-  id: "grade3_sql_create_table",
-  group: "projects",
-  topic: "שנה ג׳ - SQL",
-  title: "SQL 2: יצירת טבלה",
-  subtitle: "CREATE TABLE IF NOT EXISTS",
-  explain:
-    "טבלה היא כמו אקסל בתוך בסיס הנתונים. ניצור טבלה books אם היא לא קיימת.",
-  task:
-    "בחרו את הפקודה הנכונה שיוצרת טבלה books רק אם היא לא קיימת.",
-  hint:
-    "חפשו את IF NOT EXISTS בתוך CREATE TABLE.",
-  starter: `# אין הרצה חובה כאן
-print("SQL 2")`,
-  solution: `CREATE TABLE IF NOT EXISTS books (...);`,
-  expectedOutput: null,
-  fallback: {
-    type: "quiz",
-    question: "איזו פקודה יוצרת טבלה בשם books רק אם היא לא קיימת כבר?",
-    options: [
-      "INSERT INTO books ...",
-      "CREATE TABLE books ...",
-      "CREATE TABLE IF NOT EXISTS books (...)",
-      "SELECT * FROM books"
-    ],
-    correctIndex: 2,
-    explainCorrect:
-      "CREATE TABLE יוצר טבלה, ו־IF NOT EXISTS אומר ליצור רק אם הטבלה עדיין לא קיימת."
-  }
-},
-
 {
   id: "grade3_sql_execute_fetch_commit",
   group: "projects",
@@ -274,8 +205,28 @@ print("SQL 2")`,
   title: "SQL 3: execute / fetchall / commit",
   subtitle: "להבין מה כל פונקציה עושה",
   explain:
-    "cursor.execute מריץ פקודת SQL. fetchall מביא תוצאות של SELECT. commit שו
-
+    "cursor.execute מריץ פקודת SQL. fetchall() מביא תוצאות של SELECT. commit() שומר שינויים (INSERT/UPDATE/DELETE) לקובץ.",
+  task:
+    "בחרו את המשפט הנכון לגבי execute(), fetchall(), commit().",
+  hint:
+    "commit שומר שינויים, fetchall קשור ל-SELECT.",
+  starter: `# אין הרצה חובה כאן
+print("SQL 3")`,
+  solution: `execute מריץ SQL, fetchall מביא תוצאות, commit שומר שינויים.`,
+  expectedOutput: null,
+  fallback: {
+    type: "quiz",
+    question: "מה נכון לגבי execute(), fetchall(), commit()?",
+    options: [
+      "fetchall() שומר שינויים בקובץ",
+      "commit() מביא את כל התוצאות של SELECT",
+      "execute() מריץ פקודת SQL, fetchall() מביא תוצאות, commit() שומר שינויים",
+      "execute() סוגר חיבור לבסיס הנתונים"
+    ],
+    correctIndex: 2,
+    explainCorrect:
+      "execute מריץ SQL, fetchall מביא תוצאות, ו־commit שומר שינויים."
+  }
 }
 
   
