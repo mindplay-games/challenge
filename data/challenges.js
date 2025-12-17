@@ -203,7 +203,7 @@ print(f"{a}{op}{b} = {result}")`,
 
   {
     id: "sql_quiz_1",
-    group: "projects",
+    group: "grade3",
     topic: "SQL",
     title: "שאלה 1: מזה sql?",
     subtitle: "שאלון",
@@ -230,7 +230,7 @@ print(f"{a}{op}{b} = {result}")`,
 
   {
     id: "sql_quiz_2",
-    group: "projects",
+    group: "grade3",
     topic: "SQL",
     title: "שאלה 2: מזה בסיס נתונים?",
     subtitle: "שאלון",
@@ -257,7 +257,7 @@ print(f"{a}{op}{b} = {result}")`,
 
   {
     id: "sql_quiz_3",
-    group: "projects",
+    group: "grade3",
     topic: "SQL",
     title: "שאלה 3: מהי commit",
     subtitle: "שאלון",
@@ -284,7 +284,7 @@ print(f"{a}{op}{b} = {result}")`,
 
   {
     id: "sql_quiz_4",
-    group: "projects",
+    group: "grade3",
     topic: "SQL",
     title: "שאלה 4: מזה cursor",
     subtitle: "שאלון",
@@ -311,7 +311,7 @@ print(f"{a}{op}{b} = {result}")`,
 
   {
     id: "sql_quiz_5",
-    group: "projects",
+    group: "grade3",
     topic: "SQL",
     title: "שאלה 5: מזה SELECT",
     subtitle: "שאלון",
@@ -338,7 +338,7 @@ print(f"{a}{op}{b} = {result}")`,
 
   {
     id: "sql_order_1",
-    group: "projects",
+    group: "grade3",
     topic: "SQL",
     title: "שאלה 6: בונים שאילתה",
     subtitle: "סדרו את השאילתה",
@@ -366,7 +366,7 @@ print(f"{a}{op}{b} = {result}")`,
 
   {
     id: "sql_order_2",
-    group: "projects",
+    group: "grade3",
     topic: "SQL",
     title: "שאלה 7: בונים שאילתה",
     subtitle: "SELECT עם עמודות",
@@ -394,7 +394,7 @@ print(f"{a}{op}{b} = {result}")`,
 
   {
     id: "sql_order_3",
-    group: "projects",
+    group: "grade3",
     topic: "SQL",
     title: "שאלה 8: גרירה WHERE",
     subtitle: "סינון מידע",
@@ -424,7 +424,7 @@ print(f"{a}{op}{b} = {result}")`,
 
   {
     id: "sql_order_4",
-    group: "projects",
+    group: "grade3",
     topic: "SQL",
     title: "שאלה 9: INSERT",
     subtitle: "הוספת מידע",
@@ -452,7 +452,7 @@ print(f"{a}{op}{b} = {result}")`,
 
   {
     id: "sql_order_5",
-    group: "projects",
+    group: "grade3",
     topic: "SQL",
     title: "שאלה 5: CREATE TABLE",
     subtitle: "יצירת טבלה",
