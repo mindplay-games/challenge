@@ -78,6 +78,47 @@ print(total)`,
       explainCorrect: "קודם שורת for עם :, ואז שורה מוזחת (4 רווחים) עם print."
     }
   },
+  {
+  id: "while_points_to_5",
+  group: "basics",
+  topic: "לולאת while",
+  title: "נקודות עד 5",
+  subtitle: "while + הגדלה",
+  explain: "לולאת while חוזרת כל עוד תנאי מסוים מתקיים. בכל סיבוב אפשר לשנות משתנה, וכשהתנאי כבר לא נכון — הלולאה נעצרת.",
+  task: "יש points = 0. כתבו לולאת while שמוסיפה 1 ל-points בכל סיבוב, ומדפיסה את points בכל סיבוב, עד ש-points יגיע ל-5 (כלומר הלולאה תרוץ כל עוד points קטן מ-5).",
+  hint: "while points < 5: ואז בפנים points = points + 1 ואז print(points)",
+  starter: `points = 0
+
+# כתבו לולאת while כאן:
+`,
+  solution: `points = 0
+
+while points < 5:
+    points = points + 1
+    print(points)`,
+  expectedOutput: `1
+2
+3
+4
+5`,
+  fallback: {
+    type: "order",
+    prompt: "סדרו את השורות כדי ליצור לולאת while שמדפיסה 1 עד 5",
+    pieces: [
+      "    print(points)",
+      "    points = points + 1",
+      "while points < 5:",
+      "points = 0"
+    ],
+    correct: [
+      "points = 0",
+      "while points < 5:",
+      "    points = points + 1",
+      "    print(points)"
+    ],
+    explainCorrect: "קודם מאתחלים points, ואז while עם :, ואז שתי שורות מוזחות (4 רווחים)."
+  }
+},
 {
   id: "if_bigger_than_10_write",
   group: "basics",
