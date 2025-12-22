@@ -226,4 +226,19 @@ code{
   margin-top:12px;
   gap:10px;
 }
+/* כל קוד – תמיד משמאל לימין */
+.editor,pre,code,
+.solution,
+.output {
+  direction: ltr;
+  text-align: left;
+  unicode-bidi: plaintext;
+  font-family: ui-monospace, Menlo, Consolas, monospace;
+}
+.orderCode,
+.tile code {
+  direction: ltr;
+  unicode-bidi: isolate;
+  text-align: left;
+}
 
