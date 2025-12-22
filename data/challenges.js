@@ -181,38 +181,30 @@ greet("יוסי")`,
   },
 
   // ===== פרויקט (לרוב בלי בדיקה קשיחה) =====
-  {
-    id: "project_calculator_demo",
-    group: "projects",
-    topic: "מחשבון",
-    title: "מחשבון קטן (דמו בלי input)",
-    subtitle: "חישוב + הדפסת תרגיל",
-    explain: "כאן זה תרגול ארוך יותר. נעשה דמו עם ערכים מוכנים מראש.",
-    task: "יש a=5, op='+', b=10. הדפס: 5+10 = 15",
-    hint: 'print(f"{a}{op}{b} = {result}")',
-    starter: `a = 5
-op = "+"
-b = 10
-
-# כתבו כאן:
-`,
-    solution: `a = 5
-op = "+"
-b = 10
-
-if op == "+":
-    result = a + b
-
-print(f"{a}{op}{b} = {result}")`,
-    expectedOutput: "5+10 = 15",
-    fallback: {
-      type: "quiz",
-      question: "במחשבון, למה צריך לבדוק לפני חילוק שהמספר השני לא 0?",
-      options: ["כי אחרת התוצאה תמיד 0", "כי אי אפשר לחלק באפס", "כי print לא יעבוד", "כי for לא יעבוד"],
-      correctIndex: 1,
-      explainCorrect: "חילוק באפס גורם לשגיאה, ולכן בודקים לפני שמחלקים."
-    }
-  },
+{
+  id: "float_sum_two_numbers",
+  group: "projects",
+  topic: "מספרים עשרוניים",
+  title: "חיבור עשרוניים",
+  subtitle: "int()",
+  explain: "פקודה שהופכת מספר עשרוני למספר שלם int()",
+  task: "הופך מספר עשרוני למספר שלם int()",
+  hint: "int(number)",
+  starter: `
+  number = 5.3
+  # כתבו כאן:
+  # 1) הפכו את המספר לשלם
+  # 2) הדפיסו את המספר השלם`,
+  solution: `print (int(number))`,
+  expectedOutput: "5",
+  fallback: {
+    type: "quiz",
+    question: "באיזו פקודה משתמשים כדי להפוך מספר כמו \"3.14\" למספר שלם?",
+    options: ["int()", "float()", "str()", "print()"],
+    correctIndex: 0,
+    explainCorrect: "int() ממיר טקסט למספר שלם ."
+  }
+},
 
   /* ======================
      SQL – 5 שאלונים + 5 fill (practice.html)
