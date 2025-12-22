@@ -140,6 +140,10 @@ h1,h2,h3{margin:0 0 8px}
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
   font-size:14px;
   box-shadow: inset 0 1px 0 rgba(2,6,23,.04);
+  direction: ltr;
+  text-align: left;
+  unicode-bidi: plaintext; /* עוזר כשמערבבים עברית/אנגלית */
+  font-family: ui-monospace, Menlo, Consolas, monospace;
 }
 
 .output{
