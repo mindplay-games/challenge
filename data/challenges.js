@@ -1,4 +1,4 @@
-const CHALLENGES = [
+ const CHALLENGES = [
   {
     id: "cmd_print_name",
     group: "basics",
