@@ -78,35 +78,41 @@ print(total)`,
       explainCorrect: "קודם שורת for עם :, ואז שורה מוזחת (4 רווחים) עם print."
     }
   },
+{
+  id: "if_bigger_than_10_write",
+  group: "basics",
+  topic: "תנאים",
+  title: "כתבו תנאי לבד",
+  subtitle: "if / else עם >",
+  explain: "עכשיו אתם כותבים לבד תנאי: אם משהו נכון עושים פעולה אחת, אחרת פעולה אחרת.",
+  task: "נתון x. כתבו קוד שבודק: אם x גדול מ־10 הדפיסו \"גדול\" אחרת הדפיסו \"קטן\".",
+  hint: "צריך if עם : ואז שתי הדפסות (אחת בתוך if ואחת בתוך else).",
+  starter: `x = 7
 
-  {
-    id: "if_divide_by_zero",
-    group: "basics",
-    topic: "תנאים",
-    title: "אסור לחלק באפס",
-    subtitle: "if / else",
-    explain: "תנאי מאפשר למחשב לבחור מה לעשות. אם משהו נכון – פעולה אחת, אחרת – פעולה אחרת.",
-    task: "יש num2 = 0. אם num2 שווה 0 הדפס 'אי אפשר לחלק באפס' אחרת הדפס 'אפשר לחלק'.",
-    hint: "if num2 == 0: ... else: ...",
-    starter: `num2 = 0
-
-# כתבו תנאי כאן:
+# כתבו כאן:
+# אם x גדול מ-10 הדפיסו "גדול"
+# אחרת הדפיסו "קטן"
 `,
-    solution: `num2 = 0
+  solution: `x = 7
 
-if num2 == 0:
-    print("אי אפשר לחלק באפס")
+if x > 10:
+    print("גדול")
 else:
-    print("אפשר לחלק")`,
-    expectedOutput: "אי אפשר לחלק באפס",
-    fallback: {
-      type: "quiz",
-      question: "איזה קוד בודק אם x שווה ל-10 בפייתון?",
-      options: ["if (x === 10) {}", "if x = 10:", "if x == 10:", "if x != 10:"],
-      correctIndex: 2,
-      explainCorrect: "בפייתון משווים עם == (לא עם =)."
-    }
-  },
+    print("קטן")`,
+  expectedOutput: "קטן",
+  fallback: {
+    type: "quiz",
+    question: "איזו שורה מתחילה תנאי if בפייתון?",
+    options: [
+      "if (x > 10) {",
+      "if x > 10:",
+      "if x > 10 then",
+      "if x => 10:"
+    ],
+    correctIndex: 1,
+    explainCorrect: "בפייתון כותבים if בלי סוגריים, עם : בסוף השורה."
+  }
+},
 
   {
     id: "func_greet",
