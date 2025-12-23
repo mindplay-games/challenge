@@ -23,10 +23,17 @@ async function runUserCode(code) {
   const pyodide = await initPyodide();
 
   const wrapped = `
-import sys, io
+import sys, io, js
 _buffer = io.StringIO()
 sys.stdout = _buffer
 sys.stderr = _buffer
+
+def input(prompt=""):
+    # input() דרך חלון prompt בדפדפן
+    try:
+        return js.prompt(prompt) or ""
+    except Exception:
+        return ""
 
 try:
 ${indent(code, 4)}
