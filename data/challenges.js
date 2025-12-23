@@ -19,7 +19,23 @@
       explainCorrect: 'בפייתון מדפיסים עם print() והטקסט בתוך גרשיים.'
     }
   },
-
+{
+  id: "input_name",
+  group: "basics",
+  topic: "קלט",
+  title: "קלט שם",
+  subtitle: "input() + print()",
+  explain: "input() קורא טקסט שהמשתמש מקליד. אנחנו יכולים לשמור אותו במשתנה ואז להדפיס.",
+  task: "קבלו שם מהמשתמש והדפיסו: שלום NAME",
+  hint: 'name = input("מה השם? ") ואז print("שלום", name)',
+  starter: `# כתבו כאן:
+name = input("מה השם? ")
+print("שלום", name)
+`,
+  expectedOutput: "שלום יוסי",
+  // ✅ הערכים שיסופקו ל-input() בזמן הרצה
+  inputs: ["יוסי"]
+},
   {
     id: "var_zoo_total",
     group: "basics",
