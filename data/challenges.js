@@ -206,12 +206,7 @@ greet("יוסי")`,
   explain: "input() מחזיר טקסט. כדי להפוך למספר משתמשים ב-int(). נקרא שני מספרים ונחבר.",
   task: "קבלו מהמשתמש שני מספרים (שלמים), חשבו את הסכום, והדפיסו את הסכום בלבד.",
   hint: "a = int(input(...)) ואז b = int(input(...)) ואז print(a + b)",
-  starter: `# כתבו כאן:
-a = int(input("מספר ראשון: "))
-b = int(input("מספר שני: "))
-
-# הדפיסו את הסכום:
-`,
+  starter: ``,
   solution: `a = int(input("מספר ראשון: "))
 b = int(input("מספר שני: "))
 
@@ -239,11 +234,7 @@ print(a + b)`,
   explain: "input() קורא קלט מהמשתמש. כדי לחשב עם מספרים צריך להפוך את הקלט למספר בעזרת int().",
   task: "קבלו מהמשתמש את הגיל שלו, חשבו מה יהיה הגיל בעוד שנה, והדפיסו את התוצאה.",
   hint: "age = int(input(...)) ואז print(age + 1)",
-  starter: `# כתבו כאן:
-age = int(input("מה הגיל שלך? "))
-
-# הדפיסו את הגיל בעוד שנה:
-`,
+  starter: ``,
   solution: `age = int(input("מה הגיל שלך? "))
 print(age + 1)`,
   expectedOutput: null,
@@ -260,10 +251,79 @@ print(age + 1)`,
     explainCorrect: "input() מחזיר טקסט, ו-int() הופך אותו למספר שאפשר להוסיף לו 1."
   }
 },
+{
+  id: "time_sleep_basic",
+  group: "basics",
+  topic: "ספריית time",
+  title: "טיימר קצר",
+  subtitle: "time.sleep()",
+  explain: "הספרייה time עוזרת לנו לעבוד עם זמן. הפונקציה sleep() עוצרת את התוכנית למספר שניות ואז ממשיכה.",
+  task: "ייבאו את time. הדפיסו 'מתחילים', חכו 1 שנייה עם time.sleep(1), ואז הדפיסו 'סיימנו'.",
+  hint: "import time ואז time.sleep(1)",
+  starter: ``,
+  solution: `import time
+
+print("מתחילים")
+time.sleep(1)
+print("סיימנו")`,
+  expectedOutput: `מתחילים
+סיימנו`,
+  fallback: {
+    type: "quiz",
+    question: "מה עושה time.sleep(2)?",
+    options: [
+      "מדפיס 2 למסך",
+      "מחכה 2 שניות ואז ממשיך",
+      "מוחק משתנים",
+      "עושה לולאה 2 פעמים"
+    ],
+    correctIndex: 1,
+    explainCorrect: "sleep עוצרת את התוכנית למספר שניות ואז ממשיכה."
+  }
+},
+  {
+  id: "time_stopwatch_basic",
+  group: "basics",
+  topic: "ספריית time",
+  title: "סטופר קטן",
+  subtitle: "time.time() + sleep()",
+  explain: "אפשר למדוד זמן: time.time() מחזיר את הזמן בשניות. אם שומרים זמן התחלה וזמן סיום, אפשר לחשב כמה זמן עבר.",
+  task: "ייבאו את time. שמרו start = time.time(), הדפיסו 'מתחילים', חכו 2 שניות, שמרו end = time.time(), וחשב/י כמה זמן עבר. הדפיסו: עברו: X שניות (עם עיגול לספרה אחת).",
+  hint: "passTime = end - start ואז print('עברו:', round(passTime, 1), 'שניות')",
+  starter: `# כתבו כאן:
+# 1) import time
+# 2) start = time.time()
+# 3) print("מתחילים")
+# 4) time.sleep(2)
+# 5) end = time.time()
+# 6) passTime = end - start
+# 7) print("עברו:", round(passTime, 1), "שניות")
+`,
+  solution: `import time
+
+start = time.time()
+print("מתחילים")
+time.sleep(2)
+end = time.time()
+
+elapsed = end - start
+print("עברו:", round(elapsed, 1), "שניות")`,
+  expectedOutput: null,
+  fallback: {
+    type: "quiz",
+    question: "למה עושים end - start?",
+    options: [
+      "כדי לקבל את הזמן שנשאר",
+      "כדי לקבל כמה זמן עבר בין ההתחלה לסוף",
+      "כדי להדפיס את השעה",
+      "כדי להפעיל sleep"
+    ],
+    correctIndex: 1,
+    explainCorrect: "חיסור של זמן סוף פחות זמן התחלה נותן כמה שניות עברו."
+  }
+},
 
 
-
-  // ===== פרויקט (לרוב בלי בדיקה קשיחה) =====
 {
   id: "float_sum_two_numbers",
   group: "projects",
