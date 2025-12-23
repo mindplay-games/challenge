@@ -19,7 +19,35 @@
       explainCorrect: 'בפייתון מדפיסים עם print() והטקסט בתוך גרשיים.'
     }
   },
-
+{
+  id: "input_basic_name",
+  group: "basics",
+  topic: "קלט",
+  title: "קלט שם",
+  subtitle: "input() + print()",
+  explain: "input() קורא טקסט שהמשתמש מקליד. נשמור את הטקסט במשתנה ואז נדפיס אותו.",
+  task: "קבלו שם מהמשתמש והדפיסו: שלום NAME",
+  hint: 'name = input("מה השם שלך? ") ואז print("שלום", name)',
+  starter: `# כתבו כאן:
+name = input("מה השם שלך? ")
+print("שלום", name)
+`,
+  solution: `name = input("מה השם שלך? ")
+print("שלום", name)`,
+  expectedOutput: null,
+  fallback: {
+    type: "quiz",
+    question: "מה עושה input() בפייתון?",
+    options: [
+      "מדפיס למסך",
+      "קורא קלט מהמשתמש ומחזיר אותו",
+      "מוחק משתנים",
+      "עוצר את המחשב"
+    ],
+    correctIndex: 1,
+    explainCorrect: "input() מחכה שהמשתמש יקליד ומחזיר את הטקסט."
+  }
+},
   {
     id: "var_zoo_total",
     group: "basics",
