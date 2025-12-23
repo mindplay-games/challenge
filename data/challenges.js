@@ -19,35 +19,6 @@
       explainCorrect: 'בפייתון מדפיסים עם print() והטקסט בתוך גרשיים.'
     }
   },
-{
-  id: "input_basic_name",
-  group: "basics",
-  topic: "קלט",
-  title: "קלט שם",
-  subtitle: "input() + print()",
-  explain: "input() קורא טקסט שהמשתמש מקליד. נשמור את הטקסט במשתנה ואז נדפיס אותו.",
-  task: "קבלו שם מהמשתמש והדפיסו: שלום NAME",
-  hint: 'name = input("מה השם שלך? ") ואז print("שלום", name)',
-  starter: `# כתבו כאן:
-name = input("מה השם שלך? ")
-print("שלום", name)
-`,
-  solution: `name = input("מה השם שלך? ")
-print("שלום", name)`,
-  expectedOutput: null,
-  fallback: {
-    type: "quiz",
-    question: "מה עושה input() בפייתון?",
-    options: [
-      "מדפיס למסך",
-      "קורא קלט מהמשתמש ומחזיר אותו",
-      "מוחק משתנים",
-      "עוצר את המחשב"
-    ],
-    correctIndex: 1,
-    explainCorrect: "input() מחכה שהמשתמש יקליד ומחזיר את הטקסט."
-  }
-},
   {
     id: "var_zoo_total",
     group: "basics",
@@ -75,7 +46,32 @@ print(total)`,
       explainCorrect: "משתנה הוא קופסה בזיכרון: נותנים שם ושומרים ערך."
     }
   },
-
+{
+  id: "input_basic_name",
+  group: "basics",
+  topic: "קלט",
+  title: "קלט שם",
+  subtitle: "input() + print()",
+  explain: "input() קורא טקסט שהמשתמש מקליד. נשמור את הטקסט במשתנה ואז נדפיס אותו.",
+  task: "קבלו שם מהמשתמש והדפיסו: שלום name",
+  hint: 'name = input("מה השם שלך? ") ואז print("שלום", name)',
+  starter: ``,
+  solution: `name = input("מה השם שלך? ")
+print("שלום", name)`,
+  expectedOutput: null,
+  fallback: {
+    type: "quiz",
+    question: "מה עושה input() בפייתון?",
+    options: [
+      "מדפיס למסך",
+      "קורא קלט מהמשתמש ומחזיר אותו",
+      "מוחק משתנים",
+      "עוצר את המחשב"
+    ],
+    correctIndex: 1,
+    explainCorrect: "input() מחכה שהמשתמש יקליד ומחזיר את הטקסט."
+  }
+},
   {
     id: "for_5_rounds",
     group: "basics",
@@ -201,6 +197,71 @@ greet("יוסי")`,
       explainCorrect: "פונקציה חוסכת כתיבה כפולה ועוזרת לסדר קוד."
     }
   },
+  {
+  id: "input_add_two_numbers",
+  group: "basics",
+  topic: "קלט",
+  title: "חיבור שני מספרים",
+  subtitle: "int(input()) + print()",
+  explain: "input() מחזיר טקסט. כדי להפוך למספר משתמשים ב-int(). נקרא שני מספרים ונחבר.",
+  task: "קבלו מהמשתמש שני מספרים (שלמים), חשבו את הסכום, והדפיסו את הסכום בלבד.",
+  hint: "a = int(input(...)) ואז b = int(input(...)) ואז print(a + b)",
+  starter: `# כתבו כאן:
+a = int(input("מספר ראשון: "))
+b = int(input("מספר שני: "))
+
+# הדפיסו את הסכום:
+`,
+  solution: `a = int(input("מספר ראשון: "))
+b = int(input("מספר שני: "))
+
+print(a + b)`,
+  expectedOutput: null,
+  fallback: {
+    type: "quiz",
+    question: "למה משתמשים ב-int(input()) בתרגיל הזה?",
+    options: [
+      "כדי להפוך את המספר לטקסט",
+      "כדי להפוך טקסט למספר ואז אפשר לחבר",
+      "כדי להדפיס מהר יותר",
+      "כדי ליצור לולאה"
+    ],
+    correctIndex: 1,
+    explainCorrect: "input() מחזיר טקסט, ו-int() הופך אותו למספר שאפשר לעשות עליו חיבור."
+  }
+},
+  {
+  id: "input_age_plus_one",
+  group: "basics",
+  topic: "קלט",
+  title: "הגיל בעוד שנה",
+  subtitle: "int(input()) + חישוב",
+  explain: "input() קורא קלט מהמשתמש. כדי לחשב עם מספרים צריך להפוך את הקלט למספר בעזרת int().",
+  task: "קבלו מהמשתמש את הגיל שלו, חשבו מה יהיה הגיל בעוד שנה, והדפיסו את התוצאה.",
+  hint: "age = int(input(...)) ואז print(age + 1)",
+  starter: `# כתבו כאן:
+age = int(input("מה הגיל שלך? "))
+
+# הדפיסו את הגיל בעוד שנה:
+`,
+  solution: `age = int(input("מה הגיל שלך? "))
+print(age + 1)`,
+  expectedOutput: null,
+  fallback: {
+    type: "quiz",
+    question: "למה משתמשים ב-int(input()) בתרגיל הזה?",
+    options: [
+      "כדי להפוך טקסט למספר שאפשר לחשב איתו",
+      "כדי להדפיס טקסט",
+      "כדי לעצור את הקוד",
+      "כדי להפעיל לולאה"
+    ],
+    correctIndex: 0,
+    explainCorrect: "input() מחזיר טקסט, ו-int() הופך אותו למספר שאפשר להוסיף לו 1."
+  }
+},
+
+
 
   // ===== פרויקט (לרוב בלי בדיקה קשיחה) =====
 {
