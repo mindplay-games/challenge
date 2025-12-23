@@ -159,8 +159,7 @@ else:
     explain: "פונקציה היא מתכון: כותבים פעם אחת ומפעילים שוב ושוב.",
     task: "צור פונקציה greet שמקבלת name ומדפיסה 'שלום NAME'. ואז קרא לה עם השם שלך.",
     hint: "def greet(name): ואז print בתוך הפונקציה",
-    starter: `# כתבו כאן פונקציה ואז קריאה אליה:
-`,
+    starter: `# כתבו כאן פונקציה ואז קריאה אליה:`,
     solution: `def greet(name):
     print("שלום", name)
 
@@ -183,12 +182,9 @@ greet("יוסי")`,
   title: "חיבור עשרוניים",
   subtitle: "int()",
   explain: "int() פקודה שהופכת מספר עשרוני למספר שלם ",
-  task: "number בקוד מופיע לכם המשתנה הפכו אותו למספר שלם ותדפיסו אותו ",
+  task: "בקוד מופיע המשתנה number. הפכו אותו למספר שלם והדפיסו אותו.",
   hint: "int(number)",
-  starter: `number = 5.3
-  # כתבו כאן:
-  # 1) הפכו את המספר לשלם
-  # 2) הדפיסו את המספר השלם`,
+  starter: `number = 5.3`,
   solution: `print (int(number))`,
   expectedOutput: "5",
   fallback: {
