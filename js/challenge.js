@@ -16,13 +16,19 @@ function main() {
   }
 
   function goNextChallenge() {
-    const nextId = getNextChallengeId(id);
-    if (!nextId) {
-      alert("🎉 סיימתם את כל האתגרים!");
-      location.href = "./index.html";
-      return;
-    }
-    location.href = `./challenge.html?id=${encodeURIComponent(nextId)}`;
+   const nextId = getNextChallengeId(id);
+
+   if (!nextId) {
+     alert("🎉 סיימתם את כל האתגרים!");
+     location.href = "./index.html";
+     return;
+   }
+
+   const nextCh = CHALLENGES.find(x => x.id === nextId);
+
+   // אם הבא הוא practiceOnly -> לעבור ל-practice.html
+   const page = (nextCh?.mode === "practiceOnly") ? "practice.html" : "challenge.html";
+   location.href = `./${page}?id=${encodeURIComponent(nextId)}`;
   }
 
   if (!id) {
