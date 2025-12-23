@@ -7,9 +7,8 @@
     subtitle: "print בפייתון",
     explain: "פקודה היא הוראה למחשב. בפייתון מדפיסים למסך עם print().",
     task: 'כתוב שורה אחת שמדפיסה את המילה "שלום".',
-    hint: 'טקסט תמיד בתוך גרשיים: print("שלום")',
-    starter: `# כתבו כאן:
-print("...")`,
+    hint: 'הטקסט שבתוך הפרינט יהיה מוקף ב"גרשיים" ובסוגריים() לא לשכוח לא לעשות רווחים מיותרים לפני הפקודה',
+    starter: ``,
     solution: `print("שלום")`,
     expectedOutput: "שלום",
     fallback: {
@@ -27,15 +26,12 @@ print("...")`,
     topic: "משתנים",
     title: "גן חיות עם משתנים",
     subtitle: "3 משתנים + סכום",
-    explain: "משתנה הוא קופסה בזיכרון עם שם. אפשר לשמור בו מספרים.",
-    task: "צור 3 משתנים (lions, monkeys, elephants) עם מספרים. בסוף הדפס את סכום כל החיות.",
-    hint: "total = lions + monkeys + elephants ואז print(total)",
+    explain: "משתנה הוא קופסה בזיכרון עם שם. אפשר לשמור בו מספרים, מילים ועוד",
+    task: "צור 3 משתנים (lions, monkeys, elephants) כל משתנה ישמור על מספר החיות שיש מאותו סוג לאחר מכן נדפיס את סך כל החיות שיש לנו",
+    hint: "total = lions + monkeys + elephants  ---- print(total)",
     starter: `lions = 5
 monkeys = 12
-elephants = 2
-
-# חשבו סכום והדפיסו:
-`,
+elephants = 2`,
     solution: `lions = 5
 monkeys = 12
 elephants = 2
@@ -61,8 +57,7 @@ print(total)`,
     explain: "לולאת for עושה מספר חזרות ידוע מראש. range(1,6) נותן 1 עד 5.",
     task: "צור לולאת for שמדפיסה את המספרים 1 עד 5.",
     hint: "for i in range(1, 6): ואז print(i)",
-    starter: `# כתבו לולאה כאן:
-`,
+    starter: ``,
     solution: `for i in range(1, 6):
     print(i)`,
     expectedOutput: `1
@@ -83,9 +78,9 @@ print(total)`,
   group: "basics",
   topic: "לולאת while",
   title: "נקודות עד 5",
-  subtitle: "while + הגדלה",
-  explain: "לולאת while חוזרת כל עוד תנאי מסוים מתקיים. בכל סיבוב אפשר לשנות משתנה, וכשהתנאי כבר לא נכון — הלולאה נעצרת.",
-  task: "יש points = 0. כתבו לולאת while שמוסיפה 1 ל-points בכל סיבוב, ומדפיסה את points בכל סיבוב, עד ש-points יגיע ל-5 (כלומר הלולאה תרוץ כל עוד points קטן מ-5).",
+  subtitle: "while",
+  explain: "לולאת while חוזרת כל עוד תנאי מסוים מתקיים, וכשהתנאי כבר לא נכון — הלולאה נעצרת.",
+  task: "יש לנו משתנה בשם points שמתחיל בערך 0. כתבו לולאת while שמגדילה את הערך של points ב־1 בכל סיבוב ומדפיסה את הערך שלו בכל פעם, והלולאה תמשיך לרוץ כל עוד points קטן מ־5 ותיעצר כשהוא יגיע ל־5.",
   hint: "while points < 5: ואז בפנים points = points + 1 ואז print(points)",
   starter: `points = 0
 
