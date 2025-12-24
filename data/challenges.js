@@ -288,17 +288,9 @@ print("סיימנו")`,
   title: "סטופר קטן",
   subtitle: "time.time() + sleep()",
   explain: "אפשר למדוד זמן: time.time() מחזיר את הזמן בשניות. אם שומרים זמן התחלה וזמן סיום, אפשר לחשב כמה זמן עבר.",
-  task: "ייבאו את time. שמרו start = time.time(), הדפיסו 'מתחילים', חכו 2 שניות, שמרו end = time.time(), וחשב/י כמה זמן עבר. הדפיסו: עברו: X שניות (עם עיגול לספרה אחת).",
+  task: "ייבאו את time, שמרו את הזמן בתחילת התוכנית, הדפיסו 'מתחילים', חכו 2 שניות, שמרו את הזמן בסוף, חשבו כמה זמן עבר והדפיסו: עברו X שניות (עם עיגול לספרה אחת)",
   hint: "passTime = end - start ואז print('עברו:', round(passTime, 1), 'שניות')",
-  starter: `# כתבו כאן:
-# 1) import time
-# 2) start = time.time()
-# 3) print("מתחילים")
-# 4) time.sleep(2)
-# 5) end = time.time()
-# 6) passTime = end - start
-# 7) print("עברו:", round(passTime, 1), "שניות")
-`,
+  starter: ``,
   solution: `import time
 
 start = time.time()
