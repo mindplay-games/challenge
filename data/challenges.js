@@ -422,9 +422,9 @@ print("סה\"כ לתשלום:", int(total))
   topic: "זמן ושעה",
   title: "בדיקת מהירות הקלדה",
   subtitle: "time.time()",
-  explain: "מודדים זמן בעזרת time.time(): שומרים זמן התחלה, מחכים שהמשתמש יקליד, ואז שומרים זמן סיום ומחשבים כמה זמן עבר.",
-  task: "הציגו למשתמש משפט קצר להקלדה, מדדו כמה זמן לקח לו להקליד אותו, והדפיסו: לקח לך X שניות (בעיגול לספרה אחת).",
-  hint: "start = time.time() לפני ההקלדה, end = time.time() אחרי ההקלדה, ואז timePass = end - start",
+  explain: "מודדים זמן בעזרת time.time() (שומרים זמן התחלה, מחכים שהמשתמש יקליד, ואז שומרים זמן סיום ומחשבים כמה זמן עבר).",
+  task: "הציגו למשתמש משפט קצר להקלדה, מדדו כמה זמן לקח לו להקליד אותו, והדפיסו: לקח לך X שניות .",
+  hint: "התחל למדוד זמן לפני הקלט של המשתמש, עצור את המדידה אחרי הקלט, וחישב את ההפרש בין הזמנים כדי לדעת כמה זמן לקח לו.",
   starter: `
 import time
 
@@ -446,7 +446,7 @@ typed = input("הקלדה: ")
 end = time.time()
 
 timePass = end - start
-print("לקח לך:", int(timePass), "שניות")
+print("לקח לך:", timePass, "שניות")
 `,
   expectedOutput: null,
   fallback: {
@@ -455,6 +455,51 @@ print("לקח לך:", int(timePass), "שניות")
     options: ["start - end", "end + start", "end - start", "start * end"],
     correctIndex: 2,
     explainCorrect: "כדי לחשב זמן שעבר מחסרים: end - start."
+  }
+},
+  {
+  id: "rock_paper_scissors",
+  group: "projects",
+  topic: "Random + תנאים",
+  title: "אבן–נייר–מספריים",
+  subtitle: "random.choice() + if",
+  explain: "נשתמש ב־random כדי שהמחשב יבחר אבן/נייר/מספריים בצורה אקראית, ואז נשווה מול הבחירה של המשתמש בעזרת תנאים (if) כדי לקבוע ניצחון, הפסד או תיקו.",
+  task: "קלטו מהמשתמש אבן/נייר/מספריים, תנו למחשב לבחור אקראית, הדפיסו את שתי הבחירות ואז הדפיסו את התוצאה: ניצחת / הפסדת / תיקו.",
+  hint: "computer = random.choice([...]) ואז if user == computer -> תיקו, אחרת בדקו את שלושת מצבי הניצחון של המשתמש.",
+  starter: `
+import random
+
+user = input("בחר/י אבן/נייר/מספריים: ")
+computer = random.choice(["אבן", "נייר", "מספריים"])
+
+print("אתה בחרת:", user)
+print("המחשב בחר:", computer)
+
+# כאן קובעים מי ניצח
+`,
+  solution: `
+import random
+
+user = input("בחר/י אבן/נייר/מספריים: ")
+computer = random.choice(["אבן", "נייר", "מספריים"])
+
+print("אתה בחרת:", user)
+print("המחשב בחר:", computer)
+
+if user == computer:
+    print("תיקו")
+elif (user == "אבן" and computer == "מספריים") or (user == "נייר" and computer == "אבן") or (user == "מספריים" and computer == "נייר"):
+    print("ניצחת")
+else:
+    print("הפסדת")
+`,
+  expectedOutput: "מדפיס את הבחירה שלך, את בחירת המחשב, ואז ניצחת/הפסדת/תיקו",
+  fallback: {
+    type: "quiz",
+    question: "מה הפקודה שמגרילה בחירה אקראית מתוך רשימה?",
+    options: ["random.choice()", "random.randint()", "input()", "print()"],
+    correctIndex: 0,
+    explainCorrect: "random.choice() בוחרת פריט אקראי מתוך רשימה."
   }
 },
 
