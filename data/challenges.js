@@ -383,7 +383,81 @@ print(a + b)
     correctIndex: 1,
     explainCorrect: "float(input()) מאפשר לקלוט מספר עשרוני ולחשב איתו."
   }
+},
+  {
+  id: "tip_calculator",
+  group: "projects",
+  topic: "מחשבון",
+  title: "מחשבון טיפ",
+  subtitle: "float() + חישוב אחוזים",
+  explain: "אפשר לחשב אחוזים בעזרת כפל וחילוק. לדוגמה: טיפ 10% זה סכום * 10 / 100.",
+  task: "קלטו מהמשתמש את סכום החשבון ואת אחוז הטיפ, חשבו כמה טיפ יצא, ואז הדפיסו את הסכום הכולל לתשלום.",
+  hint: "tip = bill * percent / 100 ואז total = bill + tip",
+  starter: `
+bill = float(input("כמה יצא החשבון? "))
+percent = float(input("כמה אחוז טיפ? "))
+`,
+  solution: `
+bill = float(input("כמה יצא החשבון? "))
+percent = float(input("כמה אחוז טיפ? "))
+
+tip = bill * percent / 100
+total = bill + tip
+
+print("הטיפ הוא:", round(tip, 2))
+print("סה\"כ לתשלום:", round(total, 2))
+`,
+  expectedOutput: "שתי שורות: הטיפ וסכום כולל לתשלום",
+  fallback: {
+    type: "quiz",
+    question: "איך מחשבים 15% מתוך סכום bill?",
+    options: ["bill + 15", "bill * 15", "bill * 15 / 100", "bill / 15"],
+    correctIndex: 2,
+    explainCorrect: "אחוז מחשבים על ידי כפל וחילוק ב־100: bill * 15 / 100."
+  }
+},
+{
+  id: "typing_speed_test",
+  group: "projects",
+  topic: "זמן ושעה",
+  title: "בדיקת מהירות הקלדה",
+  subtitle: "time.time()",
+  explain: "מודדים זמן בעזרת time.time(): שומרים זמן התחלה, מחכים שהמשתמש יקליד, ואז שומרים זמן סיום ומחשבים כמה זמן עבר.",
+  task: "הציגו למשתמש משפט קצר להקלדה, מדדו כמה זמן לקח לו להקליד אותו, והדפיסו: לקח לך X שניות (בעיגול לספרה אחת).",
+  hint: "start = time.time() לפני ההקלדה, end = time.time() אחרי ההקלדה, ואז timePass = end - start",
+  starter: `
+import time
+
+sentence = "אני אוהב פייתון"
+print("הקלד/י את המשפט:")
+print(sentence)
+
+# כאן מודדים זמן ומקבלים קלט
+`,
+  solution: `
+import time
+
+sentence = "אני אוהב פייתון"
+print("הקלד/י את המשפט:")
+print(sentence)
+
+start = time.time()
+typed = input("הקלדה: ")
+end = time.time()
+
+timePass = end - start
+print("לקח לך:", int(timePass), "שניות")
+`,
+  expectedOutput: "שורה שמדפיסה כמה שניות לקח להקליד",
+  fallback: {
+    type: "quiz",
+    question: "איזה ביטוי מחשב כמה זמן עבר בין end ל-start?",
+    options: ["start - end", "end + start", "end - start", "start * end"],
+    correctIndex: 2,
+    explainCorrect: "כדי לחשב זמן שעבר מחסרים: end - start."
+  }
 }
+
   
   /* ======================
      SQL – 5 שאלונים + 5 fill (practice.html)
