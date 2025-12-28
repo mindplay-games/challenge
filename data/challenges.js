@@ -375,7 +375,7 @@ a = float(input("הכנס מספר ראשון: "))
 b = float(input("הכנס מספר שני: "))
 print(a + b)
 `,
-  expectedOutput: "מספר עשרוני שהוא סכום שני המספרים",
+  expectedOutput: null,
   fallback: {
     type: "quiz",
     question: "באיזו פקודה משתמשים כדי לקלוט מספר עשרוני מהמשתמש?",
@@ -407,7 +407,7 @@ total = bill + tip
 print("הטיפ הוא:", round(tip, 2))
 print("סה\"כ לתשלום:", round(total, 2))
 `,
-  expectedOutput: "שתי שורות: הטיפ וסכום כולל לתשלום",
+  expectedOutput: null,
   fallback: {
     type: "quiz",
     question: "איך מחשבים 15% מתוך סכום bill?",
@@ -448,7 +448,7 @@ end = time.time()
 timePass = end - start
 print("לקח לך:", int(timePass), "שניות")
 `,
-  expectedOutput: "שורה שמדפיסה כמה שניות לקח להקליד",
+  expectedOutput: null,
   fallback: {
     type: "quiz",
     question: "איזה ביטוי מחשב כמה זמן עבר בין end ל-start?",
