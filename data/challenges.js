@@ -226,13 +226,12 @@ greet("יוסי")`,
   topic: "קלט",
   title: "חיבור שני מספרים",
   subtitle: "int(input()) + print()",
-  explain: "input() מחזיר טקסט. כדי להפוך למספר משתמשים ב-int(). נקרא שני מספרים ונחבר.",
+  explain: "input() מחזיר תמיד טקסט, לכן ממירים אותו למספר בעזרת int(), ואז אפשר לקלוט שני מספרים, לחבר ביניהם ולהדפיס את התוצאה",
   task: "קבלו מהמשתמש שני מספרים (שלמים), חשבו את הסכום, והדפיסו את הסכום בלבד.",
   hint: "a = int(input(...)) ואז b = int(input(...)) ואז print(a + b)",
   starter: ``,
   solution: `a = int(input("מספר ראשון: "))
 b = int(input("מספר שני: "))
-
 print(a + b)`,
   expectedOutput: null,
   fallback: {
@@ -280,8 +279,8 @@ print(age + 1)`,
   topic: "ספריית time",
   title: "טיימר קצר",
   subtitle: "time.sleep()",
-  explain: "הספרייה time עוזרת לנו לעבוד עם זמן. הפונקציה sleep() עוצרת את התוכנית למספר שניות ואז ממשיכה.",
-  task: "ייבאו את time. הדפיסו 'מתחילים', חכו 1 שנייה עם time.sleep(1), ואז הדפיסו 'סיימנו'.",
+  explain: "הספרייה time מאפשרת לנו לעבוד עם זמן. הפונקציה sleep() עוצרת את התוכנית למספר שניות ואז ממשיכה.",
+  task: "ייבאו את ספריית time. הדפיסו 'מתחילים', חכו 1 שנייה עם time.sleep(1), ואז הדפיסו 'סיימנו'.",
   hint: "import time ואז time.sleep(1)",
   starter: ``,
   solution: `import time
@@ -310,9 +309,9 @@ print("סיימנו")`,
   topic: "ספריית time",
   title: "סטופר קטן",
   subtitle: "time.time() + sleep()",
-  explain: "אפשר למדוד זמן: time.time() מחזיר את הזמן בשניות. אם שומרים זמן התחלה וזמן סיום, אפשר לחשב כמה זמן עבר.",
-  task: "ייבאו את time, שמרו את הזמן בתחילת התוכנית, הדפיסו 'מתחילים', חכו 2 שניות, שמרו את הזמן בסוף, חשבו כמה זמן עבר והדפיסו: עברו X שניות (עם עיגול לספרה אחת)",
-  hint: "passTime = end - start ואז print('עברו:', round(passTime, 1), 'שניות')",
+  explain: "בעזרת פקודת time.time() אפשר למדוד זמן בשניות, ואם שומרים זמן התחלה וזמן סיום אפשר לחשב כמה זמן עבר",
+  task: "ייבאו את הספרייה time, שמרו את זמן ההתחלה, הדפיסו – מתחילים, המתינו 2 שניות, שמרו את זמן הסיום, חשבו את משך הזמן שחלף והדפיסו – עברו X שניות (בעיגול בעזרת פקודת int).",
+  hint: "חשבו את הזמן שעבר על-ידי חיסור זמן ההתחלה מזמן הסיום, שמרו אותו במשתנה, ואז הדפיסו את מספר השניות שעברו בעיגול לספרה אחת",
   starter: ``,
   solution: `import time
 
@@ -321,8 +320,8 @@ print("מתחילים")
 time.sleep(2)
 end = time.time()
 
-elapsed = end - start
-print("עברו:", round(elapsed, 1), "שניות")`,
+timePass = end - start
+print("עברו:", int(timePass), "שניות")`,
   expectedOutput: null,
   fallback: {
     type: "quiz",
@@ -338,10 +337,9 @@ print("עברו:", round(elapsed, 1), "שניות")`,
   }
 },
 
-
 {
   id: "float_sum_two_numbers",
-  group: "projects",
+  group: "basics",
   topic: "מספרים עשרוניים",
   title: "חיבור עשרוניים",
   subtitle: "int()",
@@ -359,7 +357,34 @@ print("עברו:", round(elapsed, 1), "שניות")`,
     explainCorrect: "int() ממיר טקסט למספר שלם ."
   }
 },
-
+{
+  id: "simple_calculator_sum",
+  group: "projects",
+  topic: "מחשבון",
+  title: "מחשבון חיבור",
+  subtitle: "float()",
+  explain: "מחשבון קולט שני מספרים ומחשב תוצאה. כדי לעבוד עם מספרים עשרוניים משתמשים ב־float().",
+  task: "קלטו שני מספרים מהמשתמש, חברו ביניהם והדפיסו את התוצאה.",
+  hint: "השתמשו ב־float(input()) לשני המספרים ואז חברו ביניהם",
+  starter: `
+a = float(input("הכנס מספר ראשון: "))
+b = float(input("הכנס מספר שני: "))
+`,
+  solution: `
+a = float(input("הכנס מספר ראשון: "))
+b = float(input("הכנס מספר שני: "))
+print(a + b)
+`,
+  expectedOutput: "מספר עשרוני שהוא סכום שני המספרים",
+  fallback: {
+    type: "quiz",
+    question: "באיזו פקודה משתמשים כדי לקלוט מספר עשרוני מהמשתמש?",
+    options: ["int(input())", "float(input())", "str(input())", "print()"],
+    correctIndex: 1,
+    explainCorrect: "float(input()) מאפשר לקלוט מספר עשרוני ולחשב איתו."
+  }
+}
+  
   /* ======================
      SQL – 5 שאלונים + 5 fill (practice.html)
      ====================== */
