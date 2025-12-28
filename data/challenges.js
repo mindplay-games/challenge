@@ -390,7 +390,7 @@ print(a + b)
   topic: "מחשבון",
   title: "מחשבון טיפ",
   subtitle: "float() + חישוב אחוזים",
-  explain: "אפשר לחשב אחוזים בעזרת כפל וחילוק. לדוגמה: טיפ 10% זה סכום * 10 / 100.",
+  explain: "אפשר לחשב אחוזים בעזרת כפל וחילוק: אם החשבון יצא 100 ש״ח ורוצים טיפ של 10%, מחשבים 100 × 10 ÷ 100 – והתוצאה היא 10.",
   task: "קלטו מהמשתמש את סכום החשבון ואת אחוז הטיפ, חשבו כמה טיפ יצא, ואז הדפיסו את הסכום הכולל לתשלום.",
   hint: "tip = bill * percent / 100 ואז total = bill + tip",
   starter: `
@@ -404,8 +404,8 @@ percent = float(input("כמה אחוז טיפ? "))
 tip = bill * percent / 100
 total = bill + tip
 
-print("הטיפ הוא:", round(tip, 2))
-print("סה\"כ לתשלום:", round(total, 2))
+print("הטיפ הוא:", int(tip))
+print("סה\"כ לתשלום:", int(total))
 `,
   expectedOutput: null,
   fallback: {
