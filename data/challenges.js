@@ -456,9 +456,8 @@ print("לקח לך:", int(timePass), "שניות")
     correctIndex: 2,
     explainCorrect: "כדי לחשב זמן שעבר מחסרים: end - start."
   }
-}
+},
 
-  
   /* ======================
      SQL – 5 שאלונים + 5 fill (practice.html)
      ====================== */
