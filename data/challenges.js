@@ -385,6 +385,38 @@ print(a + b)
   }
 },
   {
+  id: "lists_basics_fruits",
+  group: "projects",
+  topic: "רשימות",
+  title: "רשימות - הבסיס",
+  subtitle: "list + index",
+  explain: "רשימה (list) היא אוסף של פריטים בתוך סוגריים מרובעים []. לכל פריט יש מיקום (אינדקס): הראשון הוא 0, השני 1 וכן הלאה.",
+  task: "צרו רשימה של 3 פירות, הדפיסו את כל הרשימה, ואז הדפיסו רק את הפריט הראשון ואת הפריט האחרון.",
+  hint: "fruits[0] זה הראשון, ו־fruits[-1] זה האחרון.",
+  starter: `
+fruits = ["תפוח", "בננה", "ענבים"]
+
+# הדפיסו את כל הרשימה
+# הדפיסו את הפריט הראשון
+# הדפיסו את הפריט האחרון
+`,
+  solution: `
+fruits = ["תפוח", "בננה", "ענבים"]
+
+print(fruits)
+print("ראשון:", fruits[0])
+print("אחרון:", fruits[-1])
+`,
+  expectedOutput: "3 הדפסות: הרשימה, הראשון, האחרון",
+  fallback: {
+    type: "quiz",
+    question: "מה מחזיר fruits[0] אם fruits = ['תפוח','בננה','ענבים'] ?",
+    options: ["'תפוח'", "'בננה'", "'ענבים'", "כל הרשימה"],
+    correctIndex: 0,
+    explainCorrect: "האינדקס 0 הוא הפריט הראשון ברשימה."
+  }
+},
+  {
   id: "tip_calculator",
   group: "projects",
   topic: "מחשבון",
