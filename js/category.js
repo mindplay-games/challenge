@@ -12,7 +12,6 @@ function makeTile(ch) {
   a.className = "tile";
 
   const page = (ch.mode === "practiceOnly") ? "practice.html" : "challenge.html";
-  // מעבירים גם group כדי שבעתיד נוכל לעשות "הבא" בתוך אותה קטגוריה אם תרצה
   a.href = `./${page}?id=${encodeURIComponent(ch.id)}&group=${encodeURIComponent(ch.group ?? "")}`;
 
   a.innerHTML = `
