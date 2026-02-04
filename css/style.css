@@ -404,3 +404,27 @@ code{
   text-align: center;
 }
 
+/* ===== Run bar: buttons left + status under buttons ===== */
+.runBar{
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;   /* ✅ הכל יושב בצד שמאל */
+  gap: 10px;
+}
+
+.runButtons{
+  display: flex;
+  align-items: center;
+  justify-content: flex-start; /* ✅ הכפתורים נצמדים לשמאל */
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+/* הסטטוס יופיע מתחת לכפתורים ובאותו קו שמאל */
+#status.status{
+  min-height: 22px;          /* שלא יקפוץ */
+  font-weight: 900;
+  margin: 0;
+  text-align: left;          /* ✅ */
+}
