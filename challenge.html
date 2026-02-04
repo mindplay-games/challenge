@@ -40,17 +40,22 @@
       <h2>✍️ כתבו קוד כאן (Python)</h2>
       <textarea id="editor" class="editor" spellcheck="false"></textarea>
 
-    <div class="runBar">
-  <div class="runButtons">
-    <button id="hintBtn" class="btn btnGhost">💡 רמז</button>
-    <button id="solutionBtn" class="btn btnGhost">🧠 הצג פתרון</button>
+  <div class="runBar">
+  <div class="runButtonsRow">
+    <div class="runLeft">
+      <button id="hintBtn" class="btn btnGhost">💡 רמז</button>
+      <button id="solutionBtn" class="btn btnGhost">🧠 הצג פתרון</button>
+    </div>
 
-    <button id="resetBtn" class="btn btnGhost">♻️ אפס</button>
-    <button id="runBtn" class="btn">▶️ Run</button>
+    <div class="runRight">
+      <button id="resetBtn" class="btn btnGhost">♻️ אפס</button>
+      <button id="runBtn" class="btn">▶️ Run</button>
+    </div>
   </div>
 
   <div id="status" class="status"></div>
 </div>
+
 <div id="hint" class="hint hidden"></div>
 <pre id="solution" class="solution hidden"></pre>
 
