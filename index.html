@@ -9,27 +9,33 @@
 <body>
   <header class="top">
     <h1>🚀 אתגרי קוד לילדים</h1>
-    <p class="sub">בחרו נושא, קראו הסבר, קחו רמז, כתבו קוד והריצו!</p>
+    <p class="sub">בחרו קטגוריה ואז תרגיל — ותתחילו לתרגל!</p>
   </header>
 
   <main class="container">
     <section class="card">
-      <h2>תרגול יסודות</h2>
-      <div id="basics" class="grid"></div>
-    </section>
+      <h2>בחרו קטגוריה</h2>
 
-    <section class="card">
-      <h2>תרגול פרויקטים</h2>
-      <div id="projects" class="grid"></div>
-    </section>
-    <section class="card">
-      <h2>תרגול שנה ג׳</h2>
-      <div id="grade3" class="grid"></div>
-   </section>
+      <div class="grid">
+        <a class="tile" href="./category.html?group=basics">
+          <div class="tag"># תרגול יסודות</div>
+          <div class="name">תרגול יסודות</div>
+          <div class="desc">פקודות, משתנים, תנאים, לולאות, פונקציות…</div>
+        </a>
 
+        <a class="tile" href="./category.html?group=projects">
+          <div class="tag"># תרגול פרויקטים</div>
+          <div class="name">תרגול פרויקטים</div>
+          <div class="desc">מחשבון, זמן, רשימות, משחקים…</div>
+        </a>
+
+        <a class="tile" href="./category.html?group=grade3">
+          <div class="tag"># תרגול שנה ג׳</div>
+          <div class="name">תרגול שנה ג׳</div>
+          <div class="desc">SQL שאלונים + השלמת פקודות</div>
+        </a>
+      </div>
+    </section>
   </main>
-
-  <script src="data/challenges.js"></script>
-  <script src="js/app.js"></script>
 </body>
 </html>
