@@ -428,3 +428,42 @@ code{
   margin: 0;
   text-align: left;          /* ✅ */
 }
+
+
+/* ===== Run row: left = hint/solution, right = reset/run ===== */
+.runBar{
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.runButtonsRow{
+  display:flex;
+  align-items:center;
+  justify-content: space-between; /* ✅ שמאל + ימין */
+  gap: 10px;
+  width: 100%;
+}
+
+.runLeft, .runRight{
+  display:flex;
+  align-items:center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+/* ✅ כיוון RTL: שמאל אמיתי / ימין אמיתי */
+.runLeft{ justify-content: flex-start; }
+.runRight{ justify-content: flex-end; }
+
+/* הסטטוס מתחת, מיושר לימין/שמאל איך שתרצה */
+#status.status{
+  min-height: 22px;
+  font-weight: 900;
+  text-align: right;  /* אם תרצי שיהיה מימין */
+}
+
+/* אם אתה רוצה את הסטטוס מתחת לשמאל (מתחת לרמז/פתרון) */
+ /* #status.status{ text-align: left; } */
+
