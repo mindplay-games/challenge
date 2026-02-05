@@ -470,18 +470,18 @@ code{
 /* ===== Logo: cleaner glass (no obvious frame) ===== */
 .brand{
   position: fixed;
-  top: 14px;
-  left: 14px;
+  top: 10px;
+  right: 14px;
   z-index: 9999;
 
   display: inline-flex;
   align-items: center;
   
-  padding: 10px 14px;
+  padding: 5px 5px;
   border-radius: 10px;
 
   /* זכוכית לבנה עדינה (פחות "מסגרת") */
-  background: rgba(255,255,255,0.95);
+  background: rgba(255,255,255,0.90);
   border: 1px solid rgba(255,255,255,0.22);   /* ✅ מסגרת כמעט לא מורגשת */
   backdrop-filter: blur(12px);
 
@@ -494,7 +494,6 @@ code{
 
   flex-direction: column;     /* ✅ לוגו ואז טקסט מתחת */
   align-items: flex-end;    /* ✅ טבעי בפינה שמאל */
-  gap: 4px;
 }
 
 .brand:hover{
@@ -507,12 +506,4 @@ code{
   width: auto;
   display: block;
 }
-.brandTagline{
-  font-size: 14px;
-  font-weight: 800;
-  letter-spacing: .2px;
-  color: black;   /* עדין על לבן */
-  line-height: 1.1;
-  white-space: nowrap;
-  align:center;
-}
+
