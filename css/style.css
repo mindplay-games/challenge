@@ -476,12 +476,12 @@ code{
 
   display: inline-flex;
   align-items: center;
-
+  
   padding: 10px 14px;
   border-radius: 10px;
 
   /* זכוכית לבנה עדינה (פחות "מסגרת") */
-  background: rgba(255,255,255,0.86);
+  background: rgba(255,255,255,0.95);
   border: 1px solid rgba(255,255,255,0.22);   /* ✅ מסגרת כמעט לא מורגשת */
   backdrop-filter: blur(12px);
 
@@ -493,7 +493,7 @@ code{
   transition: transform .15s ease, filter .15s ease;
 
   flex-direction: column;     /* ✅ לוגו ואז טקסט מתחת */
-  align-items: flex-start;    /* ✅ טבעי בפינה שמאל */
+  align-items: flex-end;    /* ✅ טבעי בפינה שמאל */
   gap: 4px;
 }
 
@@ -508,10 +508,11 @@ code{
   display: block;
 }
 .brandTagline{
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 800;
   letter-spacing: .2px;
-  color: rgba(10, 15, 30, 0.62);   /* עדין על לבן */
+  color: black;   /* עדין על לבן */
   line-height: 1.1;
   white-space: nowrap;
+  align:center;
 }
