@@ -478,7 +478,7 @@ code{
   align-items: center;
 
   padding: 10px 14px;
-  border-radius: 18px;
+  border-radius: 10px;
 
   /* זכוכית לבנה עדינה (פחות "מסגרת") */
   background: rgba(255,255,255,0.86);
