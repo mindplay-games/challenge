@@ -491,6 +491,10 @@ code{
 
   text-decoration: none;
   transition: transform .15s ease, filter .15s ease;
+
+  flex-direction: column;     /* ✅ לוגו ואז טקסט מתחת */
+  align-items: flex-start;    /* ✅ טבעי בפינה שמאל */
+  gap: 4px;
 }
 
 .brand:hover{
@@ -502,4 +506,12 @@ code{
   height: 32px;
   width: auto;
   display: block;
+}
+.brandTagline{
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: .2px;
+  color: rgba(10, 15, 30, 0.62);   /* עדין על לבן */
+  line-height: 1.1;
+  white-space: nowrap;
 }
