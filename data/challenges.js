@@ -187,7 +187,7 @@ else:
     print("שלום")
 
 greet()`,
-    expectedOutput: "שלום יוסי",
+    expectedOutput: "שלום",
     fallback: {
       type: "quiz",
       question: "מה היתרון של פונקציה?",
