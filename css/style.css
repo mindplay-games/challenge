@@ -28,6 +28,10 @@
 
   /* מיני פרויקטים */
   --m1:#f59e0b; --m2:#ec4899;   /* mini projects */
+
+  /* theme defaults (will be overridden by body[data-group]) */
+  --t1: var(--accent);
+  --t2: var(--accent2);
 }
 
 *{box-sizing:border-box}
@@ -45,6 +49,13 @@ body{
 
   color: var(--text);
 }
+
+/* ===== theme by group ===== */
+body[data-group="basics"]{ --t1: var(--b1); --t2: var(--b2); }
+body[data-group="projects_y1"]{ --t1: var(--y1a); --t2: var(--y1b); }
+body[data-group="projects_y2"]{ --t1: var(--y2a); --t2: var(--y2b); }
+body[data-group="projects_y3"], body[data-group="grade3"]{ --t1: var(--y3a); --t2: var(--y3b); }
+body[data-group="mini_projects"]{ --t1: var(--m1); --t2: var(--m2); }
 
 .top{
   padding: 34px 16px;
@@ -83,13 +94,58 @@ h1{
   box-shadow: var(--shadow);
 }
 
+/* ===== Card differentiation (RTL-friendly: border-right) ===== */
+.card--explain{ border-right: 4px solid rgba(96,165,250,.85); }
+.card--task{ border-right: 4px solid rgba(245,158,11,.85); }
+.card--practice{ border-right: 4px solid rgba(34,197,94,.85); }
+.card--code{ border-right: 4px solid rgba(167,139,250,.85); }
+
+/* subtle title pill inside cards (optional) */
+.cardTitleRow{
+  display:flex;
+  justify-content: space-between;
+  align-items:center;
+  gap:10px;
+  margin-bottom: 6px;
+}
+
+/* ===== Progress dots ===== */
+.progressDots{
+  display:flex;
+  gap:8px;
+  align-items:center;
+  justify-content:flex-end;
+  flex-wrap:wrap;
+  margin-top: 10px;
+}
+
+.dot{
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.22);
+  background: rgba(255,255,255,0.10);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.12);
+}
+
+.dot.done{
+  background: linear-gradient(90deg, var(--t1), var(--t2));
+  border-color: rgba(255,255,255,0.28);
+}
+
+.dot.current{
+  background: linear-gradient(90deg, var(--t1), var(--t2));
+  border-color: rgba(255,255,255,0.40);
+  transform: scale(1.15);
+}
+
 .grid{
   display:grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: 14px;
 }
 
-/* ========= Tiles (כללי) ========= */
+/* Tiles בסיסיים */
 .tile{
   border: 1px solid rgba(255,255,255,0.16);
   border-radius: 22px;
@@ -132,7 +188,7 @@ h1{
   line-height:1.6;
 }
 
-/* ========= Tiles של קטגוריות (עם זוהר) ========= */
+/* קטגוריות – Tile מיוחד */
 .catTile::before{
   content:"";
   position:absolute;
@@ -151,7 +207,6 @@ h1{
     radial-gradient(520px 220px at 85% 90%, rgba(96,165,250,.50), transparent 60%);
 }
 
-/* ✅ פרויקטים לפי שנים */
 .catTile[data-variant="projects_y1"]::before{
   background:
     radial-gradient(520px 220px at 15% 10%, rgba(249,115,22,.60), transparent 60%),
@@ -170,7 +225,6 @@ h1{
     radial-gradient(520px 220px at 85% 90%, rgba(6,182,212,.45), transparent 60%);
 }
 
-/* ✅ מיני־פרויקטים */
 .catTile[data-variant="mini_projects"]::before{
   background:
     radial-gradient(520px 220px at 15% 10%, rgba(245,158,11,.55), transparent 60%),
@@ -198,12 +252,22 @@ h1{
   box-shadow: inset 0 1px 0 rgba(255,255,255,0.12);
 }
 
-/* ========= טקסטים / שורות ========= */
+/* טקסטים */
 .text{color:var(--muted); line-height:1.7; font-size:15px}
 .row{display:flex; gap:10px; align-items:center; flex-wrap:wrap; margin-top:10px}
 .mini{color:var(--muted); font-size:13px}
 
-/* ========= כפתורים ========= */
+code{
+  color: var(--text);
+  background: rgba(255,255,255,0.14);
+  padding:2px 6px;
+  border-radius:8px;
+
+  direction: ltr;
+  unicode-bidi: isolate;
+}
+
+/* כפתורים */
 .btn{
   border:none;
   border-radius:16px;
@@ -223,8 +287,9 @@ h1{
   box-shadow: none;
 }
 
+/* ✅ Next button becomes theme-colored automatically */
 .btnGreen{
-  background: linear-gradient(90deg, var(--accent3), #34d399);
+  background: linear-gradient(90deg, var(--t1), var(--t2));
   box-shadow: 0 14px 28px rgba(0,0,0,.25);
 }
 
@@ -252,7 +317,6 @@ h1{
 
 .hidden{display:none}
 
-/* ========= עורך / פלט / קוד ========= */
 .editor{
   width:100%;
   min-height:190px;
@@ -261,12 +325,9 @@ h1{
   background: rgba(255,255,255,0.10);
   color: var(--text);
   padding:12px;
-  box-shadow: inset 0 1px 0 rgba(255,255,255,.08);
-
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
   font-size:14px;
-
-  /* תמיד משמאל לימין עבור קוד */
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.08);
   direction: ltr;
   text-align: left;
   unicode-bidi: plaintext;
@@ -280,21 +341,10 @@ h1{
   min-height:70px;
   overflow:auto;
   color: var(--text);
-
   direction: ltr;
   text-align: left;
   unicode-bidi: plaintext;
   font-family: ui-monospace, Menlo, Consolas, monospace;
-}
-
-code{
-  color: var(--text);
-  background: rgba(255,255,255,0.14);
-  padding:2px 6px;
-  border-radius:8px;
-
-  direction: ltr;
-  unicode-bidi: isolate;
 }
 
 pre{
@@ -304,12 +354,11 @@ pre{
   font-family: ui-monospace, Menlo, Consolas, monospace;
 }
 
-/* ========= סטטוס ========= */
 .status{font-weight:900; min-height:22px;}
 .status.good{color: #35ff8b;}
 .status.bad{color: #ff6b6b;}
 
-/* ========= כפתור חזרה (link כמו כפתור) ========= */
+/* Back button (link -> button look) */
 .link{
   display:inline-flex;
   align-items:center;
@@ -345,7 +394,7 @@ pre{
   outline-offset: 2px;
 }
 
-/* ========= Drag & Drop (Order) ========= */
+/* Drag & Drop (Order) */
 .orderWrap{
   display:grid;
   gap:10px;
@@ -403,7 +452,7 @@ pre{
   gap:10px;
 }
 
-/* ========= Run Bar (איחוד כל הגרסאות הכפולות) ========= */
+/* Run bar */
 .runBar{
   margin-top: 10px;
   display: flex;
@@ -426,11 +475,9 @@ pre{
   flex-wrap: wrap;
 }
 
-/* בתוך RTL — שמאל/ימין אמיתי */
 .runLeft{ justify-content: flex-start; }
 .runRight{ justify-content: flex-end; }
 
-/* הסטטוס מתחת — ברירת מחדל מימין (כי האתר RTL) */
 #status.status{
   margin: 0;
   text-align: right;
