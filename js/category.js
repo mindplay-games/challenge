@@ -1,18 +1,26 @@
 function groupMeta(group) {
   const map = {
     basics: { title: "תרגול יסודות", sub: "פקודות, משתנים, תנאים, לולאות, פונקציות…" },
-    projects: { title: "תרגול פרויקטים", sub: "מיני־פרויקטים ותרגול מעשי" },
-    grade3: { title: "תרגול שנה ג׳", sub: "SQL שאלונים + תרגילי השלמה" },
+
+    projects_y1: { title: "תרגול פרויקטים – שנה א׳", sub: "פרויקטים ראשונים בליווי מלא" },
+    projects_y2: { title: "תרגול פרויקטים – שנה ב׳", sub: "יותר לוגיקה, זמן, משחקים ואקראיות" },
+    projects_y3: { title: "תרגול פרויקטים – שנה ג׳", sub: "SQL שאלונים + תרגילי השלמה" },
+
+    mini_projects: { title: "מיני־פרויקטים עצמאיים", sub: "פרויקטים פתוחים לביצוע עצמאי בליווי האתר" },
   };
+
   return map[group] ?? { title: "תרגול", sub: "" };
 }
 
-function makeTile(ch) {
+function makeTile(ch, groupFromPage) {
   const a = document.createElement("a");
   a.className = "tile";
 
   const page = (ch.mode === "practiceOnly") ? "practice.html" : "challenge.html";
-  a.href = `./${page}?id=${encodeURIComponent(ch.id)}&group=${encodeURIComponent(ch.group ?? "")}`;
+  const g = ch.group ?? groupFromPage ?? "";
+  const groupPart = g ? `&group=${encodeURIComponent(g)}` : "";
+
+  a.href = `./${page}?id=${encodeURIComponent(ch.id)}${groupPart}`;
 
   a.innerHTML = `
     <div class="tag"># ${ch.topic ?? ""}</div>
@@ -39,14 +47,17 @@ function makeTile(ch) {
   const list = document.getElementById("list");
 
   if (title) title.textContent = meta.title;
-  if (sub) sub.textContent = meta.sub;
 
   const items = CHALLENGES.filter(ch => (ch.group ?? "") === group);
+
+  if (sub) {
+    sub.textContent = `${meta.sub}${items.length ? ` • ${items.length} תרגילים` : ""}`;
+  }
 
   if (!items.length) {
     list.innerHTML = "<p class='mini'>אין תרגילים בקטגוריה הזו עדיין.</p>";
     return;
   }
 
-  items.forEach(ch => list.appendChild(makeTile(ch)));
+  items.forEach(ch => list.appendChild(makeTile(ch, group)));
 })();
