@@ -20,8 +20,14 @@
 
   /* צבעי קטגוריות */
   --b1:#22c55e; --b2:#60a5fa; /* basics */
-  --p1:#f97316; --p2:#a78bfa; /* projects */
-  --g1:#f43f5e; --g2:#06b6d4; /* grade3 */
+
+  /* פרויקטים לפי שנים */
+  --y1a:#f97316; --y1b:#a78bfa; /* year 1 */
+  --y2a:#60a5fa; --y2b:#22c55e; /* year 2 */
+  --y3a:#f43f5e; --y3b:#06b6d4; /* year 3 (SQL) */
+
+  /* מיני פרויקטים */
+  --m1:#f59e0b; --m2:#ec4899;   /* mini projects */
 }
 
 *{box-sizing:border-box}
@@ -83,7 +89,7 @@ h1{
   gap: 14px;
 }
 
-/* Tiles בסיסיים */
+/* ========= Tiles (כללי) ========= */
 .tile{
   border: 1px solid rgba(255,255,255,0.16);
   border-radius: 22px;
@@ -126,7 +132,7 @@ h1{
   line-height:1.6;
 }
 
-/* קטגוריות – Tile מיוחד */
+/* ========= Tiles של קטגוריות (עם זוהר) ========= */
 .catTile::before{
   content:"";
   position:absolute;
@@ -145,16 +151,30 @@ h1{
     radial-gradient(520px 220px at 85% 90%, rgba(96,165,250,.50), transparent 60%);
 }
 
-.catTile[data-variant="projects"]::before{
+/* ✅ פרויקטים לפי שנים */
+.catTile[data-variant="projects_y1"]::before{
   background:
     radial-gradient(520px 220px at 15% 10%, rgba(249,115,22,.60), transparent 60%),
     radial-gradient(520px 220px at 85% 90%, rgba(167,139,250,.50), transparent 60%);
 }
 
-.catTile[data-variant="grade3"]::before{
+.catTile[data-variant="projects_y2"]::before{
+  background:
+    radial-gradient(520px 220px at 15% 10%, rgba(96,165,250,.55), transparent 60%),
+    radial-gradient(520px 220px at 85% 90%, rgba(34,197,94,.45), transparent 60%);
+}
+
+.catTile[data-variant="projects_y3"]::before{
   background:
     radial-gradient(520px 220px at 15% 10%, rgba(244,63,94,.55), transparent 60%),
     radial-gradient(520px 220px at 85% 90%, rgba(6,182,212,.45), transparent 60%);
+}
+
+/* ✅ מיני־פרויקטים */
+.catTile[data-variant="mini_projects"]::before{
+  background:
+    radial-gradient(520px 220px at 15% 10%, rgba(245,158,11,.55), transparent 60%),
+    radial-gradient(520px 220px at 85% 90%, rgba(236,72,153,.45), transparent 60%);
 }
 
 .catTile > *{ position: relative; z-index: 1; }
@@ -178,11 +198,12 @@ h1{
   box-shadow: inset 0 1px 0 rgba(255,255,255,0.12);
 }
 
-/* טקסטים */
+/* ========= טקסטים / שורות ========= */
 .text{color:var(--muted); line-height:1.7; font-size:15px}
 .row{display:flex; gap:10px; align-items:center; flex-wrap:wrap; margin-top:10px}
+.mini{color:var(--muted); font-size:13px}
 
-/* כפתורים */
+/* ========= כפתורים ========= */
 .btn{
   border:none;
   border-radius:16px;
@@ -231,6 +252,7 @@ h1{
 
 .hidden{display:none}
 
+/* ========= עורך / פלט / קוד ========= */
 .editor{
   width:100%;
   min-height:190px;
@@ -239,9 +261,12 @@ h1{
   background: rgba(255,255,255,0.10);
   color: var(--text);
   padding:12px;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.08);
+
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
   font-size:14px;
-  box-shadow: inset 0 1px 0 rgba(255,255,255,.08);
+
+  /* תמיד משמאל לימין עבור קוד */
   direction: ltr;
   text-align: left;
   unicode-bidi: plaintext;
@@ -255,13 +280,36 @@ h1{
   min-height:70px;
   overflow:auto;
   color: var(--text);
+
+  direction: ltr;
+  text-align: left;
+  unicode-bidi: plaintext;
+  font-family: ui-monospace, Menlo, Consolas, monospace;
 }
 
-.status{font-weight:900}
+code{
+  color: var(--text);
+  background: rgba(255,255,255,0.14);
+  padding:2px 6px;
+  border-radius:8px;
+
+  direction: ltr;
+  unicode-bidi: isolate;
+}
+
+pre{
+  direction: ltr;
+  text-align: left;
+  unicode-bidi: plaintext;
+  font-family: ui-monospace, Menlo, Consolas, monospace;
+}
+
+/* ========= סטטוס ========= */
+.status{font-weight:900; min-height:22px;}
 .status.good{color: #35ff8b;}
 .status.bad{color: #ff6b6b;}
 
-/* ===== Back button (link -> button look) ===== */
+/* ========= כפתור חזרה (link כמו כפתור) ========= */
 .link{
   display:inline-flex;
   align-items:center;
@@ -290,25 +338,14 @@ h1{
   background: rgba(255,255,255,0.18);
 }
 
-.link:active{
-  transform: translateY(0px) scale(0.99);
-}
+.link:active{ transform: translateY(0px) scale(0.99); }
 
 .link:focus{
   outline: 3px solid rgba(96,165,250,0.45);
   outline-offset: 2px;
 }
 
-.mini{color:var(--muted); font-size:13px}
-
-code{
-  color: var(--text);
-  background: rgba(255,255,255,0.14);
-  padding:2px 6px;
-  border-radius:8px;
-}
-
-/* ===== Drag & Drop (Order) ===== */
+/* ========= Drag & Drop (Order) ========= */
 .orderWrap{
   display:grid;
   gap:10px;
@@ -350,6 +387,7 @@ code{
   color: var(--text);
   direction:ltr;
   text-align:left;
+  unicode-bidi: plaintext;
 }
 
 .orderItem.dragOver{
@@ -365,72 +403,7 @@ code{
   gap:10px;
 }
 
-/* כל קוד – תמיד משמאל לימין */
-.editor,pre,code,
-.solution,
-.output {
-  direction: ltr;
-  text-align: left;
-  unicode-bidi: plaintext;
-  font-family: ui-monospace, Menlo, Consolas, monospace;
-}
-
-.orderCode,
-.tile code {
-  direction: ltr;
-  unicode-bidi: isolate;
-  text-align: left;
-}
-
-
-/* ===== Move hint/solution next to Run/Reset ===== */
-.runRow{
-  justify-content: space-between;
-  align-items: center;
-}
-
-.runLeft, .runRight{
-  display:flex;
-  gap:10px;
-  align-items:center;
-  flex-wrap:wrap;
-}
-
-/* הסטטוס יישב באמצע/בשורה אם יש מקום */
-.runRow .status{
-  margin-inline: 10px;
-  flex: 1;
-  min-width: 160px;
-  text-align: center;
-}
-
-/* ===== Run bar: buttons left + status under buttons ===== */
-.runBar{
-  margin-top: 10px;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;   /* ✅ הכל יושב בצד שמאל */
-  gap: 10px;
-}
-
-.runButtons{
-  display: flex;
-  align-items: center;
-  justify-content: flex-start; /* ✅ הכפתורים נצמדים לשמאל */
-  gap: 10px;
-  flex-wrap: wrap;
-}
-
-/* הסטטוס יופיע מתחת לכפתורים ובאותו קו שמאל */
-#status.status{
-  min-height: 22px;          /* שלא יקפוץ */
-  font-weight: 900;
-  margin: 0;
-  text-align: left;          /* ✅ */
-}
-
-
-/* ===== Run row: left = hint/solution, right = reset/run ===== */
+/* ========= Run Bar (איחוד כל הגרסאות הכפולות) ========= */
 .runBar{
   margin-top: 10px;
   display: flex;
@@ -441,7 +414,7 @@ code{
 .runButtonsRow{
   display:flex;
   align-items:center;
-  justify-content: space-between; /* ✅ שמאל + ימין */
+  justify-content: space-between;
   gap: 10px;
   width: 100%;
 }
@@ -453,57 +426,12 @@ code{
   flex-wrap: wrap;
 }
 
-/* ✅ כיוון RTL: שמאל אמיתי / ימין אמיתי */
+/* בתוך RTL — שמאל/ימין אמיתי */
 .runLeft{ justify-content: flex-start; }
 .runRight{ justify-content: flex-end; }
 
-/* הסטטוס מתחת, מיושר לימין/שמאל איך שתרצה */
+/* הסטטוס מתחת — ברירת מחדל מימין (כי האתר RTL) */
 #status.status{
-  min-height: 22px;
-  font-weight: 900;
-  text-align: right;  /* אם תרצי שיהיה מימין */
+  margin: 0;
+  text-align: right;
 }
-
-/* אם אתה רוצה את הסטטוס מתחת לשמאל (מתחת לרמז/פתרון) */
- /* #status.status{ text-align: left; } */
-
-/* ===== Logo: cleaner glass (no obvious frame) ===== */
-.brand{
-  position: fixed;
-  top: 10px;
-  right: 14px;
-  z-index: 9999;
-
-  display: inline-flex;
-  align-items: center;
-  
-  padding: 5px 5px;
-  border-radius: 10px;
-
-  /* זכוכית לבנה עדינה (פחות "מסגרת") */
-  background: rgba(255,255,255,0.90);
-  border: 1px solid rgba(255,255,255,0.22);   /* ✅ מסגרת כמעט לא מורגשת */
-  backdrop-filter: blur(12px);
-
-  box-shadow:
-    0 14px 34px rgba(0,0,0,0.28),              /* ✅ צל חיצוני */
-    inset 0 1px 0 rgba(255,255,255,0.40);      /* ✅ היילייט עדין */
-
-  text-decoration: none;
-  transition: transform .15s ease, filter .15s ease;
-
-  flex-direction: column;     /* ✅ לוגו ואז טקסט מתחת */
-  align-items: flex-end;    /* ✅ טבעי בפינה שמאל */
-}
-
-.brand:hover{
-  transform: translateY(-1px);
-  filter: brightness(1.02);
-}
-
-.brandLogo{
-  height: 32px;
-  width: auto;
-  display: block;
-}
-
