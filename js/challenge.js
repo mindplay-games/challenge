@@ -1,5 +1,4 @@
 function main() {
-  // הגנה: אם challenges לא נטען
   if (typeof CHALLENGES === "undefined" || !Array.isArray(CHALLENGES)) {
     document.body.innerHTML = "<h2 style='padding:20px'>לא נטענו נתוני אתגרים 😅</h2>";
     return;
@@ -7,29 +6,44 @@ function main() {
 
   const params = new URLSearchParams(location.search);
   const id = params.get("id");
+  const group = params.get("group");
+
+  const list = group
+    ? CHALLENGES.filter(x => (x.group ?? "") === group)
+    : CHALLENGES;
+
   const ch = CHALLENGES.find(x => x.id === id);
 
+  function setBackLink() {
+    const back = document.getElementById("backLink");
+    if (!back) return;
+    back.href = group ? `./category.html?group=${encodeURIComponent(group)}` : "./index.html";
+  }
+
   function getNextChallengeId(currentId) {
-    const idx = CHALLENGES.findIndex(x => x.id === currentId);
+    const idx = list.findIndex(x => x.id === currentId);
     if (idx === -1) return null;
-    return CHALLENGES[idx + 1]?.id ?? null;
+    return list[idx + 1]?.id ?? null;
   }
 
   function goNextChallenge() {
-   const nextId = getNextChallengeId(id);
+    const nextId = getNextChallengeId(id);
 
-   if (!nextId) {
-     alert("🎉 סיימתם את כל האתגרים!");
-     location.href = "./index.html";
-     return;
-   }
+    if (!nextId) {
+      alert("🎉 סיימתם את כל האתגרים בקטגוריה!");
+      location.href = group ? `./category.html?group=${encodeURIComponent(group)}` : "./index.html";
+      return;
+    }
 
-   const nextCh = CHALLENGES.find(x => x.id === nextId);
+    const nextCh = CHALLENGES.find(x => x.id === nextId);
+    const page = (nextCh?.mode === "practiceOnly") ? "practice.html" : "challenge.html";
 
-   // אם הבא הוא practiceOnly -> לעבור ל-practice.html
-   const page = (nextCh?.mode === "practiceOnly") ? "practice.html" : "challenge.html";
-   location.href = `./${page}?id=${encodeURIComponent(nextId)}`;
+    const groupPart = group ? `&group=${encodeURIComponent(group)}` : "";
+    location.href = `./${page}?id=${encodeURIComponent(nextId)}${groupPart}`;
   }
+
+  // ✅ מאפשר ל-renderStep לקרוא לזה
+  window.goNextChallenge = goNextChallenge;
 
   if (!id) {
     document.body.innerHTML = "<h2 style='padding:20px'>חסר id בכתובת 😅</h2>";
@@ -41,9 +55,9 @@ function main() {
     return;
   }
 
+  setBackLink();
   document.title = ch.title;
 
-  // אלמנטים (עם בדיקות)
   const title = document.getElementById("title");
   const subtitle = document.getElementById("subtitle");
   const explain = document.getElementById("explain");
@@ -59,7 +73,6 @@ function main() {
   const topicBadge = document.getElementById("topicBadge");
   const progressBadge = document.getElementById("progressBadge");
 
-  // מילוי טקסטים (עם fallback לערך ריק כדי לא לשבור)
   if (title) title.textContent = ch.title ?? "";
   if (subtitle) subtitle.textContent = ch.subtitle ?? "";
   if (explain) explain.textContent = ch.explain ?? "";
@@ -68,17 +81,16 @@ function main() {
   if (solution) solution.textContent = ch.solution ?? "";
 
   if (topicBadge) topicBadge.textContent = `# ${ch.topic ?? ""}`;
-  const idx = CHALLENGES.findIndex(x => x.id === ch.id);
-  if (progressBadge) progressBadge.textContent = `אתגר ${idx + 1} מתוך ${CHALLENGES.length}`;
 
-  // שמירה מקומית
+  const idx = list.findIndex(x => x.id === ch.id);
+  if (progressBadge) progressBadge.textContent = `אתגר ${idx + 1} מתוך ${list.length}`;
+
   const key = "code_" + ch.id;
   if (editor) {
     editor.value = localStorage.getItem(key) ?? (ch.starter ?? "");
     editor.addEventListener("input", () => localStorage.setItem(key, editor.value));
   }
 
-  // כפתורים (תמיד בדיקה לפני onclick)
   const hintBtn = document.getElementById("hintBtn");
   const solutionBtn = document.getElementById("solutionBtn");
   const resetBtn = document.getElementById("resetBtn");
@@ -106,14 +118,12 @@ function main() {
   if (nextBtn) nextBtn.onclick = goNextChallenge;
   if (nextBtnFallback) nextBtnFallback.onclick = goNextChallenge;
 
-  // ✅ fallbackOnly — יוצאים מוקדם (חוקי!)
   if (ch.mode === "fallbackOnly") {
     codeCard?.classList.add("hidden");
     showFallback(ch);
     return;
   }
 
-  // מסלול הרצה רגיל (רק אם יש את הכפתור והעורך)
   if (runBtn && editor) {
     runBtn.onclick = async () => {
       if (status) {
@@ -154,7 +164,6 @@ function main() {
     };
   }
 
-  // טעינת Pyodide מראש (רק אם יש status)
   (async () => {
     if (status) {
       status.textContent = "טוען מנוע Python…";
@@ -184,7 +193,7 @@ main();
 
 let __stepIndex = 0;
 
-function showFallback(ch){
+function showFallback(ch) {
   const card = document.getElementById("fallbackCard");
   const area = document.getElementById("fallbackArea");
   card.classList.remove("hidden");
@@ -203,9 +212,10 @@ function showFallback(ch){
 
   if (ch.fallback.type === "quiz") renderQuiz(ch.fallback, area);
   if (ch.fallback.type === "order") renderOrder(ch.fallback, area);
+  if (ch.fallback.type === "fill") renderFill(ch.fallback, area);
 }
 
-function renderStep(ch){
+function renderStep(ch) {
   const area = document.getElementById("fallbackArea");
   const steps = ch.fallback.steps;
   const step = steps[__stepIndex];
@@ -235,7 +245,7 @@ function renderStep(ch){
 
   btn.onclick = () => {
     if (isLast) {
-      goNextChallenge();
+      window.goNextChallenge?.();
       return;
     }
     __stepIndex++;
@@ -246,7 +256,7 @@ function renderStep(ch){
   area.appendChild(nav);
 }
 
-function renderQuiz(fb, root){
+function renderQuiz(fb, root) {
   const box = document.createElement("div");
   box.className = "text";
   box.innerHTML = `<p><b>${fb.question}</b></p>`;
@@ -283,7 +293,7 @@ function renderQuiz(fb, root){
   root.appendChild(list);
 }
 
-function renderOrder(fb, root){
+function renderOrder(fb, root) {
   const p = document.createElement("p");
   p.className = "text";
   p.innerHTML = `<b>${fb.prompt}</b>`;
@@ -333,7 +343,7 @@ function renderOrder(fb, root){
 
     const exp = document.createElement("p");
     exp.className = "mini answer";
-    exp.textContent = ok ? fb.explainCorrect : "רמז: import → connect → cursor 😉";
+    exp.textContent = ok ? fb.explainCorrect : "רמז: נסו שוב 😉";
 
     root.appendChild(result);
     root.appendChild(exp);
