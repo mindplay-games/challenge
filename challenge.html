@@ -8,14 +8,17 @@
 </head>
 <body>
   <header class="top">
-    <a id="backLink" class="link" href="./category.html">← חזרה לבחירה</a>
+    <a class="link" href="./index.html">← חזרה לבחירה</a>
     <h1 id="title">אתגר</h1>
     <p id="subtitle" class="sub"></p>
+
+    <!-- ✅ פס התקדמות נקודות -->
+    <div id="progressDots" class="progressDots" aria-label="התקדמות"></div>
   </header>
 
   <main class="container">
     <!-- 1) הסבר -->
-    <section class="card">
+    <section class="card card--explain">
       <div class="row" style="justify-content:space-between;">
         <span class="badge" id="topicBadge">#</span>
         <span class="badge" id="progressBadge">אתגר</span>
@@ -26,14 +29,14 @@
     </section>
 
     <!-- 2) משימה -->
-    <section class="card">
+    <section class="card card--task">
       <h2>📌 משימה</h2>
       <div id="task" class="text"></div>
       <p class="mini">טיפ: בפייתון מדפיסים עם <code>print()</code>.</p>
     </section>
 
     <!-- 3) כתיבת קוד -->
-    <section id="codeCard" class="card">
+    <section id="codeCard" class="card card--code">
       <h2>✍️ כתבו קוד כאן (Python)</h2>
       <textarea id="editor" class="editor" spellcheck="false"></textarea>
 
@@ -65,7 +68,7 @@
     </section>
 
     <!-- תוכנית ב' -->
-    <section id="fallbackCard" class="card hidden">
+    <section id="fallbackCard" class="card card--practice hidden">
       <h2>🧩 תרגול בלי הרצה (תוכנית ב׳)</h2>
       <div id="fallbackArea"></div>
 
@@ -76,8 +79,8 @@
   </main>
 
   <script src="https://cdn.jsdelivr.net/pyodide/v0.25.1/full/pyodide.js"></script>
-  <script defer src="data/challenges.js"></script>
-  <script defer src="js/runner.js"></script>
-  <script defer src="js/challenge.js"></script>
+  <script src="data/challenges.js"></script>
+  <script src="js/runner.js"></script>
+  <script src="js/challenge.js"></script>
 </body>
 </html>
