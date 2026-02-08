@@ -7,9 +7,8 @@
   <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
-  
   <header class="top">
-    <a class="link" href="./index.html">← חזרה לבחירה</a>
+    <a id="backLink" class="link" href="./category.html">← חזרה לבחירה</a>
     <h1 id="title">אתגר</h1>
     <p id="subtitle" class="sub"></p>
   </header>
@@ -24,9 +23,6 @@
 
       <h2 style="margin-top:10px;">📘 הסבר</h2>
       <div id="explain" class="text"></div>
-
-   
-   
     </section>
 
     <!-- 2) משימה -->
@@ -41,25 +37,24 @@
       <h2>✍️ כתבו קוד כאן (Python)</h2>
       <textarea id="editor" class="editor" spellcheck="false"></textarea>
 
-  <div class="runBar">
-  <div class="runButtonsRow">
-    <div class="runLeft">
-      <button id="hintBtn" class="btn btnGhost">💡 רמז</button>
-      <button id="solutionBtn" class="btn btnGhost">🧠 הצג פתרון</button>
-    </div>
+      <div class="runBar">
+        <div class="runButtonsRow">
+          <div class="runLeft">
+            <button id="hintBtn" class="btn btnGhost">💡 רמז</button>
+            <button id="solutionBtn" class="btn btnGhost">🧠 הצג פתרון</button>
+          </div>
 
-    <div class="runRight">
-      <button id="resetBtn" class="btn btnGhost">♻️ אפס</button>
-      <button id="runBtn" class="btn">▶️ Run</button>
-    </div>
-  </div>
+          <div class="runRight">
+            <button id="resetBtn" class="btn btnGhost">♻️ אפס</button>
+            <button id="runBtn" class="btn">▶️ Run</button>
+          </div>
+        </div>
 
-  <div id="status" class="status"></div>
-</div>
+        <div id="status" class="status"></div>
+      </div>
 
-<div id="hint" class="hint hidden"></div>
-<pre id="solution" class="solution hidden"></pre>
-
+      <div id="hint" class="hint hidden"></div>
+      <pre id="solution" class="solution hidden"></pre>
 
       <h3 class="mini">📤 פלט</h3>
       <pre id="output" class="output"></pre>
@@ -81,8 +76,8 @@
   </main>
 
   <script src="https://cdn.jsdelivr.net/pyodide/v0.25.1/full/pyodide.js"></script>
-  <script src="data/challenges.js"></script>
-  <script src="js/runner.js"></script>
-  <script src="js/challenge.js"></script>
+  <script defer src="data/challenges.js"></script>
+  <script defer src="js/runner.js"></script>
+  <script defer src="js/challenge.js"></script>
 </body>
 </html>
