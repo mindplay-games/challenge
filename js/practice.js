@@ -1,46 +1,64 @@
 const params = new URLSearchParams(location.search);
 const id = params.get("id");
-const group = params.get("group");
+const ch = (typeof CHALLENGES !== "undefined") ? CHALLENGES.find(x => x.id === id) : null;
 
-const list = (group)
-  ? CHALLENGES.filter(x => (x.group ?? "") === group)
-  : CHALLENGES;
-
-const ch = (typeof CHALLENGES !== "undefined")
-  ? CHALLENGES.find(x => x.id === id)
-  : null;
-
-function setBackLink() {
-  const back = document.getElementById("backLink");
-  if (!back) return;
-  back.href = group ? `./category.html?group=${encodeURIComponent(group)}` : "./index.html";
+function pick(arr){
+  return arr[Math.floor(Math.random() * arr.length)];
 }
 
-function getNextChallengeId(currentId) {
-  const idx = list.findIndex(x => x.id === currentId);
-  if (idx === -1) return null;
-  return list[idx + 1]?.id ?? null;
-}
+const PRAISE_OK = ["אלופה! 💪", "מעולה!! 🚀", "איזה תותח/ית 😎", "וואו, זה מדויק! 🎯", "יש! המשך/י ככה ⭐"];
+const PRAISE_TRY = ["כמעט! 🔁 נסה/י שוב", "עוד רגע את/ה שם 😉", "לא נורא—עוד ניסיון אחד 💡", "ממש קרוב! תבדוק/י שוב"];
 
-function goNext() {
-  const nextId = getNextChallengeId(id);
-  if (!nextId) {
-    alert("🎉 סיימתם את כל האתגרים בקטגוריה!");
-    location.href = group ? `./category.html?group=${encodeURIComponent(group)}` : "./index.html";
+function renderProgressDots(currentIndex, total){
+  const el = document.getElementById("progressDots");
+  if (!el) return;
+
+  el.innerHTML = "";
+  const maxDots = 10;
+
+  if (total <= maxDots){
+    for (let i = 0; i < total; i++){
+      const d = document.createElement("span");
+      d.className = "dot" + (i < currentIndex ? " done" : "") + (i === currentIndex ? " current" : "");
+      el.appendChild(d);
+    }
     return;
   }
 
+  const windowSize = 10;
+  const start = Math.max(0, Math.min(total - windowSize, currentIndex - Math.floor(windowSize/2)));
+
+  for (let i = start; i < start + windowSize; i++){
+    const d = document.createElement("span");
+    d.className = "dot" + (i < currentIndex ? " done" : "") + (i === currentIndex ? " current" : "");
+    el.appendChild(d);
+  }
+}
+
+function getNextChallengeId(currentId){
+  const idx = CHALLENGES.findIndex(x => x.id === currentId);
+  if (idx === -1) return null;
+  return CHALLENGES[idx + 1]?.id ?? null;
+}
+
+function goNext(){
+  const nextId = getNextChallengeId(id);
+  if (!nextId) {
+    alert("🎉 סיימתם את כל האתגרים!");
+    location.href = "./index.html";
+    return;
+  }
   const nextCh = CHALLENGES.find(x => x.id === nextId);
   const page = (nextCh?.mode === "practiceOnly") ? "practice.html" : "challenge.html";
-
-  const groupPart = group ? `&group=${encodeURIComponent(group)}` : "";
-  location.href = `./${page}?id=${encodeURIComponent(nextId)}${groupPart}`;
+  location.href = `./${page}?id=${encodeURIComponent(nextId)}`;
 }
 
 if (!ch) {
   document.body.innerHTML = "<h2 style='padding:20px'>לא נמצא תרגול 😅</h2>";
 } else {
-  setBackLink();
+  // ✅ theme
+  document.body.dataset.group = ch.group ?? "";
+
   document.title = ch.title;
 
   document.getElementById("title").textContent = ch.title ?? "";
@@ -55,9 +73,11 @@ if (!ch) {
   const topicBadge = document.getElementById("topicBadge");
   const progressBadge = document.getElementById("progressBadge");
   topicBadge.textContent = `# ${ch.topic ?? ""}`;
+  const idx = CHALLENGES.findIndex(x => x.id === ch.id);
+  progressBadge.textContent = `אתגר ${idx + 1} מתוך ${CHALLENGES.length}`;
 
-  const idx = list.findIndex(x => x.id === ch.id);
-  progressBadge.textContent = `אתגר ${idx + 1} מתוך ${list.length}`;
+  // ✅ progress dots
+  renderProgressDots(idx, CHALLENGES.length);
 
   const area = document.getElementById("practiceArea");
   area.innerHTML = "";
@@ -79,13 +99,13 @@ if (!ch) {
 
 /* ---------- renderQuiz / renderOrder / renderFill ---------- */
 
-function renderQuiz(fb, root) {
+function renderQuiz(fb, root){
   const box = document.createElement("div");
   box.className = "text";
   box.innerHTML = `<p><b>${fb.question}</b></p>`;
 
-  const listEl = document.createElement("div");
-  listEl.className = "grid";
+  const list = document.createElement("div");
+  list.className = "grid";
 
   fb.options.forEach((opt, idx) => {
     const btn = document.createElement("button");
@@ -99,24 +119,24 @@ function renderQuiz(fb, root) {
 
       const msg = document.createElement("div");
       msg.className = ok ? "status good" : "status bad";
-      msg.textContent = ok ? "✅ נכון!" : "❌ לא… נסה שוב";
+      msg.textContent = ok ? ("✅ " + pick(PRAISE_OK)) : ("❌ " + pick(PRAISE_TRY));
 
       const exp = document.createElement("p");
       exp.className = "mini answer";
-      exp.textContent = ok ? fb.explainCorrect : "רמז: חזור להסבר למעלה 😉";
+      exp.textContent = ok ? (fb.explainCorrect ?? "מעולה!") : "רמז: חזור להסבר למעלה 😉";
 
       root.appendChild(msg);
       root.appendChild(exp);
     };
 
-    listEl.appendChild(btn);
+    list.appendChild(btn);
   });
 
   root.appendChild(box);
-  root.appendChild(listEl);
+  root.appendChild(list);
 }
 
-function renderOrder(fb, root) {
+function renderOrder(fb, root){
   const p = document.createElement("p");
   p.className = "text";
   p.innerHTML = `<b>${fb.prompt}</b>`;
@@ -180,11 +200,11 @@ function renderOrder(fb, root) {
 
     const result = document.createElement("div");
     result.className = ok ? "status good" : "status bad";
-    result.textContent = ok ? "✅ מעולה! הסדר נכון" : "❌ כמעט… נסה שוב";
+    result.textContent = ok ? ("✅ " + pick(PRAISE_OK)) : ("❌ " + pick(PRAISE_TRY));
 
     const exp = document.createElement("p");
     exp.className = "mini answer";
-    exp.textContent = ok ? fb.explainCorrect : "רמז: נסו לחשוב על הסדר הנכון 😉";
+    exp.textContent = ok ? (fb.explainCorrect ?? "מעולה!") : "רמז: נסו לחשוב על הסדר הנכון 😉";
 
     root.appendChild(result);
     root.appendChild(exp);
@@ -194,16 +214,16 @@ function renderOrder(fb, root) {
   root.appendChild(actions);
 }
 
-function escapeHtml(s) {
+function escapeHtml(s){
   return (s ?? "")
-    .replaceAll("&", "&amp;")
-    .replaceAll("<", "&lt;")
-    .replaceAll(">", "&gt;")
-    .replaceAll('"', "&quot;")
-    .replaceAll("'", "&#039;");
+    .replaceAll("&","&amp;")
+    .replaceAll("<","&lt;")
+    .replaceAll(">","&gt;")
+    .replaceAll('"',"&quot;")
+    .replaceAll("'","&#039;");
 }
 
-function renderFill(fb, root) {
+function renderFill(fb, root){
   const wrap = document.createElement("div");
   wrap.style.display = "grid";
   wrap.style.gap = "12px";
@@ -215,7 +235,7 @@ function renderFill(fb, root) {
 
   const blanks = fb.blanks.map(() => ({ value: "" }));
 
-  function renderSentence() {
+  function renderSentence(){
     sentence.innerHTML = "";
 
     const line = document.createElement("div");
@@ -298,11 +318,11 @@ function renderFill(fb, root) {
 
     const result = document.createElement("div");
     result.className = ok ? "status good" : "status bad";
-    result.textContent = ok ? "✅ מעולה! השלמת נכון" : "❌ כמעט… נסה שוב";
+    result.textContent = ok ? ("✅ " + pick(PRAISE_OK)) : ("❌ " + pick(PRAISE_TRY));
 
     const exp = document.createElement("p");
     exp.className = "mini answer";
-    exp.textContent = ok ? fb.explainCorrect : "רמז: נסו שוב 😉";
+    exp.textContent = ok ? (fb.explainCorrect ?? "מעולה!") : "רמז: חזרו להסבר למעלה 😉";
 
     root.appendChild(result);
     root.appendChild(exp);
