@@ -1,27 +1,46 @@
 :root{
+  /* ===== Base (Dark Futuristic) ===== */
   --bg1:#070A1A;
   --bg2:#0B1026;
 
   --text:#EAF2FF;
   --muted: rgba(234,242,255,0.74);
 
-  --cardA: rgba(255,255,255,0.08);
-  --cardB: rgba(255,255,255,0.05);
-  --border: rgba(255,255,255,0.14);
+  /* glass surfaces */
+  --surfaceA: rgba(255,255,255,0.10);
+  --surfaceB: rgba(255,255,255,0.05);
 
-  --shadow: 0 18px 55px rgba(0,0,0,.40);
+  /* lines (soft, not borders everywhere) */
+  --line: rgba(255,255,255,0.12);
 
-  --accent:#60a5fa;
-  --accent2:#a78bfa;
+  /* neumorphic / volumetric shadows */
+  --shadow-soft:
+    0 28px 80px rgba(0,0,0,.50),
+    inset 0 1px 1px rgba(255,255,255,.08);
+
+  --shadow-float:
+    0 18px 55px rgba(0,0,0,.40);
+
+  --radius-xl: 24px;
+  --radius-lg: 18px;
+
+  /* System status */
   --good:#22c55e;
   --warn:#f59e0b;
   --bad:#ef4444;
 
-  /* צבע פס קטגוריה (ברירת מחדל) */
-  --group1: #60a5fa;
+  /* ===== Category Identity (meaningful colors) ===== */
+  --cat-basics: #60a5fa;        /* Calm Blue */
+  --cat-projects-y1: #34d399;   /* Growth Green */
+  --cat-projects-y2: #a78bfa;   /* Thinking Purple */
+  --cat-projects-y3: #06b6d4;   /* Advanced Cyan */
+  --cat-mini: #f59e0b;          /* Creative Gold */
+
+  /* Active group gradient (set via body[data-group]) */
+  --group1: var(--cat-basics);
   --group2: #a78bfa;
 
-  /* פסי כרטיסים */
+  /* Section aura (kept subtle) */
   --c-explain:#60a5fa;
   --c-task:#f59e0b;
   --c-practice:#22c55e;
@@ -35,26 +54,43 @@ body{
   font-family: system-ui, "Rubik", Arial;
 
   background:
-    radial-gradient(900px 520px at 15% 10%, rgba(96,165,250,.22), transparent 60%),
-    radial-gradient(900px 520px at 85% 20%, rgba(167,139,250,.18), transparent 60%),
-    radial-gradient(900px 520px at 40% 105%, rgba(34,197,94,.14), transparent 60%),
+    radial-gradient(1200px 680px at 15% 10%, rgba(96,165,250,.18), transparent 60%),
+    radial-gradient(1200px 680px at 85% 20%, rgba(167,139,250,.14), transparent 60%),
+    radial-gradient(1200px 680px at 40% 105%, rgba(34,197,94,.12), transparent 60%),
     linear-gradient(180deg, var(--bg1) 0%, var(--bg2) 55%, var(--bg1) 100%);
 
   color: var(--text);
 }
 
-/* Theme לפי group (אם תרצי בעתיד) */
-body[data-group="basics"]{ --group1:#22c55e; --group2:#60a5fa; }
-body[data-group="projects_y1"]{ --group1:#f97316; --group2:#a78bfa; }
-body[data-group="projects_y2"]{ --group1:#60a5fa; --group2:#22c55e; }
-body[data-group="grade3"], body[data-group="projects_y3"]{ --group1:#f43f5e; --group2:#06b6d4; }
-body[data-group="mini_projects"]{ --group1:#f59e0b; --group2:#ec4899; }
+/* ===== Theme לפי group (שומרת משמעות צבעונית) ===== */
+body[data-group="basics"]{
+  --group1: var(--cat-basics);
+  --group2: rgba(167,139,250,1);
+}
+body[data-group="projects_y1"]{
+  --group1: var(--cat-projects-y1);
+  --group2: rgba(96,165,250,1);
+}
+body[data-group="projects_y2"]{
+  --group1: var(--cat-projects-y2);
+  --group2: rgba(96,165,250,1);
+}
+body[data-group="grade3"],
+body[data-group="projects_y3"]{
+  --group1: var(--cat-projects-y3);
+  --group2: rgba(34,197,94,1);
+}
+body[data-group="mini_projects"]{
+  --group1: var(--cat-mini);
+  --group2: rgba(236,72,153,1);
+}
 
+/* ===== Top ===== */
 .top{
   padding: 34px 16px 22px;
-  border-bottom: 1px solid var(--border);
+  border-bottom: 1px solid var(--line);
   text-align:center;
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(12px);
 }
 
 h1,h2,h3{margin:0 0 10px}
@@ -85,35 +121,67 @@ h1{
   gap: 14px;
 }
 
-/* ===== Cards – מודרני ונקי ===== */
+/* =======================================================
+   Volumetric Card (Glass + Soft Neumorphism)
+   ======================================================= */
 .card{
   position: relative;
-  background: linear-gradient(180deg, var(--cardA), var(--cardB));
-  border: 1px solid var(--border);
-  border-radius: 20px;
+  border-radius: var(--radius-xl);
   padding: 18px 18px 16px;
-  box-shadow: var(--shadow);
+
+  /* volumetric glass */
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.11), rgba(255,255,255,0.045));
+
+  box-shadow: var(--shadow-soft);
+  backdrop-filter: blur(16px);
+
+  /* no hard border */
+  border: 1px solid rgba(255,255,255,0.06);
+  overflow: hidden;
 }
 
+/* inner highlight layer */
 .card::before{
   content:"";
   position:absolute;
-  inset: 0;
-  border-radius: 20px;
+  inset:0;
+  border-radius: inherit;
   pointer-events:none;
-  background: radial-gradient(900px 260px at 30% 0%, rgba(255,255,255,0.10), transparent 60%);
-  opacity: .55;
+  background:
+    radial-gradient(900px 260px at 30% 0%, rgba(255,255,255,0.12), transparent 60%),
+    radial-gradient(700px 240px at 90% 0%, rgba(96,165,250,0.08), transparent 60%);
+  opacity: .75;
 }
+
+/* soft aura (category/section) – not borders */
+.card::after{
+  content:"";
+  position:absolute;
+  inset:-40px;
+  border-radius: inherit;
+  pointer-events:none;
+  filter: blur(34px);
+  opacity: .0;
+  transition: opacity .35s ease;
+  background: radial-gradient(closest-side, rgba(96,165,250,.20), transparent 70%);
+}
+
+/* On hover / focus inside */
+.card:hover::after,
+.card:focus-within::after{
+  opacity: .9;
+}
+
+/* Section-specific aura (replace old colored borders) */
+.card--explain::after{ background: radial-gradient(closest-side, rgba(96,165,250,.22), transparent 70%); }
+.card--task::after{ background: radial-gradient(closest-side, rgba(245,158,11,.20), transparent 70%); }
+.card--practice::after{ background: radial-gradient(closest-side, rgba(34,197,94,.18), transparent 70%); }
+.card--code::after{ background: radial-gradient(closest-side, rgba(167,139,250,.20), transparent 70%); }
 
 .card > *{ position: relative; }
 
-/* פס צבע עדין בצד ימין (RTL) */
-.card--explain{ border-right: 4px solid rgba(96,165,250,.85); }
-.card--task{ border-right: 4px solid rgba(245,158,11,.85); }
-.card--practice{ border-right: 4px solid rgba(34,197,94,.85); }
-.card--code{ border-right: 4px solid rgba(167,139,250,.85); }
-
-/* טקסטים */
+/* ===== Text ===== */
 .text{color: var(--muted); line-height:1.75; font-size:15px}
 .mini{color: var(--muted); font-size:13px}
 
@@ -125,44 +193,67 @@ h1{
   margin-top:12px;
 }
 
-/* ===== Badges – קטנים, לא צועקים ===== */
+/* ===== Badges (thin + modern) ===== */
 .badge{
   display:inline-flex;
   align-items:center;
   gap:8px;
   padding: 8px 10px;
   border-radius: 999px;
-  border:1px solid rgba(255,255,255,0.16);
-  background: rgba(255,255,255,0.07);
-  color: rgba(234,242,255,0.82);
-  font-weight: 800;
+
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.10);
+
+  color: rgba(234,242,255,0.86);
+  font-weight: 700;
   font-size: 12.5px;
+
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.07);
 }
 
-/* ===== Buttons – נקי יותר ===== */
+/* =======================================================
+   Buttons (floating + volumetric)
+   ======================================================= */
 .btn{
-  border:1px solid rgba(255,255,255,0.14);
-  border-radius: 14px;
+  border:none;
+  border-radius: 16px;
   padding: 11px 16px;
-  font-weight: 900;
+  font-weight: 800;
   cursor:pointer;
+
   color: white;
-  background: linear-gradient(90deg, var(--group1), var(--group2));
-  box-shadow: 0 14px 28px rgba(0,0,0,.22);
-  transition: transform .12s ease, filter .12s ease;
+  background: linear-gradient(135deg, var(--group1), var(--group2));
+
+  box-shadow:
+    0 18px 45px rgba(0,0,0,.35),
+    0 0 26px rgba(96,165,250,.18);
+
+  transition: transform .15s ease, filter .15s ease, box-shadow .2s ease;
 }
-.btn:hover{ filter: brightness(1.05); transform: translateY(-1px); }
-.btn:active{ transform: translateY(0px); }
+
+.btn:hover{
+  filter: brightness(1.06);
+  transform: translateY(-2px);
+  box-shadow:
+    0 26px 70px rgba(0,0,0,.45),
+    0 0 34px rgba(96,165,250,.22);
+}
+.btn:active{ transform: translateY(0px) scale(.99); }
 
 .btnGhost{
-  background: rgba(255,255,255,0.06);
-  border: 1px solid rgba(255,255,255,0.18);
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,255,255,0.12);
   color: rgba(234,242,255,0.95);
-  box-shadow: none;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.08),
+    0 12px 28px rgba(0,0,0,.22);
 }
 
 .btnGreen{
-  background: linear-gradient(90deg, #22c55e, #34d399);
+  background: linear-gradient(135deg, rgba(34,197,94,1), rgba(52,211,153,1));
+  box-shadow:
+    0 20px 50px rgba(0,0,0,.35),
+    0 0 28px rgba(34,197,94,.18);
 }
 
 /* ===== Link button ===== */
@@ -171,56 +262,89 @@ h1{
   align-items:center;
   gap:10px;
   padding: 10px 14px;
-  border-radius: 14px;
-  background: rgba(255,255,255,0.08);
-  border:1px solid rgba(255,255,255,0.16);
+  border-radius: 16px;
+
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,255,255,0.12);
+
   color: rgba(234,242,255,0.95);
   text-decoration:none;
-  font-weight:900;
-  transition: transform .12s ease, filter .12s ease;
-}
-.link:hover{ transform: translateY(-1px); filter: brightness(1.05); }
+  font-weight: 800;
 
-/* ===== Tiles ===== */
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.08),
+    0 14px 36px rgba(0,0,0,.26);
+
+  transition: transform .15s ease, filter .15s ease;
+}
+.link:hover{ transform: translateY(-2px); filter: brightness(1.06); }
+
+/* =======================================================
+   Tiles (Category & Challenge tiles)
+   ======================================================= */
 .grid{
   display:grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: 14px;
 }
 
+/* Base tile: volumetric glass + hover aura */
 .tile{
-  border: 1px solid rgba(255,255,255,0.14);
-  border-radius: 18px;
-  padding: 16px;
+  position: relative;
+  border-radius: var(--radius-xl);
+  padding: 16px 16px 15px;
+
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.095), rgba(255,255,255,0.04));
+
+  border: 1px solid rgba(255,255,255,0.07);
+  box-shadow: var(--shadow-float);
+  backdrop-filter: blur(14px);
+
   cursor:pointer;
   text-decoration:none;
   color: inherit;
   text-align: right;
-  background: rgba(255,255,255,0.06);
-  box-shadow: 0 14px 32px rgba(0,0,0,0.22);
-  transition: transform .15s ease, border-color .15s ease, filter .15s ease;
-  position: relative;
+
   overflow:hidden;
+  transition: transform .25s ease, filter .25s ease, box-shadow .25s ease;
+}
+
+/* Aura */
+.tile::before{
+  content:"";
+  position:absolute;
+  inset:-50px;
+  border-radius: inherit;
+  pointer-events:none;
+  filter: blur(36px);
+  opacity: .0;
+  transition: opacity .25s ease;
+  background: radial-gradient(closest-side, rgba(96,165,250,.18), transparent 70%);
 }
 
 .tile:hover{
-  transform: translateY(-3px);
-  border-color: rgba(255,255,255,0.24);
-  filter: brightness(1.05);
+  transform: translateY(-6px) scale(1.02);
+  filter: brightness(1.03);
+  box-shadow:
+    0 30px 80px rgba(0,0,0,.50),
+    inset 0 1px 0 rgba(255,255,255,.10);
 }
+.tile:hover::before{ opacity: 1; }
 
+/* Tile typography (thin-modern) */
 .tile .tag{
-  color: rgba(234,242,255,0.80);
+  color: rgba(234,242,255,0.78);
   font-size: 12px;
-  font-weight: 900;
+  font-weight: 700;
+  letter-spacing: .2px;
 }
-
 .tile .name{
-  font-weight: 1000;
+  font-weight: 650;
   font-size: 20px;
   margin-top: 6px;
+  letter-spacing: .15px;
 }
-
 .tile .desc{
   color: var(--muted);
   font-size: 14px;
@@ -228,20 +352,24 @@ h1{
   line-height: 1.6;
 }
 
-/* קטגוריות – Tile מיוחד */
-.catTile::before{
-  content:"";
-  position:absolute;
-  inset:-2px;
-  opacity:.9;
-  filter: blur(18px);
-  z-index:0;
-  background:
-    radial-gradient(520px 220px at 15% 10%, rgba(96,165,250,.35), transparent 60%),
-    radial-gradient(520px 220px at 85% 90%, rgba(167,139,250,.30), transparent 60%);
+/* ===== Category tile aura by variant (meaningful colors) ===== */
+.catTile[data-variant="basics"]::before{
+  background: radial-gradient(closest-side, rgba(96,165,250,.22), transparent 70%);
 }
-.catTile > *{ position: relative; z-index: 1; }
+.catTile[data-variant="projects_y1"]::before{
+  background: radial-gradient(closest-side, rgba(52,211,153,.20), transparent 70%);
+}
+.catTile[data-variant="projects_y2"]::before{
+  background: radial-gradient(closest-side, rgba(167,139,250,.22), transparent 70%);
+}
+.catTile[data-variant="projects_y3"]::before{
+  background: radial-gradient(closest-side, rgba(6,182,212,.22), transparent 70%);
+}
+.catTile[data-variant="mini_projects"]::before{
+  background: radial-gradient(closest-side, rgba(245,158,11,.22), transparent 70%);
+}
 
+/* Category header layout inside tile */
 .catTop{
   display:flex;
   gap:12px;
@@ -252,23 +380,36 @@ h1{
 .catIcon{
   width: 52px;
   height: 52px;
-  border-radius: 16px;
+  border-radius: 18px;
   display:grid;
   place-items:center;
   font-size: 28px;
-  background: rgba(255,255,255,0.10);
-  border: 1px solid rgba(255,255,255,0.14);
+
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.10);
+
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.08),
+    0 18px 40px rgba(0,0,0,.28);
 }
 
-/* ===== Code area ===== */
+/* =======================================================
+   Code area (Editor / Output)
+   ======================================================= */
 .editor{
   width:100%;
   min-height: 190px;
-  border-radius: 14px;
-  border: 1px solid rgba(255,255,255,0.16);
-  background: rgba(255,255,255,0.07);
+  border-radius: 16px;
+
+  border: 1px solid rgba(255,255,255,0.10);
+  background: linear-gradient(180deg, rgba(255,255,255,0.07), rgba(255,255,255,0.03));
+
   color: var(--text);
   padding: 12px;
+
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.08),
+    0 18px 45px rgba(0,0,0,.25);
 
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
   font-size: 14px;
@@ -279,12 +420,16 @@ h1{
 }
 
 .output{
-  background: rgba(255,255,255,0.07);
-  border: 1px solid rgba(255,255,255,0.14);
-  border-radius: 14px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.07), rgba(255,255,255,0.03));
+  border: 1px solid rgba(255,255,255,0.10);
+  border-radius: 16px;
   padding: 12px;
   min-height: 70px;
   overflow:auto;
+
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.08),
+    0 18px 45px rgba(0,0,0,.22);
 
   color: var(--text);
   direction: ltr;
@@ -307,23 +452,40 @@ code{
   border-radius: 8px;
 }
 
+/* Hint / Solution as floating panels */
 .hint, .solution{
   margin-top: 10px;
-  border: 1px dashed rgba(255,255,255,0.22);
-  border-radius: 14px;
+  border-radius: 16px;
   padding: 12px;
-  background: rgba(255,255,255,0.06);
+
+  border: 1px solid rgba(255,255,255,0.10);
+  background: linear-gradient(180deg, rgba(255,255,255,0.075), rgba(255,255,255,0.03));
+
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.08),
+    0 20px 55px rgba(0,0,0,.28);
+
   color: rgba(234,242,255,0.95);
 }
 
 .hidden{display:none}
 
-/* Status */
+/* =======================================================
+   Status (with soft glow)
+   ======================================================= */
 .status{font-weight:900; min-height:22px;}
-.status.good{color: #35ff8b;}
-.status.bad{color: #ff6b6b;}
+.status.good{
+  color: var(--good);
+  text-shadow: 0 0 18px rgba(34,197,94,.45);
+}
+.status.bad{
+  color: var(--bad);
+  text-shadow: 0 0 16px rgba(239,68,68,.38);
+}
 
-/* Run bar */
+/* =======================================================
+   Run bar
+   ======================================================= */
 .runBar{
   margin-top: 10px;
   display: flex;
@@ -346,7 +508,9 @@ code{
   flex-wrap: wrap;
 }
 
-/* Drag & Drop (Order) */
+/* =======================================================
+   Drag & Drop (Order)
+   ======================================================= */
 .orderWrap{ display:grid; gap:10px; margin-top:10px; }
 
 .orderItem{
@@ -354,9 +518,14 @@ code{
   align-items:center;
   gap:10px;
   padding:12px 14px;
-  border-radius:14px;
-  border: 1px solid rgba(255,255,255,0.14);
-  background: rgba(255,255,255,0.06);
+  border-radius: 16px;
+
+  border: 1px solid rgba(255,255,255,0.10);
+  background: linear-gradient(180deg, rgba(255,255,255,0.075), rgba(255,255,255,0.03));
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.08),
+    0 18px 45px rgba(0,0,0,.24);
+
   cursor: grab;
   user-select:none;
 }
@@ -365,12 +534,18 @@ code{
 .orderGrip{
   width:34px;
   height:34px;
-  border-radius:12px;
-  border: 1px solid rgba(255,255,255,0.14);
+  border-radius: 14px;
+
+  border: 1px solid rgba(255,255,255,0.10);
   background: rgba(96,165,250,0.14);
+
   display:grid;
   place-items:center;
   font-weight:900;
+
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.08),
+    0 12px 28px rgba(0,0,0,.22);
 }
 
 .orderCode{
@@ -383,9 +558,9 @@ code{
 }
 
 .orderItem.dragOver{
-  outline:2px dashed rgba(96,165,250,.45);
+  outline:2px dashed rgba(96,165,250,.40);
   outline-offset:2px;
-  background: rgba(96,165,250,.08);
+  background: rgba(96,165,250,.06);
 }
 
 .orderActions{
