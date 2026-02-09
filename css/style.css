@@ -1,11 +1,12 @@
 :root{
   /* ===== Base (Dark Futuristic) ===== */
-  --bg1:#02030A;
-  --bg2:#050617;
+  --bg1:#0B0903;
+  --bg2:#151104;
 
-  --glow1: rgba(34,211,238,.44);
-  --glow2: rgba(168,85,247,.40);
-  --glow3: rgba(59,130,246,.32);
+  /* עדין יותר (פחות אטימות) */
+  --glow1: rgba(250,204,21,.28);  /* neon yellow */
+  --glow2: rgba(255,221,87,.22);  /* soft gold */
+  --glow3: rgba(255,184,0,.18);   /* amber */
   --text:#EAF2FF;
   --muted: rgba(234,242,255,0.74);
 
@@ -57,11 +58,10 @@ body{
   font-family: system-ui, "Rubik", Arial;
 
   background:
-   radial-gradient(1200px 680px at 12% 12%, var(--glow1), transparent 56%),
-  radial-gradient(1200px 680px at 88% 18%, var(--glow2), transparent 56%),
-  radial-gradient(1200px 680px at 45% 110%, var(--glow3), transparent 58%),
-  linear-gradient(180deg, var(--bg1) 0%, var(--bg2) 55%, var(--bg1) 100%);
-  color: var(--text);
+ radial-gradient(1200px 680px at 14% 12%, var(--glow1), transparent 60%),
+  radial-gradient(1200px 680px at 86% 18%, var(--glow2), transparent 60%),
+  radial-gradient(1200px 680px at 45% 110%, var(--glow3), transparent 64%),
+  linear-gradient(180deg, var(--bg1) 0%, var(--bg2) 55%, var(--bg1) 100%);  color: var(--text);
 }
 
 /* ===== Theme לפי group (שומרת משמעות צבעונית) ===== */
