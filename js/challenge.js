@@ -1,3 +1,16 @@
+
+function sfxPlay(id){
+  const el = document.getElementById(id);
+  if (!el) return;
+
+  try{
+    el.currentTime = 0;                 // תמיד מתחיל מהתחלה
+    const p = el.play();                // ניגון
+    if (p && typeof p.catch === "function") p.catch(() => {});
+  }catch{}
+}
+
+
 function pick(arr){
   return arr[Math.floor(Math.random() * arr.length)];
 }
@@ -151,6 +164,7 @@ function main() {
   if (runBtn && editor) {
     runBtn.onclick = async () => {
       if (status) {
+        sfxPlay("sfxRun");
         status.textContent = "טוען/מריץ…";
         status.className = "status";
       }
@@ -163,6 +177,8 @@ function main() {
 
         if (!res.ok) {
           if (status) {
+             sfxPlay("sfxError");
+
             status.textContent = "❌ " + pick(PRAISE_ERR);
             status.className = "status bad";
           }
@@ -171,12 +187,16 @@ function main() {
 
         if (!check.canCheck) {
           if (status) {
+            sfxPlay("sfxSuccess");
             status.textContent = "✅ רץ! " + pick(PRAISE_OK);
             status.className = "status good";
           }
           return;
         }
+        if (check.passed) sfxPlay("sfxSuccess");
+        else sfxPlay("sfxError");
 
+    
         if (status) {
           status.textContent = check.passed ? ("✅ הצלחת! " + pick(PRAISE_OK)) : ("❌ " + pick(PRAISE_TRY));
           status.className = check.passed ? "status good" : "status bad";
@@ -203,6 +223,7 @@ function main() {
         status.className = "status good";
       }
     } catch {
+      sfxPlay("sfxError");
       codeCard?.classList.add("hidden");
       showFallback(ch);
     }
