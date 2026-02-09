@@ -123,7 +123,7 @@ function renderQuiz(fb, root){
 
       const exp = document.createElement("p");
       exp.className = "mini answer";
-      exp.textContent = ok ? (fb.explainCorrect ?? "מעולה!");
+      exp.textContent = ok ? (fb.explainCorrect ?? "מעולה!"):"";
 
       root.appendChild(msg);
       root.appendChild(exp);
@@ -204,7 +204,7 @@ function renderOrder(fb, root){
 
     const exp = document.createElement("p");
     exp.className = "mini answer";
-    exp.textContent = ok ? (fb.explainCorrect ?? "מעולה!") : "רמז: נסו לחשוב על הסדר הנכון 😉";
+    exp.textContent = ok ? (fb.explainCorrect ?? "מעולה!") : "";
 
     root.appendChild(result);
     root.appendChild(exp);
@@ -322,7 +322,7 @@ function renderFill(fb, root){
 
     const exp = document.createElement("p");
     exp.className = "mini answer";
-    exp.textContent = ok ? (fb.explainCorrect ?? "מעולה!") : "רמז: חזרו להסבר למעלה 😉";
+    exp.textContent = ok ? (fb.explainCorrect ?? "מעולה!") : "";
 
     root.appendChild(result);
     root.appendChild(exp);
