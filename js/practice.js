@@ -123,7 +123,7 @@ function renderQuiz(fb, root){
 
       const exp = document.createElement("p");
       exp.className = "mini answer";
-      exp.textContent = ok ? (fb.explainCorrect ?? "מעולה!") : "רמז: חזור להסבר למעלה 😉";
+      exp.textContent = ok ? (fb.explainCorrect ?? "מעולה!");
 
       root.appendChild(msg);
       root.appendChild(exp);
