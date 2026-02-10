@@ -68,7 +68,7 @@ if (!ch) {
 
   const hintEl = document.getElementById("hint");
   hintEl.textContent = ch.hint ?? "";
-  document.getElementById("hintBtn").onclick = () => hintEl.classList.toggle("hidden");
+  // document.getElementById("hintBtn").onclick = () => hintEl.classList.toggle("hidden");
 
   const topicBadge = document.getElementById("topicBadge");
   const progressBadge = document.getElementById("progressBadge");
