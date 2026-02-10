@@ -38,6 +38,7 @@ function makeTile(ch, groupFromPage) {
 
   const params = new URLSearchParams(location.search);
   const group = params.get("group") || "basics";
+  document.body.dataset.group = group;
 
   const meta = groupMeta(group);
   document.title = meta.title;
