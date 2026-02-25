@@ -32,17 +32,14 @@ const CHALLENGES = [
     title: "גן חיות עם משתנים",
     subtitle: "3 משתנים + סכום",
     explain: "משתנה הוא קופסה בזיכרון עם שם. אפשר לשמור בו מספרים, מילים ועוד",
-    task: "צור 3 משתנים (lions, monkeys, elephants) כל משתנה ישמור על מספר החיות שיש מאותו סוג לאחר מכן נדפיס את סך כל החיות שיש לנו",
+    task: "בקוד למטה מופיעים 3 משתנים כל משתנה שומר על מספר החיות (אריות, קופים, פילים) - המשימה שלכם היא ליצור משתנה חדש שבתוכו נסכום את מספר כל החיות בגן ולאחר מכן נדפיס את המספר שיצא",
     hint: "total = lions + monkeys + elephants  ---- print(total)",
     starter: `lions = 5
 monkeys = 12
 elephants = 2`,
     solution: `lions = 5
 monkeys = 12
-elephants = 2
-
-total = lions + monkeys + elephants
-print(total)`,
+elephants = 2`,
     expectedOutput: "19",
     fallback: {
       type: "quiz",
@@ -59,8 +56,8 @@ print(total)`,
     topic: "קלט",
     title: "קלט שם",
     subtitle: "input() + print()",
-    explain: "input() קורא טקסט שהמשתמש מקליד. נשמור את הטקסט במשתנה ואז נדפיס אותו.",
-    task: "קבלו שם מהמשתמש והדפיסו: שלום name",
+    explain: "input() קולט טקסט שהמשתמש מקליד. נשמור את הטקסט במשתנה ואז נדפיס אותו.",
+    task: " לאחר מכן הדפיסו שלום ואז את המשתנה  input() שישמור על פקודת name צרו משתנה בשם ",
     hint: 'שמור את הקלט מה־input() במשתנה, ואז הדפס את המילה "שלום" יחד עם המשתנה בעזרת print().',
     starter: ``,
     solution: `name = input("מה השם שלך? ")
