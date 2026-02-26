@@ -240,7 +240,7 @@ greet()`,
   id: "func_greet",
   group: "basics",
   topic: "פונקציות",
-  title: "פונקציה שאומרת שלום",
+  title: "פרמטרים בפונקציות",
   subtitle: "פרמטר = מקום ריק שמקבל ערך",
   explain:
      "🔹 פונקציה היא פעולה שמפעילים בקוד.\n\n" +
@@ -401,10 +401,10 @@ print("עברו:", int(timePass), "שניות")`,
   },
 
   {
-    id: "float_sum_two_numbers",
+    id: "float_to_int_sum",
     group: "basics",
-    topic: "מספרים עשרוניים",
-    title: "חיבור עשרוניים",
+    topic: "עיגול מספרים עשרוניים",
+    title: "חיבור עשרוניים למספר שלם",
     subtitle: "int()",
     explain: "int() פקודה שהופכת מספר עשרוני למספר שלם ",
     task: "בקוד מופיע המשתנה number. הפכו אותו למספר שלם והדפיסו אותו.",
@@ -419,6 +419,34 @@ print("עברו:", int(timePass), "שניות")`,
       correctIndex: 0,
       explainCorrect: "int() ממיר טקסט למספר שלם ."
     }
+  },  
+  
+  {
+    id: "float_sum_two_numbers",
+      group: "basics",
+  topic: "מספרים עשרוניים",
+  title: "חיבור עשרוניים עם float",
+  subtitle: "float()",
+  explain: "float() פקודה שהופכת טקסט (string) של מספר עשרוני למספר עשרוני אמיתי, כדי שאפשר יהיה לעשות איתו חישובים.",
+  task: "הקוד מבקש מהמשתמש שני מספרים עשרוניים. השתמשו ב-float() כדי להפוך אותם למספרים, ואז חברו והדפיסו את הסכום.",
+  hint: "a = float(input(...)) ואז b = float(input(...)) ואז print(a + b)",
+  starter: `a = input("הכנס מספר עשרוני ראשון: ")
+b = input("הכנס מספר עשרוני שני: ")
+
+# הפכו ל-float, חברו והדפיסו:
+`,
+  solution: `a = float(input("הכנס מספר עשרוני ראשון: "))
+b = float(input("הכנס מספר עשרוני שני: "))
+
+print(a + b)`,
+  expectedOutput: "לדוגמה: אם הכניסו 2.5 ואז 1.2 יודפס 3.7",
+  fallback: {
+    type: "quiz",
+    question: "באיזו פקודה משתמשים כדי להפוך טקסט כמו \"3.14\" למספר עשרוני שאפשר לחשב איתו?",
+    options: ["int()", "float()", "str()", "print()"],
+    correctIndex: 1,
+    explainCorrect: "float() ממיר טקסט למספר עשרוני כדי שאפשר יהיה לעשות איתו חיבור/חיסור/כפל."
+  }
   },
 
   /* ======================
