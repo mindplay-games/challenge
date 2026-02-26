@@ -39,7 +39,9 @@ monkeys = 12
 elephants = 2`,
     solution: `lions = 5
 monkeys = 12
-elephants = 2`,
+elephants = 2
+total = lions + monkeys + elephants
+print(total)`,
     expectedOutput: "19",
     fallback: {
       type: "quiz",
