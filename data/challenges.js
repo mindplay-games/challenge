@@ -504,7 +504,7 @@ print(a + b)`,
   title: "הדפסה פריט מרשימה לפי אינדקס",
   subtitle: "list index",
   explain: "רשימה היא דרך לשמור על כמה פריטי מידע במקום אחד - לכל פריט ברשימה יש מספר לפי המקום שלו ברשימה וככה אפשר לשלוף אותו - וזה נקרא אינדקס",
-  task: "לפניכם רשימה של פירות הדפיסו את הרשימה ולאחר מכן הדפיסו את הפרי השני ברשימה ",
+  task: "לפניכם רשימה של פירות הדפיסו את הפרי השני ברשימה ",
   hint: "האינדקס של הפריט הראשון הוא 0 , נסו לפנות לרשימה ולהשתמש בסוגריים מרובעות []",
   starter: `fruits = ["תפוח", "בננה", "ענבים"]
   # הדפיסו את כל הרשימה
@@ -521,7 +521,278 @@ print(fruits[1])`,
     explainCorrect: "float() ממיר טקסט למספר עשרוני כדי שאפשר יהיה לעשות איתו חיבור/חיסור/כפל."
   }
   },
+{
+  id: "list_2",
+  group: "basics",
+  topic: "רשימות",
+  title: "שינוי פריט ברשימה",
+  subtitle: "list update",
+  explain: "רשימה מאפשרת לנו לשמור כמה פריטים ביחד, וגם לשנות פריט מסוים לפי המקום שלו ברשימה בעזרת אינדקס.",
+  task: "לפניכם רשימה של צבעים. הדפיסו את כל הרשימה, אחר כך החליפו את הצבע השני ל-\"סגול\", ואז הדפיסו שוב את הרשימה המעודכנת.",
+  hint: "האינדקס של הפריט הראשון הוא 0, ולכן האינדקס של הפריט השני הוא 1. אפשר לשנות ערך ברשימה בעזרת שם הרשימה, סוגריים מרובעות, וסימן שווה.",
+  starter: `colors = ["אדום", "כחול", "ירוק", "צהוב"]
+# הדפיסו את כל הרשימה
+# שנו את הצבע השני ל-\"סגול\"
+# הדפיסו שוב את הרשימה`,
+  solution: `colors = ["אדום", "כחול", "ירוק", "צהוב"]
+print(colors)
+colors[1] = "סגול"
+print(colors)`,
+  expectedOutput: `['אדום', 'כחול', 'ירוק', 'צהוב']
+['אדום', 'סגול', 'ירוק', 'צהוב']`,
+  fallback: {
+    type: "quiz",
+    question: "אם רוצים לשנות את הפריט השני ברשימה, באיזה אינדקס נשתמש?",
+    options: ["0", "1", "2", "3"],
+    correctIndex: 1,
+    explainCorrect: "האינדקס של הפריט הראשון הוא 0, ולכן הפריט השני נמצא באינדקס 1."
+  }
+},{
+  id: "list_3",
+  group: "basics",
+  topic: "רשימות",
+  title: "הדפסת הפריט הראשון והאחרון ברשימה",
+  subtitle: "first and last item with index",
+  explain: "אפשר לגשת לפריטים ברשימה לפי המיקום שלהם. הפריט הראשון נמצא באינדקס 0, והפריט האחרון נמצא תמיד באינדקס ‎-1.",
+  task: "לפניכם רשימה של חיות. הדפיסו את הפריט הראשון ברשימה ולאחר מכן הדפיסו את הפריט האחרון בעזרת אינדקס ‎-1.",
+  hint: "הפריט הראשון נמצא באינדקס 0. בפייתון אפשר להשתמש ב־-1 כדי להגיע לפריט האחרון ברשימה.",
+  starter: `animals = ["חתול", "כלב", "אריה", "פיל"]
+# הדפיסו את הפריט הראשון
+# הדפיסו את הפריט האחרון בעזרת ‎-1`,
+  solution: `animals = ["חתול", "כלב", "אריה", "פיל"]
+print(animals[0])
+print(animals[-1])`,
+  expectedOutput: `חתול
+פיל`,
+  fallback: {
+    type: "quiz",
+    question: "באיזה אינדקס משתמשים בפייתון כדי להגיע לפריט האחרון ברשימה?",
+    options: ["0", "1", "-1", "len()"],
+    correctIndex: 2,
+    explainCorrect: "בפייתון האינדקס ‎-1 תמיד מחזיר את הפריט האחרון ברשימה."
+  }
+},
+  {
+  id: "list_4",
+  group: "basics",
+  topic: "רשימות",
+  title: "הוספת פריט חדש לרשימה",
+  subtitle: "append item",
+  explain: "אפשר להוסיף פריטים חדשים לרשימה בעזרת הפקודה append(). הפקודה מוסיפה פריט חדש לסוף הרשימה.",
+  task: "לפניכם רשימה של מאכלים. הוסיפו את המאכל \"פיצה\" לסוף הרשימה ולאחר מכן הדפיסו את הרשימה.",
+  hint: "כדי להוסיף פריט לרשימה משתמשים בשם הרשימה ואז append() עם הפריט בתוך סוגריים.",
+  starter: `foods = ["פסטה", "אורז", "סלט"]
+# הוסיפו \"פיצה\" לרשימה
+# הדפיסו את הרשימה`,
+  solution: `foods = ["פסטה", "אורז", "סלט"]
+foods.append("פיצה")
+print(foods)`,
+  expectedOutput: `['פסטה', 'אורז', 'סלט', 'פיצה']`,
+  fallback: {
+    type: "quiz",
+    question: "באיזו פקודה משתמשים כדי להוסיף פריט לסוף רשימה?",
+    options: ["add()", "append()", "push()", "insert()"],
+    correctIndex: 1,
+    explainCorrect: "append() מוסיפה פריט חדש לסוף הרשימה."
+  }
+},{
+  id: "random_1",
+  group: "basics",
+  topic: "random",
+  title: "הגרלת מספר רנדומלי",
+  subtitle: "randint",
+  explain: "ספריית random מאפשרת לנו להגריל מספרים באקראי. הפקודה randint מחזירה מספר רנדומלי בין שני מספרים שאנחנו בוחרים, כולל שני הקצוות.",
+  task: "ייבאו את ספריית random, הגרילו מספר רנדומלי בין 1 ל-10, ושמרו אותו במשתנה בשם number. לאחר מכן הדפיסו את המספר.",
+  hint: "קודם צריך לכתוב import random. אחר כך אפשר להשתמש ב-random.randint(1, 10).",
+  starter: `# ייבאו את ספריית random
+# הגרילו מספר בין 1 ל-10
+# הדפיסו את המספר`,
+  solution: `import random
 
+number = random.randint(1, 10)
+print(number)`,
+  expectedOutput: null,
+  fallback: {
+    type: "quiz",
+    question: "מה עושה הפקודה random.randint(1, 10)?",
+    options: [
+      "מדפיסה את כל המספרים מ-1 עד 10",
+      "מגרילה מספר רנדומלי בין 1 ל-10",
+      "יוצרת רשימה של מספרים",
+      "ממירה טקסט למספר"
+    ],
+    correctIndex: 1,
+    explainCorrect: "random.randint(1, 10) מגרילה מספר אקראי בין 1 ל-10, כולל 1 וגם 10."
+  }
+},{
+  id: "random_2",
+  group: "basics",
+  topic: "random",
+  title: "בחירת פריט רנדומלי מרשימה",
+  subtitle: "random.choice",
+  explain: "הפקודה random.choice מאפשרת לבחור פריט אחד באקראי מתוך רשימה. היא שימושית למשל במשחקים, הגרלות, או בחירת תשובה רנדומלית.",
+  task: "ייבאו את ספריית random. לאחר מכן בחרו פרי רנדומלי מתוך הרשימה ושמרו אותו במשתנה בשם fruit. לבסוף הדפיסו את הפרי שנבחר.",
+  hint: "קודם צריך לכתוב import random. אחר כך משתמשים ב-random.choice(list_name).",
+  starter: `fruits = ["תפוח", "בננה", "ענבים", "תות"]
+# ייבאו את ספריית random
+# בחרו פרי רנדומלי מתוך הרשימה
+# הדפיסו את הפרי`,
+  solution: `import random
+
+fruits = ["תפוח", "בננה", "ענבים", "תות"]
+fruit = random.choice(fruits)
+print(fruit)`,
+  expectedOutput: null,
+  fallback: {
+    type: "quiz",
+    question: "מה עושה הפקודה random.choice(fruits)?",
+    options: [
+      "מוסיפה פרי לרשימה",
+      "מוחקת פרי מהרשימה",
+      "בוחרת פרי אקראי מתוך הרשימה",
+      "מסדרת את הרשימה לפי סדר"
+    ],
+    correctIndex: 2,
+    explainCorrect: "random.choice בוחרת פריט אחד באקראי מתוך הרשימה."
+  }
+},
+  {
+  id: "random_3",
+  group: "basics",
+  topic: "random",
+  title: "ערבוב סדר הרשימה",
+  subtitle: "random.shuffle",
+  explain: "הפקודה random.shuffle מערבבת את הסדר של הפריטים בתוך רשימה באופן אקראי. היא משנה את הרשימה עצמה.",
+  task: "ייבאו את ספריית random. לאחר מכן ערבבו את סדר הרשימה והדפיסו את הרשימה החדשה.",
+  hint: "קודם צריך לכתוב import random. לאחר מכן משתמשים ב-random.shuffle(list_name).",
+  starter: `numbers = [1, 2, 3, 4, 5]
+# ייבאו את ספריית random
+# ערבבו את הרשימה
+# הדפיסו את הרשימה`,
+  solution: `import random
+
+numbers = [1, 2, 3, 4, 5]
+random.shuffle(numbers)
+print(numbers)`,
+  expectedOutput: null,
+  fallback: {
+    type: "quiz",
+    question: "מה עושה הפקודה random.shuffle(numbers)?",
+    options: [
+      "מוסיפה מספר לרשימה",
+      "מוחקת מספר מהרשימה",
+      "מערבבת את סדר הפריטים ברשימה",
+      "מדפיסה את הרשימה"
+    ],
+    correctIndex: 2,
+    explainCorrect: "random.shuffle מערבבת את סדר הפריטים בתוך הרשימה באופן אקראי."
+  }
+},{
+  id: "dict_1",
+  group: "basics",
+  topic: "מילון",
+  title: "שליפת ערך ממילון לפי מפתח",
+  subtitle: "dictionary key",
+  explain: "מילון בפייתון שומר מידע בזוגות של מפתח וערך. כדי להגיע לערך מסוים משתמשים בשם המפתח.",
+  task: "לפניכם מילון עם פרטים על תלמיד. הדפיסו את השם של התלמיד מתוך המילון.",
+  hint: "כדי לגשת לערך במילון משתמשים בשם המילון ובתוך סוגריים מרובעות כותבים את המפתח במרכאות.",
+  starter: `student = {
+    "name": "דני",
+    "age": 10,
+    "city": "חיפה"
+}
+# הדפיסו את השם של התלמיד`,
+  solution: `student = {
+    "name": "דני",
+    "age": 10,
+    "city": "חיפה"
+}
+
+print(student["name"])`,
+  expectedOutput: `דני`,
+  fallback: {
+    type: "quiz",
+    question: "איך ניגשים לשם של התלמיד מתוך המילון student?",
+    options: [
+      "student[0]",
+      "student.name",
+      "student['name']",
+      "student('name')"
+    ],
+    correctIndex: 2,
+    explainCorrect: "במילון ניגשים לערך לפי המפתח, ולכן כותבים student['name']."
+  }
+},{
+  id: "dict_2",
+  group: "basics",
+  topic: "מילון",
+  title: "הוספת זוג חדש למילון",
+  subtitle: "add new key and value",
+  explain: "אפשר להוסיף למילון מידע חדש על ידי כתיבת מפתח חדש וערך חדש. כך המילון שומר עוד פרט מידע.",
+  task: "לפניכם מילון עם פרטים על תלמיד. הוסיפו למילון את המפתח \"favorite_color\" עם הערך \"כחול\", ולאחר מכן הדפיסו את הערך החדש שהוספתם.",
+  hint: "כדי להוסיף זוג חדש למילון כותבים את שם המילון, ואז בתוך סוגריים מרובעות את המפתח החדש, ושמים לו ערך בעזרת סימן שווה.",
+  starter: `student = {
+    "name": "דני",
+    "age": 10
+}
+# הוסיפו את המפתח "favorite_color" עם הערך "כחול"
+# הדפיסו את הערך החדש`,
+  solution: `student = {
+    "name": "דני",
+    "age": 10
+}
+
+student["favorite_color"] = "כחול"
+print(student["favorite_color"])`,
+  expectedOutput: `כחול`,
+  fallback: {
+    type: "quiz",
+    question: "איך מוסיפים מפתח חדש בשם \"city\" עם הערך \"תל אביב\" למילון student?",
+    options: [
+      "student.add('city') = 'תל אביב'",
+      "student['city'] = 'תל אביב'",
+      "student('city') = 'תל אביב'",
+      "student.city = 'תל אביב'"
+    ],
+    correctIndex: 1,
+    explainCorrect: "במילון מוסיפים זוג חדש בעזרת כתיבת המפתח בתוך סוגריים מרובעות והשמה של ערך חדש."
+  }
+},{
+  id: "dict_3",
+  group: "basics",
+  topic: "מילון",
+  title: "שינוי ערך במילון",
+  subtitle: "update value",
+  explain: "אפשר לשנות ערך קיים במילון על ידי פנייה למפתח שכבר נמצא בו, ואז הצבה של ערך חדש.",
+  task: "לפניכם מילון עם פרטים על תלמיד. שנו את הגיל של התלמיד ל-11, ולאחר מכן הדפיסו את הגיל החדש.",
+  hint: "כדי לשנות ערך במילון משתמשים במפתח שכבר קיים, ושמים לו ערך חדש עם סימן שווה.",
+  starter: `student = {
+    "name": "דני",
+    "age": 10
+}
+# שנו את הגיל ל-11
+# הדפיסו את הגיל החדש`,
+  solution: `student = {
+    "name": "דני",
+    "age": 10
+}
+
+student["age"] = 11
+print(student["age"])`,
+  expectedOutput: `11`,
+  fallback: {
+    type: "quiz",
+    question: "איך משנים את הגיל במילון student ל-12?",
+    options: [
+      "student['age'] = 12",
+      "student.age = 12",
+      "student( age ) = 12",
+      "student.add('age', 12)"
+    ],
+    correctIndex: 0,
+    explainCorrect: "כדי לשנות ערך במילון ניגשים למפתח המתאים ומציבים לו ערך חדש."
+  }
+},
   /* ======================
      PROJECTS – YEAR 1
      (שנה א׳)
